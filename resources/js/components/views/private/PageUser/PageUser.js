@@ -58,6 +58,7 @@ export default function PageUser() {
                         />
                         <Progress
                             type="circle"
+                            width={140}
                             size="large"
                             percent={30}
                             style={{
