@@ -13927,8 +13927,8 @@ textarea.form-control-lg {
 }
 .ant-btn.btn-main-primary {
   color: #ffffff;
-  background-color: #114eaf;
-  border-color: #114eaf;
+  background-color: #ff6624;
+  border-color: #ff6624;
 }
 .ant-btn.btn-main-primary:hover {
   color: #114eaf;
@@ -15290,7 +15290,7 @@ textarea.form-control-lg {
   align-items: center;
   justify-content: center;
   margin-top: 0px;
- 
+  height: 100px;
 }
 
 .tbl-bottom-filter {
@@ -16602,6 +16602,12 @@ textarea.form-control-lg {
   width: 100%;
   margin-left: -850px;
 }
+#PageLogin .ant-btn .btn-inventory-submit .ant-btn-primary,
+#LoginRightContent .ant-btn .btn-inventory-submit .ant-btn-primary {
+  background-color: #ff6624;
+  color: #ffffff;
+  border-color: #ff6624;
+}
 
 #PageUser {
   padding: 5px;
@@ -16725,125 +16731,6 @@ textarea.form-control-lg {
 }
 #PageUserRole .ant-tabs-nav .ant-tabs-nav-wrap .ant-tabs-tab-active .ant-tabs-tab-btn {
   color: #3f86ff;
-}
-
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-account-info .ant-collapse-content .ant-collapse-content-box, #PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-personal-info .ant-collapse-content .ant-collapse-content-box, #PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-department-info .ant-collapse-content .ant-collapse-content-box {
-  padding-bottom: 0px !important;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-address-info .action {
-  display: flex;
-  justify-content: space-between;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-address-info .action .checkbox-group {
-  display: flex;
-  flex-direction: column;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-address-info .action .form-list-remove-button {
-  color: #e4151f;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-benificiary-info .action {
-  display: flex;
-  justify-content: space-between;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-benificiary-info .action .form-list-remove-button {
-  color: #e4151f;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-contact-info .action {
-  display: flex;
-  justify-content: space-between;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-contact-info .action .form-list-remove-button {
-  color: #e4151f;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-family-info .action {
-  display: flex;
-  justify-content: space-between;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-family-info .action .form-list-remove-button {
-  color: #e4151f;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-family-info .form-spouse-group .ant-row {
-  row-gap: 0px !important;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-family-info .form-spouse-group .form-children-group {
-  border-top: 1px dashed #444444;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-parent-info .action {
-  display: flex;
-  justify-content: space-between;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-parent-info .action .form-list-remove-button {
-  color: #e4151f;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-school-attended-info .action {
-  display: flex;
-  justify-content: space-between;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-school-attended-info .action .form-list-remove-button {
-  color: #e4151f;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-other-qualification-info .action {
-  display: flex;
-  justify-content: space-between;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-other-qualification-info .action .form-list-remove-button {
-  color: #e4151f;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-examination-info .action {
-  display: flex;
-  justify-content: space-between;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-examination-info .action .form-list-remove-button {
-  color: #e4151f;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-project-info .action {
-  display: flex;
-  justify-content: space-between;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-project-info .action .form-list-remove-button {
-  color: #e4151f;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-other-membership-info .action {
-  display: flex;
-  justify-content: space-between;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-other-membership-info .action .form-list-remove-button {
-  color: #e4151f;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-educational-travel-info .action {
-  display: flex;
-  justify-content: space-between;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-educational-travel-info .action .form-list-remove-button {
-  color: #e4151f;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-references-info .action {
-  display: flex;
-  justify-content: space-between;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-references-info .action .form-list-remove-button {
-  color: #e4151f;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-emergency-info .action {
-  display: flex;
-  justify-content: space-between;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-emergency-info .action .form-list-remove-button {
-  color: #e4151f;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-work-experience-info .action {
-  display: flex;
-  justify-content: space-between;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-work-experience-info .action .form-list-remove-button {
-  color: #e4151f;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-training-certificate-info .action {
-  display: flex;
-  justify-content: space-between;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-training-certificate-info .action .form-list-remove-button {
-  color: #e4151f;
 }
 
 #PagePermission .module-button-wrapper .ant-space-item {
@@ -18027,125 +17914,6 @@ textarea.form-control-lg {
   background-color: #ffffff;
   color: #2a60d4;
   width: 104px;
-}
-
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-account-info .ant-collapse-content .ant-collapse-content-box, #PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-personal-info .ant-collapse-content .ant-collapse-content-box, #PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-department-info .ant-collapse-content .ant-collapse-content-box {
-  padding-bottom: 0px !important;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-address-info .action {
-  display: flex;
-  justify-content: space-between;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-address-info .action .checkbox-group {
-  display: flex;
-  flex-direction: column;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-address-info .action .form-list-remove-button {
-  color: #e4151f;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-benificiary-info .action {
-  display: flex;
-  justify-content: space-between;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-benificiary-info .action .form-list-remove-button {
-  color: #e4151f;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-contact-info .action {
-  display: flex;
-  justify-content: space-between;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-contact-info .action .form-list-remove-button {
-  color: #e4151f;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-family-info .action {
-  display: flex;
-  justify-content: space-between;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-family-info .action .form-list-remove-button {
-  color: #e4151f;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-family-info .form-spouse-group .ant-row {
-  row-gap: 0px !important;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-family-info .form-spouse-group .form-children-group {
-  border-top: 1px dashed #444444;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-parent-info .action {
-  display: flex;
-  justify-content: space-between;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-parent-info .action .form-list-remove-button {
-  color: #e4151f;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-school-attended-info .action {
-  display: flex;
-  justify-content: space-between;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-school-attended-info .action .form-list-remove-button {
-  color: #e4151f;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-other-qualification-info .action {
-  display: flex;
-  justify-content: space-between;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-other-qualification-info .action .form-list-remove-button {
-  color: #e4151f;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-examination-info .action {
-  display: flex;
-  justify-content: space-between;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-examination-info .action .form-list-remove-button {
-  color: #e4151f;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-project-info .action {
-  display: flex;
-  justify-content: space-between;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-project-info .action .form-list-remove-button {
-  color: #e4151f;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-other-membership-info .action {
-  display: flex;
-  justify-content: space-between;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-other-membership-info .action .form-list-remove-button {
-  color: #e4151f;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-educational-travel-info .action {
-  display: flex;
-  justify-content: space-between;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-educational-travel-info .action .form-list-remove-button {
-  color: #e4151f;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-references-info .action {
-  display: flex;
-  justify-content: space-between;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-references-info .action .form-list-remove-button {
-  color: #e4151f;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-emergency-info .action {
-  display: flex;
-  justify-content: space-between;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-emergency-info .action .form-list-remove-button {
-  color: #e4151f;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-work-experience-info .action {
-  display: flex;
-  justify-content: space-between;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-work-experience-info .action .form-list-remove-button {
-  color: #e4151f;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-training-certificate-info .action {
-  display: flex;
-  justify-content: space-between;
-}
-#PageEmployeeForm .ant-collapse .ant-collapse-item.collapse-item-training-certificate-info .action .form-list-remove-button {
-  color: #e4151f;
 }
 
 .ant-modal-root .ant-modal-mask {

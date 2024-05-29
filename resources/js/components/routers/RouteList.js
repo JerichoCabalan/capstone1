@@ -14,6 +14,7 @@ import PageDashboard from "../views/private/PageDashboard/PageDashboard";
 
 import PageRegister from "../views/public/PageRegister/PageRegister";
 import PageCategoryForm from "../views/private/PageInventory/PageCategoryForm";
+import PageUser from "../views/private/PageUser/PageUser";
 
 export default function RouteList() {
     return (
@@ -106,6 +107,32 @@ export default function RouteList() {
                             },
                         ]}
                         component={PageCategoryForm}
+                    />
+                }
+            />
+            <Route
+                path="/users/staff"
+                element={
+                    <PrivateRoute
+                        // moduleCode="M-02"
+                        moduleName="User"
+                        title="User"
+                        subtitle="VIEW / EDIT"
+                        pageId="User"
+                        pageHeaderIcon={faUsers}
+                        breadcrumb={[
+                            {
+                                name: "Inventory",
+                                link: "/dashboard",
+                            },
+                            {
+                                name: "Users",
+                            },
+                            {
+                                name: "Current",
+                            },
+                        ]}
+                        component={PageUser}
                     />
                 }
             />

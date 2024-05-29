@@ -72,7 +72,7 @@ export default function PageCategoryForm() {
                         </Col>
                         <Col xs={15} sm={15} md={15} lg={15} xl={15} xxl={15}>
                             <Form.Item name="category">
-                                <FloatInput
+                                <FloatSelect
                                     label="Status"
                                     placeholder="Status"
                                     options={[
@@ -232,24 +232,7 @@ export default function PageCategoryForm() {
                         paddingLeft: "22px",
                         paddingRight: "11px",
                     }}
-                >
-                    <Row gutter={[0, 0]}>
-                        <Col xs={15} sm={15} md={15} lg={15} xl={15} xxl={15}>
-                            <Button
-                                style={{
-                                    width: "122px",
-                                    marginTop: "197px",
-                                    marginLeft: "633px",
-                                }}
-                                className="btn-inventory-submit"
-                                type="primary"
-                                size="large"
-                            >
-                                Submit
-                            </Button>
-                        </Col>
-                    </Row>
-                </Col>
+                ></Col>
             </Row>
         </Form>
     );

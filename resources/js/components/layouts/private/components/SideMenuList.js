@@ -45,8 +45,8 @@ export const adminSideMenu = [
         icon: <FontAwesomeIcon icon={faUsers} />,
         children: [
             {
-                title: "",
-                path: "/users/current",
+                title: "Users",
+                path: "/users/staff",
                 moduleCode: "M-02",
             },
             {
