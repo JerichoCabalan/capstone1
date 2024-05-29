@@ -201,11 +201,11 @@ export default function Sidemenu(props) {
                     style={{ display: !sideMenuCollapse ? "block" : "none" }}
                 />
 
-                <div className="logo_wrapper">
+                {/* <div className="logo_wrapper">
                     {!sideMenuCollapse && (
                         <img src={logoFullWidth} alt={name} width="150px" />
                     )}
-                </div>
+                </div> */}
             </div>
 
             <Menu

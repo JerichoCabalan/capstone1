@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Dropdown, Image, Layout, Menu, Typography } from "antd";
+import { Col, Dropdown, Image, Layout, Menu, Row, Typography } from "antd";
 import {
     apiUrl,
     defaultProfile,
@@ -12,6 +12,7 @@ import { faEdit, faPowerOff } from "@fortawesome/pro-light-svg-icons";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { PageHeader } from "@ant-design/pro-layout";
 import { faBell } from "@fortawesome/pro-regular-svg-icons";
+import { TableGlobalSearch } from "../../providers/CustomTableFilter";
 
 export default function Header(props) {
     const {
@@ -215,7 +216,34 @@ export default function Header(props) {
                 )}
             </div>
 
-            <div className="header-right-menu">
+            <div
+                style={{
+                    marginLeft: "-1029px",
+                    marginTop: " 25px",
+                }}
+            >
+                <Row gutter={[12, 12]} id="tbl_wrapper">
+                    <Col xs={24} sm={24} md={24}>
+                        <div
+                            style={{
+                                width: "300px",
+                                height: "-300px",
+                            }}
+                        >
+                            <TableGlobalSearch
+                            // tableFilter={tableFilter}
+                            // setTableFilter={setTableFilter}
+                            />
+                        </div>
+                    </Col>
+                </Row>
+            </div>
+            <div
+                className="header-right-menu"
+                style={{
+                    marginLeft: "410px",
+                }}
+            >
                 <Dropdown
                     menu={menuProfile()}
                     placement="bottomRight"

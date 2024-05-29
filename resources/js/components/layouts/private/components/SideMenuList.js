@@ -34,7 +34,7 @@ export const adminHeaderDropDownMenuLeft = () => {
 
 export const adminSideMenu = [
     {
-        title: "Dashboard",
+        title: "Home",
         path: "/dashboard",
         icon: <FontAwesomeIcon icon={faHome} />,
         moduleCode: "M-01",
@@ -45,44 +45,54 @@ export const adminSideMenu = [
         icon: <FontAwesomeIcon icon={faUsers} />,
         children: [
             {
-                title: "Current",
+                title: "",
                 path: "/users/current",
                 moduleCode: "M-02",
             },
             {
-                title: "Archived",
+                title: "",
                 path: "/users/archived",
                 moduleCode: "M-03",
             },
         ],
     },
     {
-        title: "Permissions",
-        path: "/permission",
+        title: "Inventory",
+        path: "/inventory",
         icon: <FontAwesomeIcon icon={faShieldKeyhole} />,
         children: [
             {
-                title: "OPIS",
-                path: "/permission/opis",
+                title: "Category",
+                path: "/inventory/category",
                 moduleCode: "M-04",
             },
             {
-                title: "Faculty Monitoring",
-                path: "/permission/faculty-monitoring",
+                title: "ComLabs",
+                path: "/inventory/faculty-monitoring",
+                moduleCode: "M-05",
+            },
+            {
+                title: "Status",
+                path: "/inventory/faculty-monitoringss",
+                moduleCode: "M-05",
+            },
+            {
+                title: "Critical Stock",
+                path: "/inventory/faculty-monitorings",
                 moduleCode: "M-05",
             },
         ],
     },
     {
-        title: "System Settings",
-        path: "/system-settings",
+        title: "Reports",
+        // path: "/system-settings",
         icon: <FontAwesomeIcon icon={faCogs} />,
-        children: [
-            {
-                title: "Email Templates",
-                path: "/system-settings/email-templates",
-                moduleCode: "M-06",
-            },
-        ],
+        // // children: [
+        // //     {
+        // //         title: "Email Templates",
+        // //         path: "/system-settings/email-templates",
+        // //         moduleCode: "M-06",
+        // //     },
+        // // ],
     },
 ];

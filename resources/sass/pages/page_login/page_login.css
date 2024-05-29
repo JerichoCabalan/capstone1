@@ -1,0 +1,335 @@
+#PageLogin,
+#LoginRightContent {
+  background-color: transparent;
+  background-image: url("../../../images/login_bg.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+#PageLogin .ant-layout-content .container,
+#LoginRightContent .ant-layout-content .container {
+  background-color: transparent;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+#PageLogin .ant-layout-content .container .left,
+#LoginRightContent .ant-layout-content .container .left {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-family: "RobotoRegular";
+}
+#PageLogin .ant-layout-content .container .left .logo-wrapper,
+#LoginRightContent .ant-layout-content .container .left .logo-wrapper {
+  text-align: center;
+}
+#PageLogin .ant-layout-content .container .left .title,
+#LoginRightContent .ant-layout-content .container .left .title {
+  color: #ffffff;
+  letter-spacing: 12px;
+  line-height: 1;
+  font-weight: bolder;
+  font-family: "RobotoRegular";
+  font-size: 95px;
+  padding-top: 50px;
+}
+#PageLogin .ant-layout-content .container .left .sub-title,
+#LoginRightContent .ant-layout-content .container .left .sub-title {
+  color: #ffffff;
+  letter-spacing: 1px;
+  font-weight: 100;
+  font-size: 16px;
+}
+#PageLogin .ant-layout-content .container .right,
+#LoginRightContent .ant-layout-content .container .right {
+  margin: 5% 10% 8%;
+  width: 400px;
+}
+#PageLogin .ant-layout-content .container .right .ant-tabs .ant-tabs-nav,
+#LoginRightContent .ant-layout-content .container .right .ant-tabs .ant-tabs-nav {
+  margin: 0;
+}
+#PageLogin .ant-layout-content .container .right .ant-tabs .ant-tabs-nav::before,
+#LoginRightContent .ant-layout-content .container .right .ant-tabs .ant-tabs-nav::before {
+  border: 0px;
+}
+#PageLogin .ant-layout-content .container .right .ant-tabs .ant-tabs-nav .ant-tabs-nav-wrap .ant-tabs-nav-list .ant-tabs-tab,
+#LoginRightContent .ant-layout-content .container .right .ant-tabs .ant-tabs-nav .ant-tabs-nav-wrap .ant-tabs-nav-list .ant-tabs-tab {
+  border: 0px;
+  background-color: transparent;
+}
+#PageLogin .ant-layout-content .container .right .ant-tabs .ant-tabs-nav .ant-tabs-nav-wrap .ant-tabs-nav-list .ant-tabs-tab .ant-tabs-tab-btn,
+#LoginRightContent .ant-layout-content .container .right .ant-tabs .ant-tabs-nav .ant-tabs-nav-wrap .ant-tabs-nav-list .ant-tabs-tab .ant-tabs-tab-btn {
+  color: #ffffff;
+}
+#PageLogin .ant-layout-content .container .right .ant-tabs .ant-tabs-nav .ant-tabs-nav-wrap .ant-tabs-nav-list .ant-tabs-tab.ant-tabs-tab-active,
+#LoginRightContent .ant-layout-content .container .right .ant-tabs .ant-tabs-nav .ant-tabs-nav-wrap .ant-tabs-nav-list .ant-tabs-tab.ant-tabs-tab-active {
+  background-color: #ffffff !important;
+}
+#PageLogin .ant-layout-content .container .right .ant-tabs .ant-tabs-nav .ant-tabs-nav-wrap .ant-tabs-nav-list .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn,
+#LoginRightContent .ant-layout-content .container .right .ant-tabs .ant-tabs-nav .ant-tabs-nav-wrap .ant-tabs-nav-list .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #000000 !important;
+}
+#PageLogin .ant-layout-content .container .right .ant-card,
+#LoginRightContent .ant-layout-content .container .right .ant-card {
+  border-radius: 5%;
+  border-top-left-radius: 0%;
+  box-shadow: rgba(5, 2, 1, 0.2) 4px 4px 4px;
+}
+#PageLogin .ant-layout-content .container .right .nav-bar ul,
+#LoginRightContent .ant-layout-content .container .right .nav-bar ul {
+  display: flex;
+  padding: 0px;
+  margin: 0;
+}
+#PageLogin .ant-layout-content .container .right .nav-bar ul li,
+#LoginRightContent .ant-layout-content .container .right .nav-bar ul li {
+  padding: 5px;
+  width: 20%;
+  list-style: none;
+  text-align: center;
+  color: #ffffff;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+  background-color: #2a60d4;
+  opacity: 0.8;
+}
+#PageLogin .ant-layout-content .container .right .nav-bar ul li a,
+#LoginRightContent .ant-layout-content .container .right .nav-bar ul li a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 600;
+}
+#PageLogin .ant-layout-content .container .right .nav-bar ul .active-tab,
+#LoginRightContent .ant-layout-content .container .right .nav-bar ul .active-tab {
+  background-color: #ffffff;
+  opacity: 1 !important;
+  font-weight: 600;
+}
+#PageLogin .ant-layout-content .container .right .nav-bar ul .active-tab a,
+#LoginRightContent .ant-layout-content .container .right .nav-bar ul .active-tab a {
+  color: #000000 !important;
+}
+#PageLogin .ant-layout-content .container .right .ant-card,
+#LoginRightContent .ant-layout-content .container .right .ant-card {
+  border: none;
+  width: 100%;
+  height: 650px;
+}
+#PageLogin .ant-layout-content .container .right .ant-card .ant-card-body,
+#LoginRightContent .ant-layout-content .container .right .ant-card .ant-card-body {
+  width: 100%;
+}
+#PageLogin .ant-layout-content .container .right .ant-card .ant-card-body img,
+#LoginRightContent .ant-layout-content .container .right .ant-card .ant-card-body img {
+  width: 150px;
+  padding-top: 20px;
+}
+#PageLogin .ant-layout-content .container .right .ant-card .ant-card-body .text-1,
+#LoginRightContent .ant-layout-content .container .right .ant-card .ant-card-body .text-1 {
+  font-weight: bolder;
+  font-size: 18px;
+}
+#PageLogin .ant-layout-content .container .right .ant-card .ant-card-body .text-log-in,
+#LoginRightContent .ant-layout-content .container .right .ant-card .ant-card-body .text-log-in {
+  font-weight: bolder;
+  font-size: 28px;
+  margin: 0 0 30px;
+}
+#PageLogin .ant-layout-content .container .right .ant-card .ant-card-body .btn-log-in,
+#PageLogin .ant-layout-content .container .right .ant-card .ant-card-body .btn-continue,
+#LoginRightContent .ant-layout-content .container .right .ant-card .ant-card-body .btn-log-in,
+#LoginRightContent .ant-layout-content .container .right .ant-card .ant-card-body .btn-continue {
+  border-radius: 5px !important;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  background-color: #2a60d4;
+  color: #ffffff;
+}
+#PageLogin .ant-layout-content .container .right .ant-card .ant-card-body .btn-sign-up,
+#LoginRightContent .ant-layout-content .container .right .ant-card .ant-card-body .btn-sign-up {
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 5px !important;
+  font-weight: 600;
+  color: #000000;
+  padding: 0 30px 0;
+  margin: 20px 0px 30px;
+  float: right;
+}
+#PageLogin .ant-layout-content .container .right .ant-card .ant-card-body .ant-form .date,
+#LoginRightContent .ant-layout-content .container .right .ant-card .ant-card-body .ant-form .date {
+  margin-bottom: 0px;
+}
+#PageLogin .ant-layout-content .container .right .ant-card .ant-card-body .ant-form .date .date-format,
+#LoginRightContent .ant-layout-content .container .right .ant-card .ant-card-body .ant-form .date .date-format {
+  margin: 0px 12px 10px;
+  font-size: 12px;
+}
+#PageLogin .ant-layout-content .container .right .ant-card .ant-card-body .ant-form .date .date-label,
+#LoginRightContent .ant-layout-content .container .right .ant-card .ant-card-body .ant-form .date .date-label {
+  margin-bottom: 0px;
+}
+#PageLogin .ant-layout-content .container .rights,
+#LoginRightContent .ant-layout-content .container .rights {
+  margin: 5% 10% 8%;
+  width: 400px;
+}
+#PageLogin .ant-layout-content .container .rights .ant-tabs .ant-tabs-nav,
+#LoginRightContent .ant-layout-content .container .rights .ant-tabs .ant-tabs-nav {
+  margin: 0;
+}
+#PageLogin .ant-layout-content .container .rights .ant-tabs .ant-tabs-nav::before,
+#LoginRightContent .ant-layout-content .container .rights .ant-tabs .ant-tabs-nav::before {
+  border: 0px;
+}
+#PageLogin .ant-layout-content .container .rights .ant-tabs .ant-tabs-nav .ant-tabs-nav-wrap .ant-tabs-nav-list .ant-tabs-tab,
+#LoginRightContent .ant-layout-content .container .rights .ant-tabs .ant-tabs-nav .ant-tabs-nav-wrap .ant-tabs-nav-list .ant-tabs-tab {
+  border: 0px;
+  background-color: transparent;
+}
+#PageLogin .ant-layout-content .container .rights .ant-tabs .ant-tabs-nav .ant-tabs-nav-wrap .ant-tabs-nav-list .ant-tabs-tab .ant-tabs-tab-btn,
+#LoginRightContent .ant-layout-content .container .rights .ant-tabs .ant-tabs-nav .ant-tabs-nav-wrap .ant-tabs-nav-list .ant-tabs-tab .ant-tabs-tab-btn {
+  color: #ffffff;
+}
+#PageLogin .ant-layout-content .container .rights .ant-tabs .ant-tabs-nav .ant-tabs-nav-wrap .ant-tabs-nav-list .ant-tabs-tab.ant-tabs-tab-active,
+#LoginRightContent .ant-layout-content .container .rights .ant-tabs .ant-tabs-nav .ant-tabs-nav-wrap .ant-tabs-nav-list .ant-tabs-tab.ant-tabs-tab-active {
+  background-color: #ffffff !important;
+}
+#PageLogin .ant-layout-content .container .rights .ant-tabs .ant-tabs-nav .ant-tabs-nav-wrap .ant-tabs-nav-list .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn,
+#LoginRightContent .ant-layout-content .container .rights .ant-tabs .ant-tabs-nav .ant-tabs-nav-wrap .ant-tabs-nav-list .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #000000 !important;
+}
+#PageLogin .ant-layout-content .container .rights .ant-card,
+#LoginRightContent .ant-layout-content .container .rights .ant-card {
+  border-radius: 5%;
+  border-top-left-radius: 0%;
+  box-shadow: rgba(5, 2, 1, 0.2) 4px 4px 4px;
+}
+#PageLogin .ant-layout-content .container .rights .nav-bar ul,
+#LoginRightContent .ant-layout-content .container .rights .nav-bar ul {
+  display: flex;
+  padding: 0px;
+  margin: 0;
+}
+#PageLogin .ant-layout-content .container .rights .nav-bar ul li,
+#LoginRightContent .ant-layout-content .container .rights .nav-bar ul li {
+  padding: 5px;
+  width: 20%;
+  list-style: none;
+  text-align: center;
+  color: #ffffff;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+  background-color: #2a60d4;
+  opacity: 0.8;
+}
+#PageLogin .ant-layout-content .container .rights .nav-bar ul li a,
+#LoginRightContent .ant-layout-content .container .rights .nav-bar ul li a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 600;
+}
+#PageLogin .ant-layout-content .container .rights .nav-bar ul .active-tab,
+#LoginRightContent .ant-layout-content .container .rights .nav-bar ul .active-tab {
+  background-color: #ffffff;
+  opacity: 1 !important;
+  font-weight: 600;
+}
+#PageLogin .ant-layout-content .container .rights .nav-bar ul .active-tab a,
+#LoginRightContent .ant-layout-content .container .rights .nav-bar ul .active-tab a {
+  color: #000000 !important;
+}
+#PageLogin .ant-layout-content .container .rights .ant-card,
+#LoginRightContent .ant-layout-content .container .rights .ant-card {
+  border: none;
+  width: 100%;
+  height: 790px;
+}
+#PageLogin .ant-layout-content .container .rights .ant-card .ant-card-body,
+#LoginRightContent .ant-layout-content .container .rights .ant-card .ant-card-body {
+  width: 100%;
+}
+#PageLogin .ant-layout-content .container .rights .ant-card .ant-card-body img,
+#LoginRightContent .ant-layout-content .container .rights .ant-card .ant-card-body img {
+  width: 150px;
+  padding-top: 20px;
+}
+#PageLogin .ant-layout-content .container .rights .ant-card .ant-card-body .text-1,
+#LoginRightContent .ant-layout-content .container .rights .ant-card .ant-card-body .text-1 {
+  font-weight: bolder;
+  font-size: 18px;
+}
+#PageLogin .ant-layout-content .container .rights .ant-card .ant-card-body .text-log-in,
+#LoginRightContent .ant-layout-content .container .rights .ant-card .ant-card-body .text-log-in {
+  font-weight: bolder;
+  font-size: 28px;
+  margin: 0 0 30px;
+}
+#PageLogin .ant-layout-content .container .rights .ant-card .ant-card-body .btn-log-in,
+#PageLogin .ant-layout-content .container .rights .ant-card .ant-card-body .btn-continue,
+#LoginRightContent .ant-layout-content .container .rights .ant-card .ant-card-body .btn-log-in,
+#LoginRightContent .ant-layout-content .container .rights .ant-card .ant-card-body .btn-continue {
+  border-radius: 5px !important;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  background-color: #2a60d4;
+  color: #ffffff;
+}
+#PageLogin .ant-layout-content .container .rights .ant-card .ant-card-body .btn-sign-up,
+#LoginRightContent .ant-layout-content .container .rights .ant-card .ant-card-body .btn-sign-up {
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 5px !important;
+  font-weight: 600;
+  color: #000000;
+  padding: 0 30px 0;
+  margin: 20px 0px 30px;
+  float: right;
+}
+#PageLogin .ant-layout-content .container .rights .ant-card .ant-card-body .ant-form .date,
+#LoginRightContent .ant-layout-content .container .rights .ant-card .ant-card-body .ant-form .date {
+  margin-bottom: 0px;
+}
+#PageLogin .ant-layout-content .container .rights .ant-card .ant-card-body .ant-form .date .date-format,
+#LoginRightContent .ant-layout-content .container .rights .ant-card .ant-card-body .ant-form .date .date-format {
+  margin: 0px 12px 10px;
+  font-size: 12px;
+}
+#PageLogin .ant-layout-content .container .rights .ant-card .ant-card-body .ant-form .date .date-label,
+#LoginRightContent .ant-layout-content .container .rights .ant-card .ant-card-body .ant-form .date .date-label {
+  margin-bottom: 0px;
+}
+#PageLogin .ant-layout-footer,
+#LoginRightContent .ant-layout-footer {
+  background-color: transparent;
+  text-align: center;
+  padding-top: 0px;
+}
+#PageLogin .ant-layout-footer .ant-typography,
+#LoginRightContent .ant-layout-footer .ant-typography {
+  color: #ffffff;
+}
+#PageLogin .page-login,
+#LoginRightContent .page-login {
+  height: 46px;
+  background-color: #ff6624 !important;
+}
+#PageLogin .ant-card-body,
+#LoginRightContent .ant-card-body {
+  border: none;
+  width: 100%;
+  height: 790px;
+}
+#PageLogin .ssstbl-search-wrapper,
+#LoginRightContent .ssstbl-search-wrapper {
+  width: 100%;
+  margin-left: -850px;
+}
+#PageLogin .ant-btn .btn-inventory-submit .ant-btn-primary,
+#LoginRightContent .ant-btn .btn-inventory-submit .ant-btn-primary {
+  background-color: #ff6624;
+  color: #ffffff;
+  border-color: #ff6624;
+}/*# sourceMappingURL=page_login.css.map */
