@@ -16,9 +16,23 @@ import PageRegister from "../views/public/PageRegister/PageRegister";
 import PageCategoryForm from "../views/private/PageInventory/PageCategoryForm";
 import PageUser from "../views/private/PageUser/PageUser";
 
+import PageInventory from "../views/public/PageInventory/PageInventory";
+import PageRoles from "../views/private/PageUser/components/AllUsercomponents/PageRoles";
+import PageAllUser from "../views/private/PageUser/components/AllUsercomponents/PageAllUser";
+
 export default function RouteList() {
     return (
         <Routes>
+            <Route
+                path="/"
+                element={
+                    <PublicRoute
+                        title="LOGIN"
+                        pageId="PageLogin"
+                        component={PageInventory}
+                    />
+                }
+            />
             <Route
                 path="/login"
                 element={
@@ -110,8 +124,9 @@ export default function RouteList() {
                     />
                 }
             />
+
             <Route
-                path="/users/staff"
+                path="/users/users"
                 element={
                     <PrivateRoute
                         // moduleCode="M-02"
@@ -129,10 +144,36 @@ export default function RouteList() {
                                 name: "Users",
                             },
                             {
-                                name: "Current",
+                                name: "Users",
                             },
                         ]}
-                        component={PageUser}
+                        component={PageAllUser}
+                    />
+                }
+            />
+            <Route
+                path="/users/roles"
+                element={
+                    <PrivateRoute
+                        // moduleCode="M-02"
+                        moduleName="User"
+                        title="User"
+                        subtitle="VIEW / EDIT"
+                        pageId="User"
+                        pageHeaderIcon={faUsers}
+                        breadcrumb={[
+                            {
+                                name: "Inventory",
+                                link: "/dashboard",
+                            },
+                            {
+                                name: "Users",
+                            },
+                            {
+                                name: "Roles",
+                            },
+                        ]}
+                        component={PageRoles}
                     />
                 }
             />

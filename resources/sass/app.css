@@ -13927,8 +13927,8 @@ textarea.form-control-lg {
 }
 .ant-btn.btn-main-primary {
   color: #ffffff;
-  background-color: #ff6624;
-  border-color: #ff6624;
+  background-color: #114eaf;
+  border-color: #114eaf;
 }
 .ant-btn.btn-main-primary:hover {
   color: #114eaf;
@@ -15281,10 +15281,6 @@ textarea.form-control-lg {
 .tbl-top-filter .tbl-search-wrapper .ant-input-wrapper .ant-input {
   border-radius: 0px;
 }
-.tbl-top-filter .tbl-search-wrapper .ant-input-wrapper .ant-input.ant-input-lg {
-  height: 260px;
-  font-size: 20px;
-}
 .tbl-top-filter .tbl-search-wrapper .ant-input-wrapper .ant-input-group-addon .ant-btn.ant-btn-lg.ant-btn-icon-only.ant-input-search-button {
   display: flex;
   align-items: center;
@@ -16131,7 +16127,7 @@ textarea.form-control-lg {
 }
 .private-layout > .ant-layout-sider > .ant-layout-sider-children > .ant-side-header .anticon {
   font-size: 22px;
-  color: #ff6624;
+  color: #9ae9fd;
 }
 .private-layout > .ant-layout-sider > .ant-layout-sider-children > .ant-side-header .anticon:hover {
   color: #9ae9fd;

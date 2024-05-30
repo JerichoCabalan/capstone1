@@ -21,6 +21,7 @@ import FloatInputPassword from "../../../providers/FloatInputPassword";
 import validateRules from "../../../providers/validateRules";
 
 import { POST } from "../../../providers/useAxiosQuery";
+import FloatSelect from "../../../providers/FloatSelect";
 
 export default function PageRegister() {
     const navigate = useNavigate();
@@ -77,7 +78,12 @@ export default function PageRegister() {
 
     return (
         <Layout.Content>
-            <div className="container">
+            <div
+                className="container"
+                // style={{
+                //     height: "700px",
+                // }}
+            >
                 <div className="left">
                     <div className="logo-wrapper zoom-in-out-box-1">
                         {/* <img src={logo} /> */}
@@ -93,10 +99,21 @@ export default function PageRegister() {
                 <div className="rights">
                     <Card className="page-register">
                         <div className="text-center mt-0">
-                            <img src="../../../images/register.png" alt="" />
+                            <img
+                                src="../../../images/register.png"
+                                alt=""
+                                style={{
+                                    marginTop: "-80px",
+                                }}
+                            />
                         </div>
 
-                        <Typography.Title className="text-center text-log-in mt-0">
+                        <Typography.Title
+                            className="text-center text-log-in mt-0"
+                            style={{
+                                marginTop: "-80px !important",
+                            }}
+                        >
                             Sign Up{" "}
                         </Typography.Title>
 
@@ -136,6 +153,46 @@ export default function PageRegister() {
                                 <FloatInput
                                     label="Username / E-mail"
                                     placeholder="Username / E-mail"
+                                />
+                            </Form.Item>
+                            <Form.Item
+                                name="phonenumber"
+                                rules={[validateRules.required]}
+                                hasFeedback
+                            >
+                                <FloatInput label="+63" placeholder="+63" />
+                            </Form.Item>
+                            <Form.Item
+                                name="role"
+                                rules={[validateRules.required]}
+                                hasFeedback
+                            >
+                                <FloatSelect
+                                    label="Role"
+                                    placeholder="Role"
+                                    options={[
+                                        {
+                                            value: "Lab Staff",
+                                            label: "Lab Staff",
+                                        },
+                                        {
+                                            value: "Technician",
+                                            label: "Technician",
+                                        },
+                                        {
+                                            value: "Procurement Officer",
+                                            label: "Procurement Officer",
+                                        },
+                                        {
+                                            value: "Comlab Adviser",
+                                            label: "Comlab Adviser",
+                                        },
+                                        { value: "Faculty", label: "Faculty" },
+                                        {
+                                            value: "Students Assistant",
+                                            label: "Students Assistant",
+                                        },
+                                    ]}
                                 />
                             </Form.Item>
 
@@ -180,18 +237,6 @@ export default function PageRegister() {
                                 />
                             )}
 
-                            <div>
-                                <p
-                                    style={{
-                                        marginTop: "15px",
-                                        fontSize: "12px",
-                                        width: "330px",
-                                    }}
-                                >
-                                    By creating an account, you are agree to the
-                                    Terms of Service and Privacy Policy.
-                                </p>
-                            </div>
                             <p
                                 style={{
                                     marginLeft: "85px",

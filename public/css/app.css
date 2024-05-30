@@ -13927,8 +13927,8 @@ textarea.form-control-lg {
 }
 .ant-btn.btn-main-primary {
   color: #ffffff;
-  background-color: #ff6624;
-  border-color: #ff6624;
+  background-color: #114eaf;
+  border-color: #114eaf;
 }
 .ant-btn.btn-main-primary:hover {
   color: #114eaf;
@@ -15281,10 +15281,6 @@ textarea.form-control-lg {
 .tbl-top-filter .tbl-search-wrapper .ant-input-wrapper .ant-input {
   border-radius: 0px;
 }
-.tbl-top-filter .tbl-search-wrapper .ant-input-wrapper .ant-input.ant-input-lg {
-  height: 260px;
-  font-size: 20px;
-}
 .tbl-top-filter .tbl-search-wrapper .ant-input-wrapper .ant-input-group-addon .ant-btn.ant-btn-lg.ant-btn-icon-only.ant-input-search-button {
   display: flex;
   align-items: center;
@@ -15631,7 +15627,7 @@ textarea.form-control-lg {
 }
 
 .private-layout > .ant-layout > .ant-layout-header {
-  background-image: url(/images/login_bg.png?392d7106564661584806fdb8a55079ec);
+  background-image: url(/images/login_bg.png?fe85e872f8c678695f86d7acee1c4d83);
   background-repeat: no-repeat;
   background-size: 100%;
   width: 100%;
@@ -16131,7 +16127,7 @@ textarea.form-control-lg {
 }
 .private-layout > .ant-layout-sider > .ant-layout-sider-children > .ant-side-header .anticon {
   font-size: 22px;
-  color: #ff6624;
+  color: #9ae9fd;
 }
 .private-layout > .ant-layout-sider > .ant-layout-sider-children > .ant-side-header .anticon:hover {
   color: #9ae9fd;
@@ -16276,7 +16272,7 @@ textarea.form-control-lg {
 #PageLogin,
 #LoginRightContent {
   background-color: transparent;
-  background-image: url(/images/login_bg.png?392d7106564661584806fdb8a55079ec);
+  background-image: url(/images/login_bg.png?fe85e872f8c678695f86d7acee1c4d83);
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;
@@ -16607,6 +16603,10 @@ textarea.form-control-lg {
   background-color: #ff6624;
   color: #ffffff;
   border-color: #ff6624;
+}
+#PageLogin .ant-descriptions-item-content .page-all-users,
+#LoginRightContent .ant-descriptions-item-content .page-all-users {
+  color: #ff6624;
 }
 
 #PageUser {

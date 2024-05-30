@@ -46,12 +46,12 @@ export const adminSideMenu = [
         children: [
             {
                 title: "Users",
-                path: "/users/staff",
+                path: "/users/users",
                 moduleCode: "M-02",
             },
             {
-                title: "",
-                path: "/users/archived",
+                title: "Roles",
+                path: "/users/roles",
                 moduleCode: "M-03",
             },
         ],

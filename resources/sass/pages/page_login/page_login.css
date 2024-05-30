@@ -332,4 +332,8 @@
   background-color: #ff6624;
   color: #ffffff;
   border-color: #ff6624;
+}
+#PageLogin .ant-descriptions-item-content .page-all-users,
+#LoginRightContent .ant-descriptions-item-content .page-all-users {
+  color: #ff6624;
 }/*# sourceMappingURL=page_login.css.map */
