@@ -22,6 +22,7 @@ import validateRules from "../../../providers/validateRules";
 
 import { POST } from "../../../providers/useAxiosQuery";
 import FloatSelect from "../../../providers/FloatSelect";
+import FloatInputMask from "../../../providers/FloatInputMask";
 
 export default function PageRegister() {
     const navigate = useNavigate();
@@ -160,7 +161,13 @@ export default function PageRegister() {
                                 rules={[validateRules.required]}
                                 hasFeedback
                             >
-                                <FloatInput label="+63" placeholder="+63" />
+                                <FloatInputMask
+                                    label="Phone No"
+                                    placeholder="Phone No"
+                                    maskLabel="contact_number"
+                                    maskType="999 999 9999"
+                                    required={true}
+                                />
                             </Form.Item>
                             <Form.Item
                                 name="role"

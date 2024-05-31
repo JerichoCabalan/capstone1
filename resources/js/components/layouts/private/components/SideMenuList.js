@@ -67,18 +67,18 @@ export const adminSideMenu = [
                 moduleCode: "M-04",
             },
             {
-                title: "ComLabs",
-                path: "/inventory/faculty-monitoring",
-                moduleCode: "M-05",
-            },
-            {
-                title: "Status",
-                path: "/inventory/faculty-monitoringss",
+                title: "Equipment",
+                path: "/inventory/equipment",
                 moduleCode: "M-05",
             },
             {
                 title: "Critical Stock",
-                path: "/inventory/faculty-monitorings",
+                path: "/inventory/creticalstock",
+                moduleCode: "M-05",
+            },
+            {
+                title: "Bin",
+                path: "/inventory/bin",
                 moduleCode: "M-05",
             },
         ],

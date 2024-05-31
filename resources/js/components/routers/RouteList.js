@@ -19,6 +19,7 @@ import PageUser from "../views/private/PageUser/PageUser";
 import PageInventory from "../views/public/PageInventory/PageInventory";
 import PageRoles from "../views/private/PageUser/components/AllUsercomponents/PageRoles";
 import PageAllUser from "../views/private/PageUser/components/AllUsercomponents/PageAllUser";
+import PageInventoryAdmin from "../views/private/PageInventory/PageInventoryAdmin";
 
 export default function RouteList() {
     return (
@@ -174,6 +175,32 @@ export default function RouteList() {
                             },
                         ]}
                         component={PageRoles}
+                    />
+                }
+            />
+            <Route
+                path="/inventory/equipment"
+                element={
+                    <PrivateRoute
+                        // moduleCode="M-02"
+                        moduleName="Equipment"
+                        title="Equipment"
+                        subtitle="VIEW / EDIT"
+                        pageId="Equipment"
+                        pageHeaderIcon={faUsers}
+                        breadcrumb={[
+                            {
+                                name: "Inventory",
+                                link: "/dashboard",
+                            },
+                            {
+                                name: "Inventory",
+                            },
+                            {
+                                name: "Equipment",
+                            },
+                        ]}
+                        component={PageInventoryAdmin}
                     />
                 }
             />
