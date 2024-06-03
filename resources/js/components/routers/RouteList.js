@@ -13,13 +13,12 @@ import PageEditProfile from "../views/private/PageEditProfile/PageEditProfile";
 import PageDashboard from "../views/private/PageDashboard/PageDashboard";
 
 import PageRegister from "../views/public/PageRegister/PageRegister";
-import PageCategoryForm from "../views/private/PageInventory/PageCategoryForm";
-import PageUser from "../views/private/PageUser/PageUser";
 
 import PageInventory from "../views/public/PageInventory/PageInventory";
 import PageRoles from "../views/private/PageUser/components/AllUsercomponents/PageRoles";
 import PageAllUser from "../views/private/PageUser/components/AllUsercomponents/PageAllUser";
-import PageInventoryAdmin from "../views/private/PageInventory/PageInventoryAdmin";
+import PageInventoryAdminForm from "../views/private/PageInventory/PageInventoryAdminForm";
+import PageCategoryAdmin from "../views/private/PageInventory/PageCategoryAdmin";
 
 export default function RouteList() {
     return (
@@ -121,7 +120,7 @@ export default function RouteList() {
                                 name: "Current",
                             },
                         ]}
-                        component={PageCategoryForm}
+                        component={PageCategoryAdmin}
                     />
                 }
             />
@@ -200,7 +199,7 @@ export default function RouteList() {
                                 name: "Equipment",
                             },
                         ]}
-                        component={PageInventoryAdmin}
+                        component={PageInventoryAdminForm}
                     />
                 }
             />

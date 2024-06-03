@@ -217,28 +217,6 @@ export default function Header(props) {
             </div>
 
             <div
-                style={{
-                    marginLeft: "-1029px",
-                    marginTop: " 25px",
-                }}
-            >
-                <Row gutter={[12, 12]} id="tbl_wrapper">
-                    <Col xs={24} sm={24} md={24}>
-                        <div
-                            style={{
-                                width: "300px",
-                                height: "-300px",
-                            }}
-                        >
-                            <TableGlobalSearch
-                            // tableFilter={tableFilter}
-                            // setTableFilter={setTableFilter}
-                            />
-                        </div>
-                    </Col>
-                </Row>
-            </div>
-            <div
                 className="header-right-menu"
                 style={{
                     marginLeft: "410px",

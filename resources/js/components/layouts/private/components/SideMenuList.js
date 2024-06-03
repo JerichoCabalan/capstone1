@@ -5,6 +5,7 @@ import {
     faUsers,
     faShieldKeyhole,
     faCogs,
+    faTasks,
 } from "@fortawesome/pro-light-svg-icons";
 
 export const adminHeaderMenuLeft = (
@@ -96,3 +97,25 @@ export const adminSideMenu = [
         // // ],
     },
 ];
+
+// export const staffSideMenu = [
+//     {
+//         title: "Home",
+//         path: "/dashboard",
+//         icon: <FontAwesomeIcon icon={faHome} />,
+//         moduleCode: "S-01",
+//     },
+//     {
+//         title: "Inventory",
+//         path: "/inventory",
+//         icon: <FontAwesomeIcon icon={faUsers} />,
+//         moduleCode: "S-02",
+//     },
+//     {
+//         title: "Reports",
+//         path: "/report",
+//         icon: <FontAwesomeIcon icon={faTasks} />,
+//         moduleCode: "S-03",
+//     },
+//     // Add more menu items as needed
+// ];

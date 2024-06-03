@@ -12,6 +12,7 @@ export default function Sidemenu(props) {
         sideMenuCollapse,
         setSideMenuCollapse,
         width,
+        // userRole,
         // dataPermissions,
     } = props;
 
@@ -28,6 +29,11 @@ export default function Sidemenu(props) {
 
         return () => {};
     }, []);
+
+    // useEffect(() => {
+    //     setMenuItems(userRole === "admin" ? adminSideMenu : staffSideMenu);
+    //     return () => {};
+    // }, [userRole]);
 
     useEffect(() => {
         setOpenKeys(
