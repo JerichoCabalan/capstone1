@@ -21,6 +21,7 @@ import PageInventoryAdminForm from "../views/private/PageInventory/PageInventory
 import PageCategoryAdmin from "../views/private/PageInventory/PageCategoryAdmin";
 import PageBinAdmin from "../views/private/PageInventory/PageBinAdmin";
 import PageBorrowedStock from "../views/private/PageInventory/PageBorrowedStock";
+import { faShieldKeyhole } from "@fortawesome/pro-light-svg-icons";
 
 export default function RouteList() {
     return (
@@ -100,32 +101,6 @@ export default function RouteList() {
             />
 
             {/* users */}
-            <Route
-                path="/inventory/creticalstock"
-                element={
-                    <PrivateRoute
-                        // moduleCode="M-02"
-                        moduleName="Inventory Category"
-                        title="Creticalstock"
-                        subtitle="VIEW / EDIT"
-                        pageId="Creticalstock"
-                        pageHeaderIcon={faUsers}
-                        breadcrumb={[
-                            {
-                                name: "Inventory",
-                                link: "/dashboard",
-                            },
-                            {
-                                name: "Users",
-                            },
-                            {
-                                name: "Current",
-                            },
-                        ]}
-                        component={PageCategoryAdmin}
-                    />
-                }
-            />
 
             <Route
                 path="/users/users"
@@ -188,7 +163,7 @@ export default function RouteList() {
                         title="Equipment"
                         subtitle="VIEW / EDIT"
                         pageId="Equipment"
-                        pageHeaderIcon={faUsers}
+                        pageHeaderIcon={faShieldKeyhole}
                         breadcrumb={[
                             {
                                 name: "Inventory",
@@ -217,17 +192,43 @@ export default function RouteList() {
                         pageHeaderIcon={faUsers}
                         breadcrumb={[
                             {
-                                name: "Inventory",
+                                name: "Home",
                                 link: "/dashboard",
                             },
                             {
-                                name: "Borrowed Stock",
+                                name: "Inventory",
                             },
                             {
                                 name: "Borrowed Stock",
                             },
                         ]}
                         component={PageBorrowedStock}
+                    />
+                }
+            />
+            <Route
+                path="/inventory/creticalstock"
+                element={
+                    <PrivateRoute
+                        // moduleCode="M-02"
+                        moduleName="Inventory Category"
+                        title="Creticalstock"
+                        subtitle="VIEW / EDIT"
+                        pageId="Creticalstock"
+                        pageHeaderIcon={faUsers}
+                        breadcrumb={[
+                            {
+                                name: "Home",
+                                link: "/dashboard",
+                            },
+                            {
+                                name: "Inventory",
+                            },
+                            {
+                                name: "Cretical Stock",
+                            },
+                        ]}
+                        component={PageCategoryAdmin}
                     />
                 }
             />
