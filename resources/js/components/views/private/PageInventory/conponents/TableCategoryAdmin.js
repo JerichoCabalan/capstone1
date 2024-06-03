@@ -15,8 +15,10 @@ import {
 // import notificationErrors from "../../../providers/notificationErrors";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { faPlus } from "@fortawesome/pro-light-svg-icons";
+import { faFileExcel, faPlus } from "@fortawesome/pro-light-svg-icons";
 import ModalInventory from "./ModalInventory";
+import ModalImportExcel from "./ModalImportExcel";
+
 // import dayjs from "dayjs";
 // import { description } from "../../../providers/companyInfo";
 
@@ -33,6 +35,10 @@ export default function TableCategoryAdmin(props) {
         }));
     };
 
+    const [isImportModalOpen, setIsImportModalOpen] = useState(false);
+    const toggleImportModal = () => {
+        setIsImportModalOpen(!isImportModalOpen);
+    };
     const dataSource = [
         {
             key: "1",
@@ -98,11 +104,14 @@ export default function TableCategoryAdmin(props) {
                     style={{
                         marginLeft: "10px",
                     }}
-                    icon={<FontAwesomeIcon icon={faUserPlus} />}
+                    icon={
+                        <FontAwesomeIcon icon={faFileExcel} color="#217346" />
+                    }
                     size="large"
                     name="btn_add"
+                    onClick={toggleImportModal}
                 >
-                    Borrow{" "}
+                    Import Equipment{" "}
                 </Button>
             </Col>
             <Row
@@ -167,7 +176,7 @@ export default function TableCategoryAdmin(props) {
                             sorter
                             dataIndex={"quantity_of_stock"}
                         />
-                        <Table.Column title="Status" key="" />
+                        {/* <Table.Column title="Status" key="" /> */}
                     </Table>
                 </Col>
                 <Col xs={24} sm={24} md={24}>
@@ -189,6 +198,11 @@ export default function TableCategoryAdmin(props) {
                 handleOk={handleOk}
                 handleCancel={handleCancel}
             ></ModalInventory>
+            <ModalImportExcel
+                isModalOpen={isImportModalOpen}
+                handleOk={toggleImportModal}
+                handleCancel={toggleImportModal}
+            />
         </>
     );
 }

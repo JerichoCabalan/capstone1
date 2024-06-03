@@ -89,7 +89,7 @@ export default function PageAllUser() {
                 placement="right"
                 closable={false}
                 onClose={onClose}
-                visible={open}
+                open={open}
             >
                 {selectedUser && (
                     <>

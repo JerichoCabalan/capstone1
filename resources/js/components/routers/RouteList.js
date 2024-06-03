@@ -19,6 +19,8 @@ import PageRoles from "../views/private/PageUser/components/AllUsercomponents/Pa
 import PageAllUser from "../views/private/PageUser/components/AllUsercomponents/PageAllUser";
 import PageInventoryAdminForm from "../views/private/PageInventory/PageInventoryAdminForm";
 import PageCategoryAdmin from "../views/private/PageInventory/PageCategoryAdmin";
+import PageBinAdmin from "../views/private/PageInventory/PageBinAdmin";
+import PageBorrowedStock from "../views/private/PageInventory/PageBorrowedStock";
 
 export default function RouteList() {
     return (
@@ -99,14 +101,14 @@ export default function RouteList() {
 
             {/* users */}
             <Route
-                path="/inventory/category"
+                path="/inventory/creticalstock"
                 element={
                     <PrivateRoute
                         // moduleCode="M-02"
                         moduleName="Inventory Category"
-                        title="Category"
+                        title="Creticalstock"
                         subtitle="VIEW / EDIT"
-                        pageId="Category"
+                        pageId="Creticalstock"
                         pageHeaderIcon={faUsers}
                         breadcrumb={[
                             {
@@ -200,6 +202,58 @@ export default function RouteList() {
                             },
                         ]}
                         component={PageInventoryAdminForm}
+                    />
+                }
+            />
+            <Route
+                path="/inventory/borrowedstock"
+                element={
+                    <PrivateRoute
+                        // moduleCode="M-02"
+                        moduleName="Equipment"
+                        title="Equipment"
+                        subtitle="VIEW / EDIT"
+                        pageId="Equipment"
+                        pageHeaderIcon={faUsers}
+                        breadcrumb={[
+                            {
+                                name: "Inventory",
+                                link: "/dashboard",
+                            },
+                            {
+                                name: "Borrowed Stock",
+                            },
+                            {
+                                name: "Borrowed Stock",
+                            },
+                        ]}
+                        component={PageBorrowedStock}
+                    />
+                }
+            />
+            <Route
+                path="/inventory/bin"
+                element={
+                    <PrivateRoute
+                        // moduleCode="M-02"
+                        moduleName="Equipment"
+                        title="Equipment"
+                        subtitle="VIEW / EDIT"
+                        pageId="Equipment"
+                        pageHeaderIcon={faUsers}
+                        breadcrumb={[
+                            {
+                                name: "Inventory",
+                                link: "/dashboard",
+                            },
+                            {
+                                name: "Inventory",
+                            },
+                            {
+                                name: "Bin",
+                            },
+                        ]}
+                        component={PageBinAdmin}
                     />
                 }
             />

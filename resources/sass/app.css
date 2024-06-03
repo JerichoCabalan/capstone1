@@ -13927,13 +13927,14 @@ textarea.form-control-lg {
 }
 .ant-btn.btn-main-primary {
   color: #ffffff;
-  background-color: #114eaf;
-  border-color: #114eaf;
+  background-color: #ff6624;
+  border-color: #ff6624;
+  border-radius: 40px !important;
 }
 .ant-btn.btn-main-primary:hover {
   color: #114eaf;
   background-color: #ffffff;
-  border-color: #114eaf;
+  border-color: #ff6624;
 }
 .ant-btn.btn-main-primary:focus {
   color: #114eaf;
@@ -16603,6 +16604,10 @@ textarea.form-control-lg {
   background-color: #ff6624;
   color: #ffffff;
   border-color: #ff6624;
+}
+#PageLogin .ant-descriptions-item-content .page-all-users,
+#LoginRightContent .ant-descriptions-item-content .page-all-users {
+  color: #ff6624;
 }
 
 #PageUser {

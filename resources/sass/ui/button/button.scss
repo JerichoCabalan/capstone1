@@ -7,8 +7,9 @@
 
     &.btn-main-primary {
         color: $mainPrimaryText;
-        background-color: $mainPrimary;
-        border-color: $mainPrimary;
+        background-color: #ff6624;
+        border-color: #ff6624;
+        border-radius: 40px !important;
 
         &:hover {
             color: $mainPrimaryTextActive;

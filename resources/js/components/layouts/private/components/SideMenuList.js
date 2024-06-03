@@ -63,11 +63,6 @@ export const adminSideMenu = [
         icon: <FontAwesomeIcon icon={faShieldKeyhole} />,
         children: [
             {
-                title: "Category",
-                path: "/inventory/category",
-                moduleCode: "M-04",
-            },
-            {
                 title: "Equipment",
                 path: "/inventory/equipment",
                 moduleCode: "M-05",
@@ -75,6 +70,11 @@ export const adminSideMenu = [
             {
                 title: "Critical Stock",
                 path: "/inventory/creticalstock",
+                moduleCode: "M-05",
+            },
+            {
+                title: "Borrowed Stock",
+                path: "/inventory/borrowedstock",
                 moduleCode: "M-05",
             },
             {

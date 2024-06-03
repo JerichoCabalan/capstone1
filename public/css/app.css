@@ -13927,8 +13927,9 @@ textarea.form-control-lg {
 }
 .ant-btn.btn-main-primary {
   color: #ffffff;
-  background-color: #114eaf;
-  border-color: #114eaf;
+  background-color: #ff6624;
+  border-color: #ff6624;
+  border-radius: 40px !important;
 }
 .ant-btn.btn-main-primary:hover {
   color: #114eaf;

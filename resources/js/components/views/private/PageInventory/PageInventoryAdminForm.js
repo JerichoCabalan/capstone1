@@ -3,25 +3,14 @@ import FloatInput from "../../../providers/FloatInput";
 import { Button, Col, Form, Row } from "antd";
 import FloatSelect from "../../../providers/FloatSelect";
 import TextArea from "antd/es/input/TextArea";
-
+import FloatDatePicker from "../../../providers/FloatDatePicker";
 export default function PageInventoryAdminForm() {
     return (
         <Form>
             <Row gutter={[12, 12]}>
-                <Col
-                    xs={15}
-                    sm={15}
-                    md={12}
-                    lg={12}
-                    xl={12}
-                    xxl={12}
-                    style={{
-                        paddingLeft: "29px",
-                        paddingRight: "11px",
-                    }}
-                >
+                <Col xs={24} sm={24} md={12} lg={12} xl={12} xxl={12}>
                     <Row gutter={[0, 0]}>
-                        <Col xs={15} sm={15} md={15} lg={15} xl={15} xxl={15}>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
                             <Form.Item name="category">
                                 <FloatInput
                                     label="Unit No"
@@ -30,7 +19,7 @@ export default function PageInventoryAdminForm() {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col xs={15} sm={15} md={15} lg={15} xl={15} xxl={15}>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
                             <Form.Item name="category">
                                 <FloatInput
                                     label="Description"
@@ -39,7 +28,7 @@ export default function PageInventoryAdminForm() {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col xs={15} sm={15} md={15} lg={15} xl={15} xxl={15}>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
                             <Form.Item name="category">
                                 <FloatSelect
                                     label="Assigned ComLab"
@@ -91,62 +80,98 @@ export default function PageInventoryAdminForm() {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col xs={15} sm={15} md={15} lg={15} xl={15} xxl={15}>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
                             <Form.Item name="category">
                                 <FloatSelect
                                     label="Category"
                                     placeholder="Category"
                                     options={[
                                         {
-                                            value: "1",
-                                            label: "Not Identified",
+                                            value: "Keyboard",
+                                            label: "Keyboard",
+                                        },
+                                        {
+                                            value: "Mouse",
+                                            label: "Mouse",
+                                        },
+                                        {
+                                            value: "Monitor",
+                                            label: "Monitor",
+                                        },
+                                        {
+                                            value: "Power Supply",
+                                            label: "Power Supply",
+                                        },
+                                        {
+                                            value: "System Unit",
+                                            label: "System Unit",
+                                        },
+                                        {
+                                            value: "AVR",
+                                            label: "AVR",
+                                        },
+                                        {
+                                            value: "Laptop Charger",
+                                            label: "Laptop Charger",
+                                        },
+                                        {
+                                            value: "Projector",
+                                            label: "Projector",
+                                        },
+                                        {
+                                            value: "HDMI",
+                                            label: "HDMI",
+                                        },
+                                        {
+                                            value: "TV",
+                                            label: "TV",
                                         },
                                     ]}
                                     // onChange={(e) => handleDebounce(e)}
                                 />
                             </Form.Item>
                         </Col>
-                        <Col xs={15} sm={15} md={15} lg={15} xl={15} xxl={15}>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
                             <Form.Item name="category">
                                 <FloatSelect
                                     label="Equipment Status"
                                     placeholder="Equipment Status"
                                     options={[
                                         {
-                                            value: "Working ",
-                                            label: "Working ",
+                                            value: "Working",
+                                            label: "Working",
                                         },
                                         {
-                                            value: " Damaged ",
-                                            label: " Damaged ",
+                                            value: "Damaged",
+                                            label: "Damaged",
                                         },
                                         {
-                                            value: "To Repair ",
-                                            label: "To Repair ",
+                                            value: "To Repair",
+                                            label: "To Repair",
                                         },
                                         {
-                                            value: "Excess ",
-                                            label: "Excess ",
+                                            value: "Excess",
+                                            label: "Excess",
                                         },
                                         {
-                                            value: "Borrowed ",
-                                            label: "Borrowed ",
+                                            value: "Borrowed",
+                                            label: "Borrowed",
                                         },
                                         {
-                                            value: "Unreturned ",
-                                            label: "Unreturned ",
+                                            value: "Unreturned",
+                                            label: "Unreturned",
                                         },
                                         {
-                                            value: "Lost ",
-                                            label: "Lost ",
+                                            value: "Lost",
+                                            label: "Lost",
                                         },
                                     ]}
                                     // onChange={(e) => handleDebounce(e)}
                                 />
                             </Form.Item>
                         </Col>
-                        <Col xs={15} sm={15} md={15} lg={15} xl={15} xxl={15}>
-                            <Form.Item name="category">
+                        <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
+                            <Form.Item name="Person liable">
                                 <FloatInput
                                     label="Date Acquired"
                                     placeholder="Date Acquired"
@@ -154,7 +179,16 @@ export default function PageInventoryAdminForm() {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col xs={15} sm={15} md={15} lg={15} xl={15} xxl={15}>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
+                            <Form.Item name="category">
+                                <FloatDatePicker
+                                    label="Date Acquired"
+                                    placeholder="Date Acquired"
+                                    // onChange={(e) => handleDebounce(e)}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
                             <Form.Item name="category">
                                 <FloatInput
                                     label="Supplier"
@@ -163,7 +197,16 @@ export default function PageInventoryAdminForm() {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col xs={15} sm={15} md={15} lg={15} xl={15} xxl={15}>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
+                            <Form.Item name="payroll_terms">
+                                <FloatInput
+                                    label="Amount"
+                                    placeholder="Amount"
+                                    // onChange={(e) => handleDebounce(e)}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
                             <Form.Item name="payroll_terms">
                                 <FloatInput
                                     label="Amount"
@@ -174,21 +217,9 @@ export default function PageInventoryAdminForm() {
                         </Col>
                     </Row>
                 </Col>
-
-                <Col
-                    xs={15}
-                    sm={15}
-                    md={15}
-                    lg={15}
-                    xl={15}
-                    xxl={12}
-                    style={{
-                        paddingLeft: "22px",
-                        paddingRight: "11px",
-                    }}
-                >
+                <Col xs={24} sm={24} md={12} lg={12} xl={12} xxl={12}>
                     <Row gutter={[0, 0]}>
-                        <Col xs={15} sm={15} md={15} lg={15} xl={15} xxl={15}>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
                             <Form.Item name="department">
                                 <FloatInput
                                     label="Item No"
@@ -197,7 +228,7 @@ export default function PageInventoryAdminForm() {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col xs={15} sm={15} md={15} lg={15} xl={15} xxl={15}>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
                             <Form.Item name="employment_status">
                                 <FloatInput
                                     label="Property No"
@@ -206,8 +237,7 @@ export default function PageInventoryAdminForm() {
                                 />
                             </Form.Item>
                         </Col>
-
-                        <Col xs={15} sm={15} md={15} lg={15} xl={15} xxl={15}>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
                             <Form.Item name="confidentiality_level">
                                 <FloatInput
                                     label="Control No"
@@ -216,7 +246,7 @@ export default function PageInventoryAdminForm() {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col xs={15} sm={15} md={15} lg={15} xl={15} xxl={15}>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
                             <Form.Item name="confidentiality_level">
                                 <FloatInput
                                     label="Serial No"
@@ -225,7 +255,7 @@ export default function PageInventoryAdminForm() {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col xs={15} sm={15} md={15} lg={15} xl={15} xxl={15}>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
                             <Form.Item name="confidentiality_level">
                                 <FloatInput
                                     label="Amount"
@@ -234,7 +264,7 @@ export default function PageInventoryAdminForm() {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col xs={15} sm={15} md={15} lg={15} xl={15} xxl={15}>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
                             <Form.Item name="confidentiality_level">
                                 <FloatInput
                                     label="No of Stocks"
@@ -243,7 +273,16 @@ export default function PageInventoryAdminForm() {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col xs={15} sm={15} md={15} lg={15} xl={15} xxl={15}>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
+                            <Form.Item name="confidentiality_level">
+                                <FloatInput
+                                    label="Restocking Point"
+                                    placeholder="Restocking Point"
+                                    // onChange={(e) => handleDebounce(e)}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
                             <Form.Item name="confidentiality_level">
                                 <FloatInput
                                     label="Restocking Point"
@@ -254,45 +293,19 @@ export default function PageInventoryAdminForm() {
                         </Col>
                     </Row>
                 </Col>
-
-                <Col
-                    xs={15}
-                    sm={15}
-                    md={15}
-                    lg={15}
-                    xl={15}
-                    xxl={12}
-                    style={{
-                        paddingLeft: "22px",
-                        paddingRight: "11px",
-                    }}
-                >
-                    <Row gutter={[0, 0]}>
-                        <Col xs={15} sm={15} md={15} lg={15} xl={15} xxl={15}>
-                            <Form.Item name="department">
-                                <TextArea
-                                    label="Remarks"
-                                    placeholder="Remarks"
-                                    // onChange={(e) => handleDebounce(e)}
-                                    rows={7}
-                                />
-                            </Form.Item>
-                        </Col>
-                    </Row>
-                </Col>
-
-                <Col
-                    xs={15}
-                    sm={15}
-                    md={15}
-                    lg={15}
-                    xl={15}
-                    xxl={12}
-                    style={{
-                        paddingLeft: "22px",
-                        paddingRight: "11px",
-                    }}
-                ></Col>
+                <Row gutter={[0, 0]}>
+                    <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
+                        <Form.Item name="department">
+                            <TextArea
+                                styles={{ width: "100%" }}
+                                label="Remarks"
+                                placeholder="Remarks"
+                                // onChange={(e) => handleDebounce(e)}
+                                rows={7}
+                            />
+                        </Form.Item>
+                    </Col>
+                </Row>
             </Row>
         </Form>
     );

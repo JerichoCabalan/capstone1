@@ -209,15 +209,17 @@ export default function Sidemenu(props) {
 
                 <div className="logo_wrapper">
                     {!sideMenuCollapse && (
-                        <img
-                            src="/images/logo_sidemenu.png"
-                            alt="INVENTORY "
-                            style={{
-                                width: "80px",
-                                marginLeft: "-138px",
-                            }}
-                            // width="50px"
-                        />
+                        <>
+                            <img
+                                src="/images/logo_sidemenu.png"
+                                alt="INVENTORY "
+                                style={{
+                                    width: "80px",
+                                    marginLeft: "-138px",
+                                }}
+                                // width="50px"
+                            />
+                        </>
                     )}
                 </div>
             </div>
