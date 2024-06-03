@@ -336,4 +336,16 @@
 #PageLogin .ant-descriptions-item-content .page-all-users,
 #LoginRightContent .ant-descriptions-item-content .page-all-users {
   color: #ff6624;
+}
+#PageLogin .btn-main-primary.btn-main-invert-outline.b-r-none.hides,
+#LoginRightContent .btn-main-primary.btn-main-invert-outline.b-r-none.hides {
+  margin-left: 10px;
+  background-color: rgb(29, 108, 53);
+  color: white;
+  border-color: rgb(29, 108, 53);
+}
+#PageLogin .btn-main-primary.btn-main-invert-outline.b-r-none.hides:hover,
+#LoginRightContent .btn-main-primary.btn-main-invert-outline.b-r-none.hides:hover {
+  background-color: #2a60d4;
+  border-color: #2a60d4;
 }/*# sourceMappingURL=page_login.css.map */

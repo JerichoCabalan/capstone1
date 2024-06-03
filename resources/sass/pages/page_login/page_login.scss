@@ -346,4 +346,22 @@
     .ant-descriptions-item-content .page-all-users {
         color: #ff6624;
     }
+
+    .btn-main-primary {
+        &.btn-main-invert-outline {
+            &.b-r-none {
+                &.hides {
+                    margin-left: 10px;
+                    background-color: rgb(29, 108, 53);
+                    color: white;
+                    border-color: rgb(29, 108, 53);
+
+                    &:hover {
+                        background-color: #2a60d4;
+                        border-color: #2a60d4;
+                    }
+                }
+            }
+        }
+    }
 }

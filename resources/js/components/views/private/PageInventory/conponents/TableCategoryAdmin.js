@@ -100,13 +100,14 @@ export default function TableCategoryAdmin(props) {
                 </Button>
 
                 <Button
-                    className=" btn-main-primary btn-main-invert-outline b-r-none hides"
+                    className="btn-main-primary btn-main-invert-outline b-r-none hides"
                     style={{
                         marginLeft: "10px",
+                        backgroundColor: "rgb(29 108 53)",
+                        color: "white",
+                        borderColor: "rgb(29 108 53)",
                     }}
-                    icon={
-                        <FontAwesomeIcon icon={faFileExcel} color="#217346" />
-                    }
+                    icon={<FontAwesomeIcon icon={faFileExcel} color="#fff" />}
                     size="large"
                     name="btn_add"
                     onClick={toggleImportModal}

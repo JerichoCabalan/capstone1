@@ -9,7 +9,7 @@ export default function ModalImportExcel({
     handleCancel,
 }) {
     const { Dragger } = Upload;
-    const [loading, setLoading] = useState(false); // Add this line
+    const [loading, setLoading] = useState(false);
 
     const props = {
         name: "file",
@@ -19,14 +19,14 @@ export default function ModalImportExcel({
         onChange(info) {
             const { status } = info.file;
             if (status === "uploading") {
-                setLoading(true); // Set loading to true when the upload starts
+                setLoading(true);
             } else if (status === "done") {
-                setLoading(false); // Set loading to false when the upload finishes
+                setLoading(false);
                 message.success(
                     `${info.file.name} file uploaded successfully.`
                 );
             } else if (status === "error") {
-                setLoading(false); // Set loading to false when the upload fails
+                setLoading(false);
                 message.error(`${info.file.name} file upload failed.`);
             }
         },
@@ -58,13 +58,12 @@ export default function ModalImportExcel({
                     key={2}
                     onClick={handleOk}
                 >
-                    SUBMIT
+                    Upload
                 </Button>,
             ]}
         >
             <Spin spinning={loading}>
                 {" "}
-                {/* Add this line */}
                 <Dragger {...props}>
                     <p className="ant-upload-drag-icon">
                         <FileExcelOutlined />
@@ -79,7 +78,6 @@ export default function ModalImportExcel({
                     </p>
                 </Dragger>
             </Spin>{" "}
-            {/* Add this line */}
         </Modal>
     );
 }
