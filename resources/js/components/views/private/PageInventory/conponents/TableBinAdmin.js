@@ -104,7 +104,7 @@ export default function TableBinAdmin(props) {
                 </Button>
 
                 <Button
-                    className=" btn-main-primary btn-main-invert-outline b-r-none hides"
+                    className="btn-main-primary btn-main-invert-outline b-r-none hides"
                     style={{
                         marginLeft: "10px",
                     }}
@@ -112,7 +112,7 @@ export default function TableBinAdmin(props) {
                     size="large"
                     name="btn_add"
                 >
-                    Delete Equipment{" "}
+                    Delete Equipment
                 </Button>
             </Col>
             <Row
