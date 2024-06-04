@@ -32,222 +32,56 @@ export default function PageLogin() {
 
     const { mutate: mutateLogin, isLoading: isLoadingButtonLogin } = POST(
         "api/login",
-        "login"
+        "register"
     );
 
     const onFinishLogin = (values) => {
-        console.log("onFinishLogin", values);
+        try {
+            console.log("onFinishLogin", values);
 
-        mutateLogin(values, {
-            onSuccess: (res) => {
-                // console.log("res", res);
-                if (res.data) {
-                    localStorage.userdata = encrypt(JSON.stringify(res.data));
-                    localStorage.token = res.token;
+            mutateLogin(values, {
+                onSuccess: (res) => {
+                    // console.log("res", res);
+                    if (res.data) {
+                        localStorage.userdata = encrypt(
+                            JSON.stringify(res.data)
+                        );
+                        localStorage.token = res.token;
 
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 500);
-                } else {
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 500);
+                    } else {
+                        setErrorMessageLogin({
+                            type: "error",
+                            message: res.message,
+                        });
+                    }
+                },
+                onError: (err) => {
                     setErrorMessageLogin({
                         type: "error",
-                        message: res.message,
+                        message: (
+                            <>
+                                Unrecognized username or password.{" "}
+                                <b>Forgot your password?</b>
+                            </>
+                        ),
                     });
-                }
-            },
-            onError: (err) => {
-                setErrorMessageLogin({
-                    type: "error",
-                    message: (
-                        <>
-                            Unrecognized username or password.{" "}
-                            <b>Forgot your password?</b>
-                        </>
-                    ),
-                });
-            },
-        });
+                },
+            });
+        } catch (error) {
+            console.error("An error occurred during login:", error);
+            setErrorMessageLogin({
+                type: "error",
+                message: "An unexpected error occurred. Please try again.",
+            });
+        }
     };
 
     const onChange = (key) => {
         console.log(key);
     };
-
-    // const items = [
-    //     {
-    //         key: "1",
-    //         label: "Log In",
-    //         children: (
-    //             <Card>
-    //                 <div className="text-center mt-0">
-    //                     <img src="../../../images/register.png" alt="" />
-    //                 </div>
-
-    //                 <Typography.Title className="text-center text-log-in mt-0">
-    //                     Log In
-    //                 </Typography.Title>
-
-    //                 <Form
-    //                     layout="vertical"
-    //                     className="login-form"
-    //                     onFinish={onFinishLogin}
-    //                     autoComplete="off"
-    //                 >
-    //                     <Form.Item
-    //                         name="email"
-    //                         rules={[validateRules.required]}
-    //                         hasFeedback
-    //                     >
-    //                         <FloatInput
-    //                             label="Username / E-mail"
-    //                             placeholder="Username / E-mail"
-    //                         />
-    //                     </Form.Item>
-
-    //                     <Form.Item
-    //                         name="password"
-    //                         rules={[validateRules.required]}
-    //                         hasFeedback
-    //                     >
-    //                         <FloatInputPassword
-    //                             label="Password"
-    //                             placeholder="Password"
-    //                         />
-    //                     </Form.Item>
-
-    //                     <Button
-    //                         type="primary"
-    //                         htmlType="submit"
-    //                         loading={isLoadingButtonLogin}
-    //                         className="mt-10 btn-log-in page-login"
-    //                         block
-    //                         size="middle"
-    //                     >
-    //                         Log In
-    //                     </Button>
-
-    //                     {errorMessageLogin.message && (
-    //                         <Alert
-    //                             className="mt-10"
-    //                             type={errorMessageLogin.type}
-    //                             message={errorMessageLogin.message}
-    //                         />
-    //                     )}
-
-    //                     <div>
-    //                         <p
-    //                             style={{
-    //                                 marginTop: "15px",
-    //                                 fontSize: "12px",
-    //                                 width: "330px",
-    //                             }}
-    //                         >
-    //                             By creating an account, you are agree to the
-    //                             Terms of Service and Privacy Policy.
-    //                         </p>
-    //                     </div>
-    //                     <p
-    //                         style={{
-    //                             marginLeft: "85px",
-    //                         }}
-    //                     >
-    //                         Doesn't have an
-    //                         <Link
-    //                             to="/signup"
-    //                             style={{
-    //                                 marginTop: "15px",
-    //                             }}
-    //                         >
-    //                             {" "}
-    //                             Sign Up here?
-    //                         </Link>
-    //                     </p>
-    //                 </Form>
-    //             </Card>
-    //         ),
-    //     },
-    //     {
-    //         key: "2",
-    //         label: "Sign Up",
-    //         children: (
-    //             <Card>
-    //                 <div className="text-center mt-0">
-    //                     <img src="../../../images/register.png" alt="" />
-    //                 </div>
-
-    //                 <Form
-    //                     layout="vertical"
-    //                     className="login-form"
-    //                     onFinish={onFinishLogin}
-    //                     autoComplete="off"
-    //                 >
-    //                     <Form.Item
-    //                         name="lastname"
-    //                         rules={[validateRules.required]}
-    //                         hasFeedback
-    //                     >
-    //                         <FloatInput
-    //                             label="Last Name"
-    //                             placeholder="Last Name"
-    //                         />
-    //                     </Form.Item>
-
-    //                     <Form.Item
-    //                         name="firstname"
-    //                         rules={[validateRules.required]}
-    //                         hasFeedback
-    //                     >
-    //                         <FloatInput
-    //                             label="First Name"
-    //                             placeholder="First Name"
-    //                         />
-    //                     </Form.Item>
-
-    //                     <Form.Item name="middlename" hasFeedback>
-    //                         <FloatInput
-    //                             label="Middle Name"
-    //                             placeholder="Middle Name"
-    //                         />
-    //                     </Form.Item>
-
-    //                     <Form.Item className="date">
-    //                         <p className="date-label">Date of Birth</p>
-    //                         <DatePicker
-    //                             size="large"
-    //                             className="w-50"
-    //                             placeholder="Date"
-    //                             label="Date"
-    //                             format={"MM/DD/YYYY"}
-    //                         />
-    //                         <p className="date-format">MM/DD/YYYY</p>
-    //                     </Form.Item>
-
-    //                     <Button
-    //                         type="primary"
-    //                         htmlType="submit"
-    //                         loading={isLoadingButtonLogin}
-    //                         className="btn-continue"
-    //                         block
-    //                         size="middle"
-    //                         onClick={() => {
-    //                             navigate("/registration");
-    //                         }}
-    //                     >
-    //                         Continue
-    //                     </Button>
-
-    //                     {errorMessageLogin.message && (
-    //                         <Alert
-    //                             className="mt-5"
-    //                             type={errorMessageLogin.type}
-    //                             message={errorMessageLogin.message}
-    //                         />
-    //                     )}
-    //                 </Form>
-    //             </Card>
-    //         ),
-    //     },
-    // ];
 
     return (
         <Layout.Content>

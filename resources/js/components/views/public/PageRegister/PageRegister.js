@@ -15,6 +15,7 @@ import { logo } from "../../../providers/companyInfo";
 import { encrypt } from "../../../providers/companyInfo";
 import { Link, useNavigate } from "react-router-dom";
 import { date, description } from "../../../providers/companyInfo";
+import { message } from "antd";
 
 import FloatInput from "../../../providers/FloatInput";
 import FloatInputPassword from "../../../providers/FloatInputPassword";
@@ -26,14 +27,29 @@ import FloatInputMask from "../../../providers/FloatInputMask";
 
 export default function PageRegister() {
     const navigate = useNavigate();
-
+    const [form] = Form.useForm();
     const [activeTab, setActiveTab] = useState("login");
 
     const [errorMessageLogin, setErrorMessageLogin] = useState({
         type: "",
         message: "",
     });
+    const { mutate: mutateRegister, isLoading: isLoadingRegister } = POST(
+        "api/register",
+        "login"
+    );
 
+    const onFinish = (values) => {
+        mutateRegister(values, {
+            onSuccess: (res) => {
+                console.log("res", res);
+                message.success("Registration successful! Please login.");
+            },
+            onError: (err) => {
+                message.error("Registration failed. Please try again.");
+            },
+        });
+    };
     const { mutate: mutateLogin, isLoading: isLoadingButtonLogin } = POST(
         "api/login",
         "login"
@@ -121,8 +137,9 @@ export default function PageRegister() {
                         <Form
                             layout="vertical"
                             className="login-form"
-                            onFinish={onFinishLogin}
+                            onFinish={onFinish}
                             autoComplete="off"
+                            form={form}
                         >
                             <Row gutter={[12, 12]}>
                                 <Col xs={12} sm={12} md={12}>
@@ -152,20 +169,30 @@ export default function PageRegister() {
                                 hasFeedback
                             >
                                 <FloatInput
-                                    label="Username / E-mail"
-                                    placeholder="Username / E-mail"
+                                    label="E-mail"
+                                    placeholder=" E-mail"
                                 />
                             </Form.Item>
                             <Form.Item
-                                name="phonenumber"
+                                name="username"
+                                rules={[validateRules.required]}
+                                hasFeedback
+                            >
+                                <FloatInput
+                                    label="Username"
+                                    placeholder="Username"
+                                />
+                            </Form.Item>
+                            <Form.Item
+                                name="phone_number"
                                 rules={[validateRules.required]}
                                 hasFeedback
                             >
                                 <FloatInputMask
                                     label="Phone No"
                                     placeholder="Phone No"
-                                    maskLabel="contact_number"
-                                    maskType="999 999 9999"
+                                    maskLabel="phone_number"
+                                    maskType="999 9999 9999"
                                     required={true}
                                 />
                             </Form.Item>
@@ -215,9 +242,32 @@ export default function PageRegister() {
                             </Form.Item>
 
                             <Form.Item
-                                name="confirm_password"
-                                rules={[validateRules.required]}
+                                name="password_confirmation"
+                                dependencies={["password"]}
                                 hasFeedback
+                                rules={[
+                                    {
+                                        required: true,
+                                        message:
+                                            "Please confirm your password!",
+                                    },
+                                    ({ getFieldValue }) => ({
+                                        validator(_, value) {
+                                            if (
+                                                !value ||
+                                                getFieldValue("password") ===
+                                                    value
+                                            ) {
+                                                return Promise.resolve();
+                                            }
+                                            return Promise.reject(
+                                                new Error(
+                                                    "The two passwords do not match!"
+                                                )
+                                            );
+                                        },
+                                    }),
+                                ]}
                             >
                                 <FloatInputPassword
                                     label="Confirm Password"
@@ -233,7 +283,7 @@ export default function PageRegister() {
                                 block
                                 size="middle"
                             >
-                                Log In
+                                Sign Up
                             </Button>
 
                             {errorMessageLogin.message && (

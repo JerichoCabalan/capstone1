@@ -12,46 +12,35 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => $request->password
         ];
-
+    
         if (auth()->attempt($credentialsEmail)) {
             $user = auth()->user();
-
-            $dataUser = \App\Models\Profile::firstWhere("user_id", $request->id);
-            $dataUserRole = \App\Models\UserRole::find($request->user_role_id);
-
+    
+            $dataUser = \App\Models\Profile::firstWhere("user_id", $user->id);
+            $dataUserRole = \App\Models\UserRole::find($user->user_role_id);
+    
             if ($dataUser) {
                 $user['firstname'] = $dataUser->firstname ?? null;
                 $user['lastname'] = $dataUser->lastname ?? null;
             }
-
+    
             if ($dataUserRole) {
                 $user['role'] = $dataUserRole->role ?? null;
             }
-
+    
             if ($user->status == 'Active') {
-                if ($request->from) {
-                    if ($request->from == 'faculty_monitoring_attendance_checker' && in_array($user->user_role_id, [1, 2])) {
-                        $token = $user->createToken(date('Y') . '-' . env('APP_NAME'))->accessToken;
-
-                        return response()->json([
-                            'success' => true,
-                            'data' => $user,
-                            'token' => $token,
-
-                        ], 200);
-                    } else {
-                        return response()->json([
-                            'success' => false,
-                            'message' => 'Permission not allowed!',
-                        ], 200);
-                    }
-                } else {
+                // Check if the user has the required role and from value
+                if ($request->from && $request->from == 'faculty_monitoring_attendance_checker' && in_array($user->user_role_id, [1, 2])) {
                     $token = $user->createToken(date('Y') . '-' . env('APP_NAME'))->accessToken;
                     return response()->json([
                         'success' => true,
                         'data' => $user,
                         'token' => $token,
-
+                    ], 200);
+                } else {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Permission not allowed!',
                     ], 200);
                 }
             } else if ($user->status == 'Deactivated') {
@@ -73,19 +62,19 @@ class AuthController extends Controller
             ];
             if (auth()->attempt($credentialsUsername)) {
                 $user = auth()->user();
-
-                $dataUser = \App\Models\Profile::firstWhere("user_id", $request->id);
+    
+                $dataUser = \App\Models\Profile::firstWhere("user_id", $user->id);
                 $dataUserRole = \App\Models\UserRole::find($user->user_role_id);
-
+    
                 if ($dataUser) {
                     $user['firstname'] = $dataUser->firstname ?? null;
                     $user['lastname'] = $dataUser->lastname ?? null;
                 }
-
+    
                 if ($dataUserRole) {
                     $user['role'] = $dataUserRole->role ?? null;
                 }
-
+    
                 if ($user->status == 'Active') {
                     if ($request->from) {
                         if ($request->from == 'faculty_monitoring_attendance_checker' && in_array($user->user_role_id, [1, 2])) {
@@ -94,7 +83,7 @@ class AuthController extends Controller
                                 'success' => true,
                                 'data' => $user,
                                 'token' => $token,
-
+    
                             ], 200);
                         } else {
                             return response()->json([
@@ -104,12 +93,12 @@ class AuthController extends Controller
                         }
                     } else {
                         $token = $user->createToken(date('Y') . '-' . env('APP_NAME'))->accessToken;
-
+    
                         return response()->json([
                             'success' => true,
                             'data' => $user,
                             'token' => $token,
-
+    
                         ], 200);
                     }
                 } else if ($user->status == 'Deactivated') {
@@ -133,23 +122,38 @@ class AuthController extends Controller
             }
         }
     }
+    
+    
+    
 
     public function register(Request $request)
-    {
-        // $credentialsName = [
-        //     'lastname' => $request->lastname,
-        //     'firstname' => $request->firstname,
-        //     'middlename' => $request->middlename
-        // ];
-
-        // if (auth()->attempt($credentialsName)) {
-        //     $user = auth()->user();
-
-        //     dd($user);
-
-        //     if ($user->status == "") {
-        //     }
-        // }
+    { 
+        $validatedData = $request->validate([
+            'username' => 'required|string|max:255', 
+            'lastname' => 'required|string|max:255',
+            'firstname' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'phone_number' => 'required|string|max:255',
+            'role' => 'required|string|max:255',
+            
+        ]);
+    
+        $user = new \App\Models\User();
+        $user->username = $validatedData['username']; 
+        $user->lastname = $validatedData['lastname'];
+        $user->firstname = $validatedData['firstname'];
+        $user->email = $validatedData['email'];
+        $user->password = bcrypt($validatedData['password']);
+        $user->role = $validatedData['role'];
+        $user->phone_number = $validatedData['phone_number'];
+        $user->save();
+    
+        return response()->json([
+            'success' => true,
+            'message' => 'User registered successfully!',
+        ], 200);
+    
     }
 
     public function forgot_password(Request $request)
