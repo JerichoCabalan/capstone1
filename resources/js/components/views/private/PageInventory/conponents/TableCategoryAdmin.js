@@ -158,6 +158,12 @@ export default function TableCategoryAdmin(props) {
                             dataIndex={"description"}
                             sorter={true}
                         />
+                        <Table.Column
+                            title="Category"
+                            key="description"
+                            dataIndex={"description"}
+                            sorter={true}
+                        />
 
                         <Table.Column
                             title="Assigned Comlab"

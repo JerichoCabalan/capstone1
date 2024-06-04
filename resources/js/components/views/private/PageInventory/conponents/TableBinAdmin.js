@@ -158,17 +158,29 @@ export default function TableBinAdmin(props) {
                             dataIndex={"description"}
                             sorter={true}
                         />
+                        <Table.Column
+                            title="Category"
+                            key="description"
+                            dataIndex={"category"}
+                            sorter={true}
+                        />
 
                         <Table.Column
-                            title="Assigned Comlab"
+                            title="Equipment Status"
+                            key="email"
+                            dataIndex={"status"}
+                            sorter={true}
+                        />
+                        <Table.Column
+                            title="Moved on"
                             key="email"
                             dataIndex={"assigned_comlab"}
                             sorter={true}
                         />
                         <Table.Column
-                            title="Equipment Status"
+                            title="Moved by"
                             key="email"
-                            dataIndex={"status"}
+                            dataIndex={"assigned_comlab"}
                             sorter={true}
                         />
                         {/* <Table.Column title="Staff" key="" /> */}
