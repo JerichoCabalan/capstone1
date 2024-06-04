@@ -295,9 +295,8 @@ export default function PageInventoryAdminForm() {
                 </Col>
                 <Row gutter={[0, 0]}>
                     <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
-                        <Form.Item name="department">
+                        <Form.Item name="department" style={{}}>
                             <TextArea
-                                styles={{ width: "100%" }}
                                 label="Remarks"
                                 placeholder="Remarks"
                                 // onChange={(e) => handleDebounce(e)}
