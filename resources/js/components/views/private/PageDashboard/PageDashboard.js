@@ -34,8 +34,10 @@ export default function PageDashboard() {
                             <Card
                                 style={{
                                     width: 300,
-                                    backgroundColor: "aqua",
+                                    backgroundColor: "#a5aeff",
                                     borderRadius: "60px",
+                                    boxShadow:
+                                        "rgb(165, 174, 255) 0px 25px 20px -20px",
                                 }}
                             >
                                 <Row>
@@ -84,7 +86,7 @@ export default function PageDashboard() {
                                                 marginLeft: "-22px",
                                                 marginTop: "-75px",
                                                 fontSize: "17px",
-                                                backgroundColor: "aqua",
+                                                backgroundColor: "#a5aeff",
                                                 color: "blue",
                                             }}
                                         >
@@ -148,6 +150,8 @@ export default function PageDashboard() {
                                     width: 300,
                                     backgroundColor: "#DAF7A6",
                                     borderRadius: "60px",
+                                    boxShadow:
+                                        "rgb(218, 247, 166) 0px 25px 20px -20px",
                                 }}
                             >
                                 <Row>
@@ -229,6 +233,7 @@ export default function PageDashboard() {
                                     <Button
                                         style={{
                                             backgroundColor: "orange",
+                                            borderRadius: "100px",
                                         }}
                                         type="primary"
                                     >
@@ -252,8 +257,10 @@ export default function PageDashboard() {
                             <Card
                                 style={{
                                     width: 300,
-                                    backgroundColor: "pink ",
+                                    backgroundColor: "#ffcece",
                                     borderRadius: "60px",
+                                    boxShadow:
+                                        "rgb(255, 206, 206) 0px 25px 20px -20px",
                                 }}
                             >
                                 <Row>
@@ -299,7 +306,7 @@ export default function PageDashboard() {
                                                 marginLeft: "-21px",
                                                 marginTop: "-75px",
                                                 fontSize: "17px",
-                                                backgroundColor: "pink  ",
+                                                backgroundColor: "#ffcece",
                                                 color: "blue",
                                                 width: "47px",
                                             }}
@@ -334,6 +341,7 @@ export default function PageDashboard() {
                                         justifyContent: "center",
                                         marginTop: "20px",
                                         marginLeft: "-25px",
+                                        borderRadius: "100px",
                                     }}
                                 >
                                     <Button
