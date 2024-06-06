@@ -127,8 +127,7 @@ export default function ModalInventory(props) {
 
     return (
         <Modal
-            className="ant-modal-wrap-2"
-            style={{ backgroundColor: "red" }}
+            className="ant-modal-wrap-2 custom-modal"
             title={
                 (toggleModalInventory.data && toggleModalInventory.data.id
                     ? "EDIT"
@@ -146,13 +145,19 @@ export default function ModalInventory(props) {
                     CANCEL
                 </Button>,
                 <Button
-                    className="btn-main-primary"
-                    type="primary"
+                    className="btn-main-primary btn-main-invert-outline b-r-none hides"
                     size="large"
+                    style={{
+                        marginLeft: "10px",
+                        backgroundColor: "#f27510",
+                        color: "white",
+                        borderColor: "#f27510",
+                    }}
+                    type="primary"
                     key={2}
                     onClick={() => form.submit()}
                 >
-                    Upload
+                    Submit
                 </Button>,
             ]}
         >
