@@ -52,9 +52,15 @@ export default function ModalImportExcel({
                     CANCEL
                 </Button>,
                 <Button
-                    className="btn-main-primary"
+                    className="btn-main-primary btn-main-invert-outline b-r-none hides"
                     type="primary"
                     size="large"
+                    style={{
+                        marginLeft: "10px",
+                        backgroundColor: "rgb(29 108 53)",
+                        color: "white",
+                        borderColor: "rgb(29 108 53)",
+                    }}
                     key={2}
                     onClick={handleOk}
                 >

@@ -58,7 +58,7 @@ export default function RouteList() {
             />
 
             <Route
-                path="/edit-profile"
+                path="/"
                 element={
                     <PrivateRoute
                         moduleName="Edit Profile"
@@ -66,16 +66,7 @@ export default function RouteList() {
                         subtitle="VIEW / EDIT"
                         pageId="PageUserProfile"
                         pageHeaderIcon={faUsers}
-                        breadcrumb={[
-                            {
-                                name: "Dashboard",
-                                link: "/dashboard",
-                            },
-                            {
-                                name: "Edit Profile",
-                            },
-                        ]}
-                        component={PageEditProfile}
+                        component={PageInventory}
                     />
                 }
             />

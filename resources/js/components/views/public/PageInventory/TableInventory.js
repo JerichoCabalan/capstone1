@@ -18,7 +18,7 @@ import dayjs from "dayjs";
 import { description } from "../../../providers/companyInfo";
 
 export default function TableInventory(props) {
-    const { tableFilter, setTableFilter, sortInfo } = props;
+    const { tableFilter, setTableFilter, sortInfo, dataSource } = props;
     const navigate = useNavigate();
     const onChangeTable = (sorter) => {
         setTableFilter((ps) => ({
@@ -29,33 +29,6 @@ export default function TableInventory(props) {
             page_size: "50",
         }));
     };
-
-    const dataSource = [
-        {
-            key: "1",
-            unit_no: "1",
-            description: "Monitor",
-            assigned_comlab: "Assigned to Lab 1",
-            status: "Available",
-            quantity_of_stock: "10",
-        },
-        {
-            key: "2",
-            unit_no: "2",
-            description: "Keybord",
-            assigned_comlab: "Assigned to Lab 1",
-            status: "Available",
-            quantity_of_stock: "10",
-        },
-        {
-            key: "3",
-            unit_no: "3",
-            description: "Monitor",
-            assigned_comlab: "Assigned to Lab 1",
-            status: "Available",
-            quantity_of_stock: "10",
-        },
-    ];
 
     return (
         <Row
@@ -79,14 +52,13 @@ export default function TableInventory(props) {
             </Col>
             <Col xs={24} sm={24} md={24}>
                 <Table
-                    // className="ant-table-default ant-table-striped"
-                    // dataSource={dataSource && dataSource.data.data}
-                    // rowKey={(record) => record.id}
+                    className="ant-table-default ant-table-striped"
+                    dataSource={dataSource && dataSource.data.data}
+                    rowKey={(record) => record.id}
                     pagination={false}
                     bordered={false}
                     onChange={onChangeTable}
                     scroll={{ x: "max-content" }}
-                    dataSource={dataSource}
                 >
                     <Table.Column
                         title="Unit No"
@@ -103,25 +75,25 @@ export default function TableInventory(props) {
 
                     <Table.Column
                         title="Assigned Comlab"
-                        key="email"
+                        key="assigned_comlab"
                         dataIndex={"assigned_comlab"}
                         sorter={true}
                     />
                     <Table.Column
                         title="Status"
-                        key="email"
-                        dataIndex={"status"}
+                        key="equipment_status"
+                        dataIndex={"equipment_status"}
                         sorter={true}
                     />
                     <Table.Column
                         title="Quantity of Stock"
-                        key="fullname"
+                        key="no_of_stock"
                         sorter
-                        dataIndex={"quantity_of_stock"}
+                        dataIndex={"no_of_stock"}
                     />
                     <Table.Column
                         title="Action"
-                        key="fullname"
+                        key="user_id"
                         sorter
                         render={(text, record) => (
                             <Popconfirm

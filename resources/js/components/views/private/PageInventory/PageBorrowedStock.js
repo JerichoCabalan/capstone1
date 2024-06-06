@@ -55,8 +55,8 @@ export default function PageBorrowedStock() {
     }, [location]);
 
     const { data: dataSource, refetch: refetchSource } = GET(
-        `api/users?${new URLSearchParams(tableFilter)}`,
-        "students_active_list"
+        `api/borrow_stock?${new URLSearchParams(tableFilter)}`,
+        "borrow_stock"
     );
 
     useEffect(() => {

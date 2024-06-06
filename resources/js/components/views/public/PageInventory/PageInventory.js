@@ -6,7 +6,7 @@ import { faPlus } from "@fortawesome/pro-regular-svg-icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import TableInventory from "./TableInventory";
 
-export default function PageInventory(watermarkProps) {
+export default function PageInventory() {
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -52,8 +52,8 @@ export default function PageInventory(watermarkProps) {
     }, [location]);
 
     const { data: dataSource, refetch: refetchSource } = GET(
-        `api/users?${new URLSearchParams(tableFilter)}`,
-        "students_active_list"
+        `api/inventory_admin?${new URLSearchParams(tableFilter)}`,
+        "inventory_admin"
     );
 
     useEffect(() => {

@@ -7,8 +7,11 @@ import {
 } from "@fortawesome/pro-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Row, Col, Card, Button } from "antd";
+import { useNavigate } from "react-router-dom";
 
 export default function PageDashboard() {
+    const navigate = useNavigate();
+
     return (
         <Row gutter={[12, 12]}>
             <Col xs={24} sm={24} md={24} lg={24} xl={16} xxl={16}>
@@ -45,14 +48,24 @@ export default function PageDashboard() {
                                         style={{
                                             fontSize: "50px",
                                             color: "blue",
-                                            marginLeft: "89px",
-                                            marginTop: "-65px",
-                                            // border: "1px solid #DAF7A6",
-                                            // borderRadius: "50%",
-                                            // backgroundColor: "#DAF7A6",
+                                            marginLeft: "80px",
+                                            marginTop: "-76px",
+                                            border: "9px solid #a5aeff",
+                                            borderRadius: "50%",
+                                            // backgroundColor: "#ffcece",
+                                            width: "70px",
+                                            height: "70px",
+                                            display: "flex",
+                                            alignItems: "center",
+                                            justifyContent: "center",
                                         }}
                                     >
-                                        <FontAwesomeIcon icon={faUsers} />
+                                        <FontAwesomeIcon
+                                            style={{
+                                                fontSize: "35px",
+                                            }}
+                                            icon={faUsers}
+                                        />
                                     </div>
                                     <Col span={11}>
                                         <p
@@ -123,8 +136,12 @@ export default function PageDashboard() {
                                     }}
                                 >
                                     <Button
+                                        className="btn-main-primary btn-main-invert-outline b-r-none hides"
                                         style={{
-                                            backgroundColor: "orange",
+                                            marginLeft: "10px",
+                                            backgroundColor: "ff6624",
+                                            color: "white",
+                                            borderColor: "ff6624",
                                         }}
                                         type="primary"
                                     >
@@ -159,14 +176,24 @@ export default function PageDashboard() {
                                         style={{
                                             fontSize: "50px",
                                             color: "blue",
-                                            marginLeft: "89px",
-                                            marginTop: "-65px",
-                                            // border: "1px solid #DAF7A6",
-                                            // borderRadius: "50%",
-                                            // backgroundColor: "#DAF7A6",
+                                            marginLeft: "80px",
+                                            marginTop: "-76px",
+                                            border: "9px solid #DAF7A6",
+                                            borderRadius: "50%",
+                                            // backgroundColor: "#ffcece",
+                                            width: "70px",
+                                            height: "70px",
+                                            display: "flex",
+                                            alignItems: "center",
+                                            justifyContent: "center",
                                         }}
                                     >
-                                        <FontAwesomeIcon icon={faToolbox} />
+                                        <FontAwesomeIcon
+                                            style={{
+                                                fontSize: "35px",
+                                            }}
+                                            icon={faToolbox}
+                                        />
                                     </div>
 
                                     <Col span={11}>
@@ -231,9 +258,12 @@ export default function PageDashboard() {
                                     }}
                                 >
                                     <Button
+                                        className="btn-main-primary btn-main-invert-outline b-r-none hides"
                                         style={{
-                                            backgroundColor: "orange",
-                                            borderRadius: "100px",
+                                            marginLeft: "10px",
+                                            backgroundColor: "ff6624",
+                                            color: "white",
+                                            borderColor: "ff6624",
                                         }}
                                         type="primary"
                                     >
@@ -268,14 +298,22 @@ export default function PageDashboard() {
                                         style={{
                                             fontSize: "50px",
                                             color: "blue",
-                                            marginLeft: "89px",
-                                            marginTop: "-65px",
-                                            // border: "1px solid #DAF7A6",
-                                            // borderRadius: "50%",
-                                            // backgroundColor: "#DAF7A6",
+                                            marginLeft: "80px",
+                                            marginTop: "-76px",
+                                            border: "9px solid #ffcece",
+                                            borderRadius: "50%",
+                                            // backgroundColor: "#ffcece",
+                                            width: "70px",
+                                            height: "70px",
+                                            display: "flex",
+                                            alignItems: "center",
+                                            justifyContent: "center",
                                         }}
                                     >
                                         <FontAwesomeIcon
+                                            style={{
+                                                fontSize: "35px",
+                                            }}
                                             icon={faBusinessTime}
                                         />
                                     </div>
@@ -345,12 +383,19 @@ export default function PageDashboard() {
                                     }}
                                 >
                                     <Button
+                                        className="btn-main-primary btn-main-invert-outline b-r-none hides"
                                         style={{
-                                            backgroundColor: "orange",
+                                            marginLeft: "10px",
+                                            backgroundColor: "ff6624",
+                                            color: "white",
+                                            borderColor: "ff6624",
                                         }}
                                         type="primary"
+                                        onClick={() =>
+                                            navigate("/inventory/equipment")
+                                        }
                                     >
-                                        View Stock Equipment
+                                        View Stock
                                     </Button>
                                 </div>
                             </Card>

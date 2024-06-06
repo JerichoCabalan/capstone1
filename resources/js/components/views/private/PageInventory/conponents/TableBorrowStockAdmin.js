@@ -26,7 +26,7 @@ import ModalInventory from "./ModalInventory";
 // import { description } from "../../../providers/companyInfo";
 
 export default function TableBorrowStockAdmin(props) {
-    const { tableFilter, setTableFilter, sortInfo } = props;
+    const { tableFilter, setTableFilter, sortInfo, dataSource } = props;
     const navigate = useNavigate();
     const onChangeTable = (sorter) => {
         setTableFilter((ps) => ({
@@ -38,40 +38,6 @@ export default function TableBorrowStockAdmin(props) {
         }));
     };
 
-    const dataSource = [
-        {
-            key: "1",
-            unit_no: "1",
-            description: "Monitor",
-            assigned_comlab: "Assigned to Lab 1",
-            status: "Available",
-            borrow_status: "Borrowed",
-            role: "Lab Staff",
-            quantity_of_stock: "10",
-            borrow_date: "2024-06-04",
-        },
-        {
-            key: "2",
-            unit_no: "2",
-            description: "Keybord",
-            assigned_comlab: "Assigned to Lab 1",
-            status: "Available",
-            borrow_status: "Borrowed",
-            role: "ComLab Adviser",
-            quantity_of_stock: "10",
-            borrow_date: "2024-06-04",
-        },
-        {
-            key: "3",
-            unit_no: "3",
-            description: "Monitor",
-            assigned_comlab: "Assigned to Lab 1",
-            borrow_status: "Available",
-            role: "ComLab Adviser",
-            quantity_of_stock: "10",
-            borrow_date: "2024-06-04",
-        },
-    ];
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const onSelectChange = (selectedRowKeys) => {
         setSelectedRowKeys(selectedRowKeys);
@@ -140,13 +106,13 @@ export default function TableBorrowStockAdmin(props) {
                 <Col xs={24} sm={24} md={24}>
                     <Table
                         // className="ant-table-default ant-table-striped"
-                        // dataSource={dataSource && dataSource.data.data}
-                        // rowKey={(record) => record.id}
+                        dataSource={dataSource && dataSource.data.data}
+                        rowKey={(record) => record.id}
                         pagination={false}
                         bordered={false}
                         onChange={onChangeTable}
                         scroll={{ x: "max-content" }}
-                        dataSource={dataSource}
+                        // dataSource={dataSource}
                         rowSelection={rowSelection}
                     >
                         <Table.Column
@@ -209,11 +175,11 @@ export default function TableBorrowStockAdmin(props) {
                     </div>
                 </Col>
             </Row>
-            <ModalInventory
+            {/* <ModalInventory
                 isModalOpen={isModalOpen}
                 handleOk={handleOk}
                 handleCancel={handleCancel}
-            ></ModalInventory>
+            ></ModalInventory> */}
         </>
     );
 }

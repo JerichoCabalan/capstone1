@@ -15354,7 +15354,7 @@ textarea.form-control-lg {
 .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-content .ant-modal-header {
   margin-bottom: 0px;
   padding: 20px;
-  background-color: #114eaf;
+  background-color: #ff6624;
   border-radius: 0px;
 }
 .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-content .ant-modal-header .ant-modal-title {
@@ -16620,6 +16620,73 @@ textarea.form-control-lg {
 #LoginRightContent .btn-main-primary.btn-main-invert-outline.b-r-none.hides:hover {
   background-color: #2a60d4;
   border-color: #2a60d4;
+}
+#PageLogin .custom-modal .ant-modal,
+#LoginRightContent .custom-modal .ant-modal {
+  padding-bottom: 0px;
+}
+#PageLogin .custom-modal .ant-modal .ant-modal-content,
+#LoginRightContent .custom-modal .ant-modal .ant-modal-content {
+  border-radius: 0px;
+  padding: 0px;
+}
+#PageLogin .custom-modal .ant-modal .ant-modal-content .ant-modal-close,
+#LoginRightContent .custom-modal .ant-modal .ant-modal-content .ant-modal-close {
+  top: 20px;
+  color: #ffffff;
+}
+#PageLogin .custom-modal .ant-modal .ant-modal-content .ant-modal-header,
+#LoginRightContent .custom-modal .ant-modal .ant-modal-content .ant-modal-header {
+  margin-bottom: 0px;
+  padding: 20px;
+  background-color: #ff6624;
+  border-radius: 0px;
+}
+#PageLogin .custom-modal .ant-modal .ant-modal-content .ant-modal-header .ant-modal-title,
+#LoginRightContent .custom-modal .ant-modal .ant-modal-content .ant-modal-header .ant-modal-title {
+  color: #ffffff;
+}
+#PageLogin .custom-modal .ant-modal .ant-modal-content .ant-modal-body,
+#LoginRightContent .custom-modal .ant-modal .ant-modal-content .ant-modal-body {
+  padding: 20px;
+}
+#PageLogin .custom-modal .ant-modal .ant-modal-content .ant-modal-footer,
+#LoginRightContent .custom-modal .ant-modal .ant-modal-content .ant-modal-footer {
+  padding: 20px;
+}
+#PageLogin .custom-modal .ant-modal .ant-modal-content .ant-modal-footer .ant-btn.ant-btn-primary,
+#LoginRightContent .custom-modal .ant-modal .ant-modal-content .ant-modal-footer .ant-btn.ant-btn-primary {
+  color: #ffffff;
+  background-color: #114eaf;
+  border-color: #114eaf;
+}
+#PageLogin .custom-modal .ant-modal .ant-modal-content .ant-modal-footer .ant-btn.ant-btn-primary:hover,
+#LoginRightContent .custom-modal .ant-modal .ant-modal-content .ant-modal-footer .ant-btn.ant-btn-primary:hover {
+  color: #114eaf;
+  background-color: #ffffff;
+  border-color: #114eaf;
+}
+#PageLogin .custom-modal .ant-modal .ant-modal-content .ant-modal-footer .ant-btn.ant-btn-primary:focus,
+#LoginRightContent .custom-modal .ant-modal .ant-modal-content .ant-modal-footer .ant-btn.ant-btn-primary:focus {
+  color: #114eaf;
+  background-color: #ffffff;
+  border-color: #114eaf;
+}
+#PageLogin .custom-modal .ant-modal .ant-modal-content .ant-modal-footer .ant-btn.ant-btn-default,
+#LoginRightContent .custom-modal .ant-modal .ant-modal-content .ant-modal-footer .ant-btn.ant-btn-default {
+  color: #114eaf;
+  background-color: #ffffff;
+  border-color: #b0b4b4;
+}
+#PageLogin .custom-modal .ant-modal .ant-modal-content .ant-modal-footer .ant-btn.ant-btn-default:hover,
+#LoginRightContent .custom-modal .ant-modal .ant-modal-content .ant-modal-footer .ant-btn.ant-btn-default:hover {
+  border-color: #114eaf;
+}
+#PageLogin .custom-modal .ant-modal .ant-modal-content .ant-modal-footer .ant-btn.ant-btn-default:focus,
+#LoginRightContent .custom-modal .ant-modal .ant-modal-content .ant-modal-footer .ant-btn.ant-btn-default:focus {
+  color: #ffffff;
+  background-color: #114eaf;
+  border-color: #114eaf;
 }
 
 #PageUser {

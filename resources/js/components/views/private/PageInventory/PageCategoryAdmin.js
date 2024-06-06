@@ -53,8 +53,8 @@ export default function PageCategoryAdmin() {
     }, [location]);
 
     const { data: dataSource, refetch: refetchSource } = GET(
-        `api/users?${new URLSearchParams(tableFilter)}`,
-        "students_active_list"
+        `api/inventory_admin?${new URLSearchParams(tableFilter)}`,
+        "inventory_admin"
     );
 
     useEffect(() => {
@@ -64,15 +64,7 @@ export default function PageCategoryAdmin() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [tableFilter]);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const showModal = () => {
-        setIsModalOpen(true);
-    };
-    const handleOk = () => {
-        setIsModalOpen(false);
-    };
-    const handleCancel = () => {
-        setIsModalOpen(false);
-    };
+
     return (
         <>
             <Col xs={24} sm={24} md={24}></Col>

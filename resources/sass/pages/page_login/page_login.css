@@ -348,4 +348,8 @@
 #LoginRightContent .btn-main-primary.btn-main-invert-outline.b-r-none.hides:hover {
   background-color: #2a60d4;
   border-color: #2a60d4;
+}
+#PageLogin .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-content .ant-modal-header .modal-bg-color,
+#LoginRightContent .ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-content .ant-modal-header .modal-bg-color {
+  background-color: #ff6624 !important;
 }/*# sourceMappingURL=page_login.css.map */
