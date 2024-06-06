@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BorrowStock;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BorrowStockController extends Controller
 {
@@ -17,6 +18,19 @@ class BorrowStockController extends Controller
         $data = BorrowStock::select([
             "*",
         ]);
+        $unit_no = "SELECT unit_no FROM inventory_admins WHERE inventory_admins.id = borrow_stocks.inventory_admin_id";
+        $data = BorrowStock::select([
+            "*",
+            DB::raw("($unit_no) `fullname`"),
+          
+        ]);
+
+        $data = $data->where(function ($query) use ($request, $unit_no) {
+            if ($request->search) {
+                $query->orWhere(DB::raw("($unit_no)"), 'LIKE', "%$request->search%");
+              
+            }
+        });
 
         if(isset($request->user_id)) {
             $data = $data->where('user_id', $request->user_id);
@@ -99,7 +113,7 @@ class BorrowStockController extends Controller
         $id = $request->input('id');
         $ret = [
             "success" => false,
-            "message" => "Data not Active",
+            "message" => "Data not Accept",
         ];
 
         $findAccountCodes = BorrowStock::find($id);

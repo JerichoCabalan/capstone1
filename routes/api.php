@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 // Your API routes go here
 Route::post('login', [App\Http\Controllers\AuthController::class, 'login']);
 Route::post('register', [App\Http\Controllers\AuthController::class, 'register']);
+// Route::get(`inventory_admin`, [App\Http\Controllers\InventoryAdminController::class, 'inventory_admin']);
 // Route::post('register', '\App\Http\Controllers\AuthController@register');
 // Route::post('forgot_password', 'App\Http\Controllers\AuthController@forgot_password');
 
@@ -66,12 +67,15 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('borrow_stock', App\Http\Controllers\BorrowStockController::class);
     Route::post('borrow_stock_status', [App\Http\Controllers\BorrowStockController::class, "borrow_stock_status"]);
     Route::post('model', [App\Http\Controllers\BorrowStockController::class, "model"]);
+    Route::apiResource('user_role_permission', App\Http\Controllers\UserRolePermissionController::class);
 
+    Route::apiResource('user_role', App\Http\Controllers\UserRoleController::class);
 
 
   
 });
 
+Route::get('inventory_admin', [App\Http\Controllers\InventoryAdminController::class, 'inventory_admin']);
 Route::get('faculty_load_report_print', [App\Http\Controllers\FacultyLoadMonitoringController::class, 'faculty_load_report_print']);
 // Route::get('inventory_admin', [App\Http\Controllers\InventoryAdminController::class]);
 

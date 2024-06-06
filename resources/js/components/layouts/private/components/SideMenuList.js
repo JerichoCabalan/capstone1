@@ -96,6 +96,18 @@ export const adminSideMenu = [
         // //     },
         // // ],
     },
+    {
+        title: "Permissions",
+        path: "/permission",
+        icon: <FontAwesomeIcon icon={faShieldKeyhole} />,
+        children: [
+            {
+                title: "User Monitoring",
+                path: "/permission/user-monitoring",
+                moduleCode: "M-05",
+            },
+        ],
+    },
 ];
 
 // export const staffSideMenu = [

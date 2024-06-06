@@ -143,13 +143,13 @@ export default function PageAllUser() {
                         >
                             <Descriptions.Item
                                 label=""
-                                style={{ fontSize: "20px" }} // Change the pixel value as needed
+                                style={{ fontSize: "20px" }}
                             >
                                 {selectedUser.name}
                             </Descriptions.Item>
                             <Descriptions.Item
                                 label=""
-                                style={{ fontSize: "20px", color: "red" }} // Change the pixel value as needed
+                                style={{ fontSize: "20px", color: "red" }}
                             >
                                 {selectedUser.email}
                             </Descriptions.Item>
@@ -171,7 +171,7 @@ export default function PageAllUser() {
                             {
                                 key: "2",
                                 label: "Recent Activities",
-                                children: <TabsRecentActivities />,
+                                // children: <PageUser />,
                             },
                         ]}
                     />

@@ -22,6 +22,8 @@ import PageCategoryAdmin from "../views/private/PageInventory/PageCategoryAdmin"
 import PageBinAdmin from "../views/private/PageInventory/PageBinAdmin";
 import PageBorrowedStock from "../views/private/PageInventory/PageBorrowedStock";
 import { faShieldKeyhole } from "@fortawesome/pro-light-svg-icons";
+import PageUser from "../views/private/PageUser/PageUser";
+import PageUserRolePermission from "../views/private/PagePermission/PageUserRolePermission";
 
 export default function RouteList() {
     return (
@@ -246,6 +248,34 @@ export default function RouteList() {
                             },
                         ]}
                         component={PageBinAdmin}
+                    />
+                }
+            />
+
+            <Route
+                path="/permission/user-monitoring"
+                element={
+                    <PrivateRoute
+                        // moduleCode="M-02"
+                        moduleName="User Current Edit Permission"
+                        title="User's Edit Permission"
+                        subtitle="EDIT"
+                        pageId="PageUserEdit"
+                        pageHeaderIcon={faUsers}
+                        breadcrumb={[
+                            {
+                                name: "Dashboard",
+                                link: "/dashboard",
+                            },
+                            {
+                                name: "Users",
+                                link: "/permission/user-monitoring",
+                            },
+                            {
+                                name: "Edit Permission",
+                            },
+                        ]}
+                        component={PageUserRolePermission}
                     />
                 }
             />

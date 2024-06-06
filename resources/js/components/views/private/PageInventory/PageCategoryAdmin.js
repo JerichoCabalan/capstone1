@@ -53,7 +53,7 @@ export default function PageCategoryAdmin() {
     }, [location]);
 
     const { data: dataSource, refetch: refetchSource } = GET(
-        `api/inventory_admin?${new URLSearchParams(tableFilter)}`,
+        `api/inventory_admin${new URLSearchParams(tableFilter)}`,
         "inventory_admin"
     );
 
@@ -63,7 +63,6 @@ export default function PageCategoryAdmin() {
         return () => {};
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [tableFilter]);
-    const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
         <>

@@ -1,4 +1,13 @@
-import { Row, Col, Table, Card, Popconfirm, Button, Modal } from "antd";
+import {
+    Row,
+    Col,
+    Table,
+    Card,
+    Popconfirm,
+    Button,
+    Modal,
+    notification,
+} from "antd";
 import {
     TableGlobalSearch,
     TablePageSize,
@@ -22,6 +31,8 @@ import {
     faUserXmark,
 } from "@fortawesome/pro-light-svg-icons";
 import ModalInventory from "./ModalInventory";
+import { POST } from "../../../../providers/useAxiosQuery";
+import notificationErrors from "../../../../providers/notificationErrors";
 // import dayjs from "dayjs";
 // import { description } from "../../../providers/companyInfo";
 
@@ -58,6 +69,34 @@ export default function TableBorrowStockAdmin(props) {
         setIsModalOpen(true);
     };
 
+    const { mutate: mutateAccpet } = POST(
+        `api/borrow_stock_status`,
+        "borrow_stock_status"
+    );
+    const handleAccept = (record) => {
+        console.log("Accepting record:", record);
+        mutateAccpet(record, {
+            onSuccess: (res) => {
+                console.log("Accept success response:", res);
+                if (res.success) {
+                    notification.success({
+                        message: "Borrow",
+                        description: res.message,
+                    });
+                } else {
+                    notification.error({
+                        message: "Borrow",
+                        description: res.message,
+                    });
+                }
+            },
+            onError: (err) => {
+                console.error("Accept error:", err);
+                notificationErrors(err);
+            },
+        });
+    };
+
     return (
         <>
             <Col xs={24} sm={24} md={24}>
@@ -66,14 +105,21 @@ export default function TableBorrowStockAdmin(props) {
                     icon={<FontAwesomeIcon icon={faUserCheck} />}
                     size="large"
                     name="btn_add"
-                    open={isModalOpen}
-                    onClick={showModal}
+                    onClick={() =>
+                        handleAccept(
+                            selectedRowKeys.map((key) =>
+                                dataSource.data.data.find(
+                                    (item) => item.id === key
+                                )
+                            )
+                        )
+                    }
                 >
                     Accept{" "}
                 </Button>
 
                 <Button
-                    className=" btn-main-primary btn-main-invert-outline b-r-none hides"
+                    className="btn-main-primary btn-main-invert-outline b-r-none hides"
                     style={{
                         marginLeft: "10px",
                     }}

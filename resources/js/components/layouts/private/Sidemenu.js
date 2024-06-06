@@ -12,7 +12,7 @@ export default function Sidemenu(props) {
         sideMenuCollapse,
         setSideMenuCollapse,
         width,
-        // userRole,
+        // role,
         // dataPermissions,
     } = props;
 
@@ -24,16 +24,32 @@ export default function Sidemenu(props) {
 
     const [menuItems, setMenuItems] = useState([]);
 
+    // useEffect(() => {
+    //     setMenuItems(adminSideMenu);
+
+    //     return () => {};
+    // }, []);
     useEffect(() => {
-        setMenuItems(adminSideMenu);
+        if ((role === "admin", "lab staff")) {
+            setMenuItems(adminSideMenu);
+        } else if (
+            [
+                "Faculty",
+                "Students Assistant",
+                "Procurement Officer",
+                "Comlab Adviser",
+                "Technician",
+            ].includes(role)
+        ) {
+            setMenuItems(staffSideMenu);
+        }
 
         return () => {};
-    }, []);
-
+    }, [role]);
     // useEffect(() => {
-    //     setMenuItems(userRole === "admin" ? adminSideMenu : staffSideMenu);
+    //     setMenuItems(role === "admin" ? adminSideMenu : staffSideMenu);
     //     return () => {};
-    // }, [userRole]);
+    // }, [role]);
 
     useEffect(() => {
         setOpenKeys(

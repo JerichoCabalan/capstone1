@@ -78,15 +78,15 @@ export default function TableBinAdmin(props) {
     const showModal = () => {
         setIsModalOpen(true);
     };
-    const handleRestore = () => {
-        const newDataSource = dataSource.map((item) =>
-            selectedRowKeys.includes(item.key)
-                ? { ...item, status: "Restored" }
-                : item
-        );
-        setDataSource(newDataSource);
-        setIsModalOpen(true);
-    };
+    // const handleRestore = () => {
+    //     const newDataSource = dataSource.map((item) =>
+    //         selectedRowKeys.includes(item.key)
+    //             ? { ...item, status: "Restored" }
+    //             : item
+    //     );
+    //     setDataSource(newDataSource);
+    //     setIsModalOpen(true);
+    // };
 
     return (
         <>
@@ -98,7 +98,7 @@ export default function TableBinAdmin(props) {
                     name="btn_add"
                     open={isModalOpen}
                     // onClick={showModal}
-                    onClick={handleRestore}
+                    // onClick={handleRestore}
                 >
                     Restore Equipment{" "}
                 </Button>
