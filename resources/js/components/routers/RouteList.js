@@ -24,6 +24,7 @@ import PageBorrowedStock from "../views/private/PageInventory/PageBorrowedStock"
 import { faShieldKeyhole } from "@fortawesome/pro-light-svg-icons";
 import PageUser from "../views/private/PageUser/PageUser";
 import PageUserRolePermission from "../views/private/PagePermission/PageUserRolePermission";
+import PageDashBoardStaff from "../views/private/PageDashboardStaff/PageDashboardStaff";
 
 export default function RouteList() {
     return (
@@ -281,6 +282,29 @@ export default function RouteList() {
             />
 
             {/* end permission */}
+
+            {/* STAFF DASHBOARD */}
+            <Route
+                path="/staffdashboard"
+                element={
+                    <PrivateRoute
+                        // moduleCode="M-01"
+                        moduleName="Home"
+                        title="Home"
+                        subtitle="ADMIN"
+                        pageId="PageHome"
+                        pageHeaderIcon={faHome}
+                        breadcrumb={[
+                            {
+                                name: "Home",
+                            },
+                        ]}
+                        component={PageDashBoardStaff}
+                    />
+                }
+            />
+
+            {/* END STAFF DASHBOARD */}
 
             <Route
                 path="/request-permission"

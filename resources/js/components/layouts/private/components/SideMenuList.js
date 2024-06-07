@@ -110,24 +110,24 @@ export const adminSideMenu = [
     },
 ];
 
-// export const staffSideMenu = [
-//     {
-//         title: "Home",
-//         path: "/dashboard",
-//         icon: <FontAwesomeIcon icon={faHome} />,
-//         moduleCode: "S-01",
-//     },
-//     {
-//         title: "Inventory",
-//         path: "/inventory",
-//         icon: <FontAwesomeIcon icon={faUsers} />,
-//         moduleCode: "S-02",
-//     },
-//     {
-//         title: "Reports",
-//         path: "/report",
-//         icon: <FontAwesomeIcon icon={faTasks} />,
-//         moduleCode: "S-03",
-//     },
-//     // Add more menu items as needed
-// ];
+export const staffSideMenu = [
+    {
+        title: "Home",
+        path: "/staffdashboard",
+        icon: <FontAwesomeIcon icon={faHome} />,
+        moduleCode: "S-01",
+    },
+    {
+        title: "Inventory",
+        path: "/inventory",
+        icon: <FontAwesomeIcon icon={faUsers} />,
+        moduleCode: "S-02",
+    },
+    {
+        title: "Reports",
+        path: "/report",
+        icon: <FontAwesomeIcon icon={faTasks} />,
+        moduleCode: "S-03",
+    },
+    // Add more menu items as needed
+];

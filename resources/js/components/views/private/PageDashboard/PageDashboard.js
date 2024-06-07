@@ -8,9 +8,44 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Row, Col, Card, Button } from "antd";
 import { useNavigate } from "react-router-dom";
+import { GET } from "../../../providers/useAxiosQuery";
 
 export default function PageDashboard() {
     const navigate = useNavigate();
+
+    const { data: dataBorrowStatus, error } = GET(
+        `api/borrow_stock`,
+        "borrow_stock"
+    );
+    console.log("dataBorrowStatus", dataBorrowStatus);
+    let acceptedStatus = 0;
+    let pendingStatus = 0;
+    if (
+        dataBorrowStatus &&
+        dataBorrowStatus.data &&
+        dataBorrowStatus.data.length > 0
+    ) {
+        dataBorrowStatus.data.forEach((item) => {
+            if (item.borrow_status === "accept") {
+                acceptedStatus++;
+            } else if (item.borrow_status === "pending") {
+                pendingStatus++;
+            }
+        });
+    }
+    console.log("acceptedStatus", acceptedStatus);
+    console.log("pendingStatus", pendingStatus);
+    const { data: dataStock, errors } = GET(
+        `api/inventory_admin`,
+        "inventory_admin"
+    );
+    let totalStock = 0;
+    if (dataStock && dataStock.data && dataStock.data.length > 0) {
+        dataStock.data.forEach((item) => {
+            totalStock += Number(item.no_of_stock);
+        });
+    }
+    console.log("totalStock", totalStock);
 
     return (
         <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
@@ -51,7 +86,6 @@ export default function PageDashboard() {
                                         marginTop: "-76px",
                                         border: "9px solid #a5aeff",
                                         borderRadius: "50%",
-                                        // backgroundColor: "#ffcece",
                                         width: "70px",
                                         height: "70px",
                                         display: "flex",
@@ -179,7 +213,6 @@ export default function PageDashboard() {
                                         marginTop: "-76px",
                                         border: "9px solid #DAF7A6",
                                         borderRadius: "50%",
-                                        // backgroundColor: "#ffcece",
                                         width: "70px",
                                         height: "70px",
                                         display: "flex",
@@ -200,12 +233,12 @@ export default function PageDashboard() {
                                         style={{
                                             fontSize: "50px",
                                             color: "green",
-                                            marginLeft: "-8px",
+                                            marginLeft: "18px",
                                         }}
                                     >
-                                        12
-                                    </p>{" "}
-                                    <p style={{ color: "green" }}>Accept</p>
+                                        {acceptedStatus}
+                                    </p>
+                                    <p style={{ color: "green" }}>Accepted</p>
                                 </Col>
                                 <Col span={2}>
                                     <div
@@ -218,13 +251,13 @@ export default function PageDashboard() {
                                         style={{
                                             marginLeft: "-43px",
                                             marginTop: "-75px",
-                                            fontSize: "17px",
+                                            fontSize: "15px",
                                             backgroundColor: "#DAF7A6",
                                             color: "blue",
-                                            width: "100px",
+                                            width: "110px",
                                         }}
                                     >
-                                        Equipement
+                                        Borrow Status
                                     </p>
                                 </Col>
 
@@ -232,12 +265,12 @@ export default function PageDashboard() {
                                     <p
                                         style={{
                                             fontSize: "50px",
-                                            color: "#ff3b00 ",
+                                            color: "#ff3b00",
                                             marginLeft: "49px",
                                         }}
                                     >
-                                        5
-                                    </p>{" "}
+                                        {pendingStatus}
+                                    </p>
                                     <p
                                         style={{
                                             color: "red",
@@ -265,8 +298,11 @@ export default function PageDashboard() {
                                         borderColor: "ff6624",
                                     }}
                                     type="primary"
+                                    onClick={() =>
+                                        navigate("/inventory/borrowedstock")
+                                    }
                                 >
-                                    View Equipment
+                                    View Borrow Status
                                 </Button>
                             </div>
                         </Card>
@@ -301,7 +337,6 @@ export default function PageDashboard() {
                                         marginTop: "-76px",
                                         border: "9px solid #ffcece",
                                         borderRadius: "50%",
-                                        // backgroundColor: "#ffcece",
                                         width: "70px",
                                         height: "70px",
                                         display: "flex",
@@ -323,7 +358,7 @@ export default function PageDashboard() {
                                             color: "green",
                                         }}
                                     >
-                                        120
+                                        {totalStock}
                                     </p>{" "}
                                     <p style={{ color: "green" }}>
                                         Available Stock
@@ -355,7 +390,7 @@ export default function PageDashboard() {
                                     <p
                                         style={{
                                             fontSize: "50px",
-                                            color: "#ff3b00 ",
+                                            color: "#ff3b00",
                                             marginLeft: "50px",
                                         }}
                                     >

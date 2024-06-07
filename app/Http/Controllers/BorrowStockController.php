@@ -17,11 +17,13 @@ class BorrowStockController extends Controller
     {
         $data = BorrowStock::select([
             "*",
+           
         ]);
         $unit_no = "SELECT unit_no FROM inventory_admins WHERE inventory_admins.id = borrow_stocks.inventory_admin_id";
         $data = BorrowStock::select([
             "*",
             DB::raw("($unit_no) `fullname`"),
+            "borrow_status"
           
         ]);
 

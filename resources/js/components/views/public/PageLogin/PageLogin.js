@@ -32,7 +32,7 @@ export default function PageLogin() {
 
     const { mutate: mutateLogin, isLoading: isLoadingButtonLogin } = POST(
         "api/login",
-        "register"
+        "login"
     );
 
     const onFinishLogin = (values) => {

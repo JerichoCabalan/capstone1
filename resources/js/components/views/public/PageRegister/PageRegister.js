@@ -44,6 +44,7 @@ export default function PageRegister() {
             onSuccess: (res) => {
                 console.log("res", res);
                 message.success("Registration successful! Please login.");
+                navigate("/staffdashboard");
             },
             onError: (err) => {
                 message.error("Registration failed. Please try again.");

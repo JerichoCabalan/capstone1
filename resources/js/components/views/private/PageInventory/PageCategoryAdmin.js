@@ -53,7 +53,7 @@ export default function PageCategoryAdmin() {
     }, [location]);
 
     const { data: dataSource, refetch: refetchSource } = GET(
-        `api/inventory_admin${new URLSearchParams(tableFilter)}`,
+        `api/inventory_admin?${new URLSearchParams(tableFilter)}`,
         "inventory_admin"
     );
 

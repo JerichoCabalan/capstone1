@@ -4,7 +4,7 @@ import { Layout, Menu, Typography } from "antd";
 import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 
 import { logoFullWidth, name, role } from "../../providers/companyInfo";
-import { adminSideMenu } from "./components/SideMenuList";
+import { adminSideMenu, staffSideMenu } from "./components/SideMenuList";
 
 export default function Sidemenu(props) {
     const {
@@ -12,7 +12,7 @@ export default function Sidemenu(props) {
         sideMenuCollapse,
         setSideMenuCollapse,
         width,
-        // role,
+        role,
         // dataPermissions,
     } = props;
 
@@ -24,28 +24,28 @@ export default function Sidemenu(props) {
 
     const [menuItems, setMenuItems] = useState([]);
 
-    // useEffect(() => {
-    //     setMenuItems(adminSideMenu);
-
-    //     return () => {};
-    // }, []);
     useEffect(() => {
-        if ((role === "admin", "lab staff")) {
-            setMenuItems(adminSideMenu);
-        } else if (
-            [
-                "Faculty",
-                "Students Assistant",
-                "Procurement Officer",
-                "Comlab Adviser",
-                "Technician",
-            ].includes(role)
-        ) {
-            setMenuItems(staffSideMenu);
-        }
+        setMenuItems(adminSideMenu);
 
         return () => {};
-    }, [role]);
+    }, []);
+    // useEffect(() => {
+    //     if ((role === "admin", "lab staff")) {
+    //         setMenuItems(adminSideMenu);
+    //     } else if (
+    //         [
+    //             "Faculty",
+    //             "Students Assistant",
+    //             "Procurement Officer",
+    //             "Comlab Adviser",
+    //             "Technician",
+    //         ].includes(role)
+    //     ) {
+    //         setMenuItems(staffSideMenu);
+    //     }
+
+    //     return () => {};
+    // }, [role]);
     // useEffect(() => {
     //     setMenuItems(role === "admin" ? adminSideMenu : staffSideMenu);
     //     return () => {};

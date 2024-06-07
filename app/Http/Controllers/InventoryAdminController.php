@@ -251,7 +251,7 @@ class InventoryAdminController extends Controller
         return response()->json($ret, 200);
     }
 
-    public function import_excel(Request $request) 
+    public function model(Request $request) 
     {
         Excel::import(new EquipmentImport, $request->file('file'));
         

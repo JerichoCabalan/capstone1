@@ -63,6 +63,7 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('inventory_admin', App\Http\Controllers\InventoryAdminController::class);
     // Route::post('inventory_modal', App\Http\Controllers\InventoryAdminController::class);
     Route::post('inventory_modal', [App\Http\Controllers\InventoryAdminController::class, "inventory_modal"]);
+    Route::post('model', [App\Http\Controllers\InventoryAdminController::class, "model"]);
     Route::post('equipement_delete', [App\Http\Controllers\InventoryAdminController::class, "equipement_delete"]);
     Route::apiResource('borrow_stock', App\Http\Controllers\BorrowStockController::class);
     Route::post('borrow_stock_status', [App\Http\Controllers\BorrowStockController::class, "borrow_stock_status"]);
@@ -75,7 +76,7 @@ Route::middleware('auth:api')->group(function () {
   
 });
 
-Route::get('inventory_admin', [App\Http\Controllers\InventoryAdminController::class, 'inventory_admin']);
+// Route::get('inventory_admin', [App\Http\Controllers\InventoryAdminController::class, 'inventory_admin']);
 Route::get('faculty_load_report_print', [App\Http\Controllers\FacultyLoadMonitoringController::class, 'faculty_load_report_print']);
 // Route::get('inventory_admin', [App\Http\Controllers\InventoryAdminController::class]);
 

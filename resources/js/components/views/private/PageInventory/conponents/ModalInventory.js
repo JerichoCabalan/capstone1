@@ -177,6 +177,7 @@ export default function ModalInventory(props) {
                                     <FloatInput
                                         label="Unit No"
                                         placeholder="Unit No"
+                                        required
                                     />
                                 </Form.Item>
                             </Col>
@@ -192,6 +193,7 @@ export default function ModalInventory(props) {
                                     <FloatInput
                                         label="Description"
                                         placeholder="Description"
+                                        required
                                     />
                                 </Form.Item>
                             </Col>
@@ -207,6 +209,7 @@ export default function ModalInventory(props) {
                                     <FloatSelect
                                         label="Assigned ComLab"
                                         placeholder="Assigned ComLab"
+                                        required
                                         options={[
                                             {
                                                 value: "CL1",
@@ -262,6 +265,7 @@ export default function ModalInventory(props) {
                             >
                                 <Form.Item name="category">
                                     <FloatSelect
+                                        required
                                         label="Category"
                                         placeholder="Category"
                                         options={[
@@ -319,6 +323,7 @@ export default function ModalInventory(props) {
                             >
                                 <Form.Item name="equipment_status">
                                     <FloatSelect
+                                        required
                                         label="Equipment Status"
                                         placeholder="Equipment Status"
                                         options={[
@@ -354,21 +359,7 @@ export default function ModalInventory(props) {
                                     />
                                 </Form.Item>
                             </Col>
-                            <Col
-                                xs={24}
-                                sm={24}
-                                md={24}
-                                lg={24}
-                                xl={24}
-                                xxl={24}
-                            >
-                                <Form.Item name="person_liable">
-                                    <FloatInput
-                                        label="Date Acquired"
-                                        placeholder="Date Acquired"
-                                    />
-                                </Form.Item>
-                            </Col>
+
                             <Col
                                 xs={24}
                                 sm={24}
@@ -379,6 +370,7 @@ export default function ModalInventory(props) {
                             >
                                 <Form.Item name="date_acquired">
                                     <FloatDatePicker
+                                        required
                                         label="Date Acquired"
                                         placeholder="Date Acquired"
                                     />
@@ -394,6 +386,7 @@ export default function ModalInventory(props) {
                             >
                                 <Form.Item name="supplier">
                                     <FloatInput
+                                        required
                                         label="Supplier"
                                         placeholder="Supplier"
                                     />
@@ -409,6 +402,7 @@ export default function ModalInventory(props) {
                             >
                                 <Form.Item name="amount">
                                     <FloatInput
+                                        required
                                         label="Amount"
                                         placeholder="Amount"
                                     />
@@ -428,6 +422,7 @@ export default function ModalInventory(props) {
                             >
                                 <Form.Item name="item_no">
                                     <FloatInput
+                                        required
                                         label="Item No"
                                         placeholder="Item No"
                                     />
@@ -458,6 +453,7 @@ export default function ModalInventory(props) {
                             >
                                 <Form.Item name="control_no">
                                     <FloatInput
+                                        required
                                         label="Control No"
                                         placeholder="Control No"
                                     />
@@ -473,6 +469,7 @@ export default function ModalInventory(props) {
                             >
                                 <Form.Item name="serial_no">
                                     <FloatInput
+                                        required
                                         label="Serial No"
                                         placeholder="Serial No"
                                     />
@@ -489,6 +486,7 @@ export default function ModalInventory(props) {
                             >
                                 <Form.Item name="no_of_stock">
                                     <FloatInput
+                                        required
                                         label="No of Stocks"
                                         placeholder="No of Stocks"
                                     />
@@ -504,6 +502,7 @@ export default function ModalInventory(props) {
                             >
                                 <Form.Item name="restocking_point">
                                     <FloatInput
+                                        required
                                         label="Restocking Point"
                                         placeholder="Restocking Point"
                                     />
@@ -515,6 +514,7 @@ export default function ModalInventory(props) {
                         <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
                             <Form.Item name="remarks" style={{}}>
                                 <TextArea
+                                    required
                                     label="Remarks"
                                     placeholder="Remarks"
                                     rows={7}

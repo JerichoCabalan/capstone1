@@ -71,7 +71,7 @@ export default function TableBorrowStockAdmin(props) {
 
     const { mutate: mutateAccpet } = POST(
         `api/borrow_stock_status`,
-        "borrow_stock_status"
+        "borrow_stock"
     );
     const handleAccept = (record) => {
         console.log("Accepting record:", record);
@@ -107,10 +107,8 @@ export default function TableBorrowStockAdmin(props) {
                     name="btn_add"
                     onClick={() =>
                         handleAccept(
-                            selectedRowKeys.map((key) =>
-                                dataSource.data.data.find(
-                                    (item) => item.id === key
-                                )
+                            dataSource.data.data.find(
+                                (item) => item.id === selectedRowKeys[0]
                             )
                         )
                     }

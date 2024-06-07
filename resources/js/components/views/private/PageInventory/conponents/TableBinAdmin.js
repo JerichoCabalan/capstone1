@@ -209,11 +209,11 @@ export default function TableBinAdmin(props) {
                     </div>
                 </Col>
             </Row>
-            <ModalInventory
+            {/* <ModalInventory
                 isModalOpen={isModalOpen}
                 handleOk={handleOk}
                 handleCancel={handleCancel}
-            ></ModalInventory>
+            ></ModalInventory> */}
         </>
     );
 }
