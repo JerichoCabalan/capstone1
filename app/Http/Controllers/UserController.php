@@ -657,54 +657,29 @@ class UserController extends Controller
             "data" => $data
         ], 200);
     }
-
-    public function user_profile_info_update(Request $request)
+    
+    public function users_status(Request $request)
     {
+        $id = $request->input('id');
         $ret = [
             "success" => false,
-            "message" => "Data not updated"
+            "message" => "Data not Active",
         ];
 
-        $find = User::find(auth()->user()->id);
+        $findUser = User::find($id);
+        if ($findUser) {
+            $newStatus = $findUser->users_status === 'Active' ? 'Inactive' : 'Active';
+            $findUser->users_status = $newStatus;
+            $findUser->save();
 
-        if ($find) {
-            $findProfile = Profile::where("user_id", auth()->user()->id)->first();
-
-            if ($findProfile) {
-                $findProfileUpdate = $findProfile->fill([
-                    "firstname" => $request->firstname,
-                    "lastname" => $request->lastname,
-                    "civil_status_id" => $request->civil_status_id,
-                    "nationality_id" => $request->nationality_id,
-                    "gender" => $request->gender,
-                ]);
-
-                if ($findProfileUpdate->save()) {
-                    ProfileContactInformation::where("profile_id", $findProfile->id)->update(['status' => 0]);
-
-                    $checkContactNumber = ProfileContactInformation::where("profile_id", $findProfile->id)
-                        ->where("contact_number", $request->contact_number)
-                        ->first();
-
-                    if ($checkContactNumber) {
-                        $checkContactNumber->fill(['status' => 1])->save();
-                    } else {
-                        ProfileContactInformation::create([
-                            "profile_id" => $findProfile->id,
-                            "contact_number" => $request->contact_number,
-                            "status" => 1
-                        ]);
-                    }
-
-
-                    $ret = [
-                        "success" => true,
-                        "message" => "Data updated successfully"
-                    ];
-                }
-            }
+            $ret = [
+                "success" => true,
+                "message" => "User  " . ucfirst($newStatus) . " successfully"
+            ];
         }
 
         return response()->json($ret, 200);
     }
+
+   
 }

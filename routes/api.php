@@ -34,6 +34,7 @@ Route::middleware('auth:api')->group(function () {
     Route::post('users_update_email', [App\Http\Controllers\UserController::class, "users_update_email"]);
     Route::post('users_update_password', [App\Http\Controllers\UserController::class, "users_update_password"]);
     Route::post('users_info_update_password', [App\Http\Controllers\UserController::class, "users_info_update_password"]);
+    Route::post('users_status', [App\Http\Controllers\UserController::class, "users_status"]);
     Route::apiResource('users', App\Http\Controllers\UserController::class);
     // END UserController
 
