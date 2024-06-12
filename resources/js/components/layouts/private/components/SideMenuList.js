@@ -47,7 +47,7 @@ export const adminSideMenu = [
         children: [
             {
                 title: "Users",
-                path: "/users/users",
+                path: "/users/user",
                 moduleCode: "M-02",
             },
             {
@@ -86,15 +86,15 @@ export const adminSideMenu = [
     },
     {
         title: "Reports",
-        // path: "/system-settings",
+        path: "/report",
         icon: <FontAwesomeIcon icon={faCogs} />,
-        // // children: [
-        // //     {
-        // //         title: "Email Templates",
-        // //         path: "/system-settings/email-templates",
-        // //         moduleCode: "M-06",
-        // //     },
-        // // ],
+        children: [
+            {
+                title: "Report",
+                path: "/report/chart",
+                moduleCode: "M-06",
+            },
+        ],
     },
     {
         title: "Permissions",

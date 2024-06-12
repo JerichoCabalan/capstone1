@@ -68,4 +68,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(UserRole::class, "user_role_id");
     }
+    public function inventory_admin()
+    {
+        return $this->belongsTo(InventoryAdmin::class, "inventory_admin_id");
+    }
 }

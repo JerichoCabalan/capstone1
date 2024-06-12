@@ -7,6 +7,7 @@ import {
     Switch,
     notification,
     Skeleton,
+    Card,
 } from "antd";
 import React, { useState } from "react";
 import { GET, POST } from "../../../../../providers/useAxiosQuery";
@@ -15,7 +16,7 @@ import notificationErrors from "../../../../../providers/notificationErrors";
 export default function PageAllUser() {
     const [open, setOpen] = useState(false);
     const [selectedUser, setSelectedUser] = useState(null);
-    const [loadingUser, setLoadingUser] = useState(false); // Track the loading state for the user
+    const [loadingUser, setLoadingUser] = useState(false);
 
     const {
         data: dataSource,
@@ -27,15 +28,25 @@ export default function PageAllUser() {
         }
     });
 
+    const { data: dataInventory } = GET(
+        `api/inventory_admin`,
+        "inventory_admin",
+        (res) => {
+            if (res.data) {
+                console.log("dataInventory", res);
+            }
+        }
+    );
+
     const showDrawer = (user) => {
         setLoadingUser(true);
         setSelectedUser(null);
         setOpen(true);
-        // Simulate a delay for user data fetching
+
         setTimeout(() => {
             setSelectedUser(user);
             setLoadingUser(false);
-        }, 1000); // Adjust the delay as needed
+        }, 1000);
     };
 
     const onClose = () => {
@@ -245,12 +256,71 @@ export default function PageAllUser() {
                                 key="phone_number"
                                 dataIndex="phone_number"
                             />
-                            <Table.Column
-                                title="Borrow Equipment"
-                                key="borrow_stock_id"
-                                dataIndex="borrow_stock_id"
-                            />
                         </Table>
+                        <div>
+                            <h2>Borrow Equipment</h2>
+                            {dataInventory &&
+                            selectedUser &&
+                            dataInventory.data ? (
+                                dataInventory.data
+                                    .filter(
+                                        (item) =>
+                                            item.user_id === selectedUser.id
+                                    )
+                                    .map((item) => (
+                                        <Card key={item.id}>
+                                            <h5 style={{ fontSize: "15px" }}>
+                                                {item.category}
+                                            </h5>
+                                            <div
+                                                style={{
+                                                    marginLeft: "50px",
+                                                    marginTop: "35px",
+                                                }}
+                                            >
+                                                <p>
+                                                    Description:{" "}
+                                                    {item.description}
+                                                </p>
+                                                <p>
+                                                    Assigned Comlab:{" "}
+                                                    {item.assigned_comlab}
+                                                </p>
+                                                <p>
+                                                    Equipment Status:{" "}
+                                                    {item.equipment_status}
+                                                </p>
+                                                <p>
+                                                    Person Liable:{" "}
+                                                    {item.person_liable}
+                                                </p>
+                                                <p>
+                                                    Date Acquired:{" "}
+                                                    {item.date_acquired}
+                                                </p>
+                                                <p>Supplier: {item.supplier}</p>
+                                                <p>
+                                                    Stocks Quantity:{" "}
+                                                    {item.stocks_quantity}
+                                                </p>
+                                                <p>
+                                                    Reorder Point:{" "}
+                                                    {item.reorder_point}
+                                                </p>
+                                                <p>
+                                                    Serial No.: {item.serial_no}
+                                                </p>
+                                                <p>
+                                                    Control No.:{" "}
+                                                    {item.control_no}
+                                                </p>
+                                            </div>
+                                        </Card>
+                                    ))
+                            ) : (
+                                <p>No inventory data available</p>
+                            )}
+                        </div>
                     </>
                 ) : (
                     <Skeleton active />

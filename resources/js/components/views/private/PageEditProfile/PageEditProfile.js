@@ -28,14 +28,6 @@ export default function PageEditProfile() {
     const [selectedData, setSelectedData] = useState({
         username: "",
         email: "",
-        department_id: "",
-        school_id: "",
-        firstname: "",
-        lastname: "",
-        contact_number: "",
-        gender: "",
-        civil_status_id: "",
-        nationality_id: "",
     });
 
     const [toggleModalFormEmail, setToggleModalFormEmail] = useState({
@@ -62,57 +54,12 @@ export default function PageEditProfile() {
         file: null,
     });
 
-    const { data: dataCivilStatuses } = GET(
-        `api/ref_civilstatus`,
-        "civil_status_select"
-    );
-
-    const { data: dataNationalities } = GET(
-        `api/ref_nationality`,
-        "ref_nationality_select"
-    );
-
     GET(`api/users/${userData().id}`, "users_info", (res) => {
         if (res.data) {
             let data = res.data;
 
             let username = data.username;
             let email = data.email;
-            let school_id = data.profile.school_id;
-            let firstname = data.profile.firstname;
-            let lastname = data.profile.lastname;
-
-            let gender = "";
-
-            if (
-                data.profile &&
-                data.profile.profile_gender &&
-                data.profile.profile_gender.length > 0
-            ) {
-                gender = data.profile.profile_gender[0].gender;
-            }
-
-            let contact_number = "";
-
-            if (
-                data.profile &&
-                data.profile.profile_contact_informations &&
-                data.profile.profile_contact_informations.length
-            ) {
-                contact_number =
-                    data.profile.profile_contact_informations[0].contact_number;
-            }
-
-            let department_id = "";
-
-            if (
-                data.profile &&
-                data.profile.profile_departments &&
-                data.profile.profile_departments.length
-            ) {
-                department_id =
-                    data.profile.profile_departments[0].department_id;
-            }
 
             if (
                 data.profile &&
@@ -129,26 +76,10 @@ export default function PageEditProfile() {
             setSelectedData({
                 username,
                 email,
-                department_id,
-                school_id,
-                firstname,
-                lastname,
-                contact_number,
-                gender,
-                civil_status_id: data.profile.civil_status_id,
-                nationality_id: data.profile.nationality_id,
             });
             form.setFieldsValue({
                 username,
                 email,
-                department_id,
-                school_id,
-                firstname,
-                lastname,
-                contact_number,
-                gender,
-                civil_status_id: data.profile.civil_status_id,
-                nationality_id: data.profile.nationality_id,
             });
         }
     });
@@ -307,215 +238,6 @@ export default function PageEditProfile() {
                                             >
                                                 Change Password
                                             </Button>
-                                        </Col>
-                                    </Row>
-                                ),
-                            },
-                            {
-                                key: "1",
-                                label: "PERSONAL INFORMATION",
-                                children: (
-                                    <Row gutter={[12, 12]}>
-                                        <Col
-                                            xs={24}
-                                            sm={24}
-                                            md={24}
-                                            lg={12}
-                                            xl={12}
-                                            xxl={12}
-                                        >
-                                            <Form.Item name="school_id">
-                                                <FloatInput
-                                                    label="School ID"
-                                                    placeholder="School ID"
-                                                    disabled
-                                                />
-                                            </Form.Item>
-                                        </Col>
-
-                                        <Col
-                                            xs={24}
-                                            sm={24}
-                                            md={12}
-                                            lg={12}
-                                            xl={12}
-                                        ></Col>
-
-                                        <Col
-                                            xs={24}
-                                            sm={24}
-                                            md={12}
-                                            lg={12}
-                                            xl={12}
-                                        >
-                                            <Form.Item
-                                                name="firstname"
-                                                rules={[validateRules.required]}
-                                            >
-                                                <FloatInput
-                                                    label="First Name"
-                                                    placeholder="First Name"
-                                                    required
-                                                    onBlur={(e) =>
-                                                        handleInputBlur(
-                                                            e.target.value,
-                                                            "firstname"
-                                                        )
-                                                    }
-                                                />
-                                            </Form.Item>
-                                        </Col>
-
-                                        <Col
-                                            xs={24}
-                                            sm={24}
-                                            md={12}
-                                            lg={12}
-                                            xl={12}
-                                        >
-                                            <Form.Item
-                                                name="lastname"
-                                                rules={[validateRules.required]}
-                                            >
-                                                <FloatInput
-                                                    label="Last Name"
-                                                    placeholder="Last Name"
-                                                    required
-                                                    onBlur={(e) =>
-                                                        handleInputBlur(
-                                                            e.target.value,
-                                                            "lastname"
-                                                        )
-                                                    }
-                                                />
-                                            </Form.Item>
-                                        </Col>
-
-                                        <Col
-                                            xs={24}
-                                            sm={24}
-                                            md={24}
-                                            lg={12}
-                                            xl={12}
-                                            xxl={12}
-                                        >
-                                            <Form.Item
-                                                name="contact_number"
-                                                rules={[validateRules.phone]}
-                                            >
-                                                <FloatInputMask
-                                                    label="Phone No"
-                                                    placeholder="Phone No"
-                                                    maskLabel="contact_number"
-                                                    maskType="999 999 9999"
-                                                    required={true}
-                                                    onBlur={(e) =>
-                                                        handleInputBlur(
-                                                            e.target.value,
-                                                            "contact_number"
-                                                        )
-                                                    }
-                                                />
-                                            </Form.Item>
-                                        </Col>
-
-                                        <Col
-                                            xs={24}
-                                            sm={24}
-                                            md={24}
-                                            lg={12}
-                                            xl={12}
-                                            xxl={12}
-                                        >
-                                            <Form.Item name="gender">
-                                                <FloatSelect
-                                                    label="Gender"
-                                                    placeholder="Gender"
-                                                    options={[
-                                                        {
-                                                            label: "Male",
-                                                            value: "Male",
-                                                        },
-                                                        {
-                                                            label: "Female",
-                                                            value: "Female",
-                                                        },
-                                                    ]}
-                                                    required={true}
-                                                    onChange={(e) =>
-                                                        handleInputBlur(
-                                                            e,
-                                                            "gender"
-                                                        )
-                                                    }
-                                                />
-                                            </Form.Item>
-                                        </Col>
-
-                                        <Col
-                                            xs={24}
-                                            sm={24}
-                                            md={24}
-                                            lg={12}
-                                            xl={12}
-                                            xxl={12}
-                                        >
-                                            <Form.Item name="civil_status_id">
-                                                <FloatSelect
-                                                    label="Civil Status"
-                                                    placeholder="Civil Status"
-                                                    options={
-                                                        dataCivilStatuses &&
-                                                        dataCivilStatuses.data
-                                                            ? dataCivilStatuses.data.map(
-                                                                  (item) => ({
-                                                                      value: item.id,
-                                                                      label: item.civil_status,
-                                                                  })
-                                                              )
-                                                            : []
-                                                    }
-                                                    onChange={(e) =>
-                                                        handleInputBlur(
-                                                            e,
-                                                            "civil_status_id"
-                                                        )
-                                                    }
-                                                />
-                                            </Form.Item>
-                                        </Col>
-
-                                        <Col
-                                            xs={24}
-                                            sm={24}
-                                            md={24}
-                                            lg={12}
-                                            xl={12}
-                                            xxl={12}
-                                        >
-                                            <Form.Item name="nationality_id">
-                                                <FloatSelect
-                                                    label="Citizenship"
-                                                    placeholder="Citizenship"
-                                                    options={
-                                                        dataNationalities &&
-                                                        dataNationalities.data
-                                                            ? dataNationalities.data.map(
-                                                                  (item) => ({
-                                                                      value: item.id,
-                                                                      label: item.nationality,
-                                                                  })
-                                                              )
-                                                            : []
-                                                    }
-                                                    onChange={(e) =>
-                                                        handleInputBlur(
-                                                            e,
-                                                            "nationality_id"
-                                                        )
-                                                    }
-                                                />
-                                            </Form.Item>
                                         </Col>
                                     </Row>
                                 ),

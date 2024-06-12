@@ -25,6 +25,7 @@ import { faShieldKeyhole } from "@fortawesome/pro-light-svg-icons";
 import PageUser from "../views/private/PageUser/PageUser";
 import PageUserRolePermission from "../views/private/PagePermission/PageUserRolePermission";
 import PageDashBoardStaff from "../views/private/PageDashboardStaff/PageDashboardStaff";
+import PageReportChat from "../views/private/PageReport/PageReportChart";
 
 export default function RouteList() {
     return (
@@ -59,9 +60,8 @@ export default function RouteList() {
                     />
                 }
             />
-
             <Route
-                path="/"
+                path="/edit-profile"
                 element={
                     <PrivateRoute
                         moduleName="Edit Profile"
@@ -69,7 +69,16 @@ export default function RouteList() {
                         subtitle="VIEW / EDIT"
                         pageId="PageUserProfile"
                         pageHeaderIcon={faUsers}
-                        component={PageInventory}
+                        breadcrumb={[
+                            {
+                                name: "Dashboard",
+                                link: "/dashboard",
+                            },
+                            {
+                                name: "Edit Profile",
+                            },
+                        ]}
+                        component={PageEditProfile}
                     />
                 }
             />
@@ -97,7 +106,7 @@ export default function RouteList() {
             {/* users */}
 
             <Route
-                path="/users/users"
+                path="/users/user"
                 element={
                     <PrivateRoute
                         // moduleCode="M-02"
@@ -277,6 +286,33 @@ export default function RouteList() {
                             },
                         ]}
                         component={PageUserRolePermission}
+                    />
+                }
+            />
+            <Route
+                path="/report/chart"
+                element={
+                    <PrivateRoute
+                        // moduleCode="M-02"
+                        moduleName="Equipment Report Chart"
+                        title="Equipment Report Chart"
+                        subtitle="Equipment Report Chart"
+                        pageId="PageUserEdit"
+                        pageHeaderIcon={faUsers}
+                        breadcrumb={[
+                            {
+                                name: "Dashboard",
+                                link: "/dashboard",
+                            },
+                            {
+                                name: "Users",
+                                link: "/report/chart",
+                            },
+                            {
+                                name: "Equipment Report Chart",
+                            },
+                        ]}
+                        component={PageReportChat}
                     />
                 }
             />

@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
-import TableInventoryAdmin from "./conponents/TableCategoryAdmin";
 import { useLocation, useNavigate } from "react-router-dom";
-import { GET } from "../../../providers/useAxiosQuery";
-import { Button, Col, Modal, Row } from "antd";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/pro-light-svg-icons";
-import TableCategoryAdmin from "./conponents/TableCategoryAdmin";
-import TableBinAdmin from "./conponents/TableBinAdmin";
-import TableBorrowStockAdmin from "./conponents/TableBorrowStockAdmin";
+import { GET, POST } from "../../../providers/useAxiosQuery";
+import { Button, Col, Row, notification } from "antd";
 
+import TableBorrowStockAdmin from "./conponents/TableBorrowStockAdmin";
 export default function PageBorrowedStock() {
     const navigate = useNavigate();
     const location = useLocation();
@@ -16,10 +11,6 @@ export default function PageBorrowedStock() {
     const [sortInfo, setSortInfo] = useState({
         order: "descend",
         columnKey: "created_at",
-        status:
-            location.pathname === "/students/current"
-                ? "Active"
-                : "Deactivated",
     });
 
     const [tableFilter, setTableFilter] = useState({
@@ -28,7 +19,10 @@ export default function PageBorrowedStock() {
         search: "",
         sort_field: "created_at",
         sort_order: "desc",
-        status: "Active",
+        status:
+            location.pathname === "/students/current"
+                ? "Active"
+                : "Deactivated",
         from: location.pathname,
     });
 
@@ -50,31 +44,23 @@ export default function PageBorrowedStock() {
             order: "descend",
             columnKey: "created_at",
         });
-
-        return () => {};
     }, [location]);
 
     const { data: dataSource, refetch: refetchSource } = GET(
         `api/borrow_stock?${new URLSearchParams(tableFilter)}`,
         "borrow_stock"
     );
+    useEffect(() => {
+        if (dataSource) {
+            console.log("Fetched Data Source: ", dataSource);
+        }
+    }, [dataSource]);
 
     useEffect(() => {
+        console.log("tableFilter", tableFilter);
         refetchSource();
+    }, [tableFilter, refetchSource]);
 
-        return () => {};
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [tableFilter]);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const showModal = () => {
-        setIsModalOpen(true);
-    };
-    const handleOk = () => {
-        setIsModalOpen(false);
-    };
-    const handleCancel = () => {
-        setIsModalOpen(false);
-    };
     return (
         <>
             <Col xs={24} sm={24} md={24}></Col>

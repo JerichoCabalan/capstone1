@@ -1,83 +1,51 @@
-import {
-    Row,
-    Col,
-    Table,
-    Card,
-    Popconfirm,
-    Button,
-    Modal,
-    notification,
-} from "antd";
+import React, { useEffect, useState } from "react";
+import { Col, Row, Table, Button, notification } from "antd";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserCheck, faUserXmark } from "@fortawesome/pro-light-svg-icons";
+import notificationErrors from "../../../../providers/notificationErrors";
+
 import {
     TableGlobalSearch,
     TablePageSize,
     TablePagination,
     TableShowingEntries,
 } from "../../../../providers/CustomTableFilter";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faPencil,
-    faTrash,
-    faUserGear,
-    faUserPlus,
-} from "@fortawesome/pro-regular-svg-icons";
-// import notificationErrors from "../../../providers/notificationErrors";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import {
-    faCheck,
-    faPlus,
-    faUserCheck,
-    faUserXmark,
-} from "@fortawesome/pro-light-svg-icons";
-import ModalInventory from "./ModalInventory";
 import { POST } from "../../../../providers/useAxiosQuery";
-import notificationErrors from "../../../../providers/notificationErrors";
-// import dayjs from "dayjs";
-// import { description } from "../../../providers/companyInfo";
 
 export default function TableBorrowStockAdmin(props) {
     const { tableFilter, setTableFilter, sortInfo, dataSource } = props;
-    const navigate = useNavigate();
-    const onChangeTable = (sorter) => {
-        setTableFilter((ps) => ({
-            ...ps,
+    const onChangeTable = (pagination, filters, sorter) => {
+        setTableFilter((prev) => ({
+            ...prev,
             sort_field: sorter.columnKey,
             sort_order: sorter.order ? sorter.order.replace("end", "") : null,
-            page: 1,
-            page_size: "50",
+            page: pagination.current,
+            page_size: pagination.pageSize,
         }));
     };
+    useEffect(() => {
+        if (dataSource) {
+            console.log("Data Source in Table: ", dataSource);
+        }
+    }, [dataSource]);
 
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-    const onSelectChange = (selectedRowKeys) => {
-        setSelectedRowKeys(selectedRowKeys);
+    const onSelectChange = (selectedKeys) => {
+        setSelectedRowKeys(selectedKeys);
     };
     const rowSelection = {
         selectedRowKeys,
         onChange: onSelectChange,
     };
-    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const handleOk = () => {
-        setIsModalOpen(false);
-    };
-    const handleCancel = () => {
-        setIsModalOpen(false);
-    };
-    const showModal = () => {
-        setIsModalOpen(true);
-    };
-
-    const { mutate: mutateAccpet } = POST(
-        `api/borrow_stock_status`,
+    const { mutate: mutateAccept } = POST(
+        "api/borrow_stock_status",
         "borrow_stock"
     );
+
     const handleAccept = (record) => {
-        console.log("Accepting record:", record);
-        mutateAccpet(record, {
+        mutateAccept(record, {
             onSuccess: (res) => {
-                console.log("Accept success response:", res);
                 if (res.success) {
                     notification.success({
                         message: "Borrow",
@@ -91,7 +59,6 @@ export default function TableBorrowStockAdmin(props) {
                 }
             },
             onError: (err) => {
-                console.error("Accept error:", err);
                 notificationErrors(err);
             },
         });
@@ -101,10 +68,9 @@ export default function TableBorrowStockAdmin(props) {
         <>
             <Col xs={24} sm={24} md={24}>
                 <Button
-                    className=" btn-main-primary btn-main-invert-outline b-r-none hides"
+                    className="btn-main-primary btn-main-invert-outline b-r-none hides"
                     icon={<FontAwesomeIcon icon={faUserCheck} />}
                     size="large"
-                    name="btn_add"
                     onClick={() =>
                         handleAccept(
                             dataSource.data.data.find(
@@ -113,27 +79,21 @@ export default function TableBorrowStockAdmin(props) {
                         )
                     }
                 >
-                    Accept{" "}
+                    Accept
                 </Button>
-
                 <Button
                     className="btn-main-primary btn-main-invert-outline b-r-none hides"
-                    style={{
-                        marginLeft: "10px",
-                    }}
+                    style={{ marginLeft: "10px" }}
                     icon={<FontAwesomeIcon icon={faUserXmark} />}
                     size="large"
-                    name="btn_add"
                 >
-                    Decline{" "}
+                    Decline
                 </Button>
             </Col>
             <Row
                 gutter={[12, 12]}
                 id="tbl_wrapper"
-                style={{
-                    marginTop: "90px",
-                }}
+                style={{ marginTop: "90px" }}
             >
                 <Col xs={24} sm={24} md={24}>
                     <div className="tbl-top-filter">
@@ -149,60 +109,57 @@ export default function TableBorrowStockAdmin(props) {
                 </Col>
                 <Col xs={24} sm={24} md={24}>
                     <Table
-                        // className="ant-table-default ant-table-striped"
                         dataSource={dataSource && dataSource.data.data}
                         rowKey={(record) => record.id}
-                        pagination={false}
-                        bordered={false}
+                        pagination={{
+                            current: tableFilter.page,
+                            pageSize: tableFilter.page_size,
+                        }}
                         onChange={onChangeTable}
-                        scroll={{ x: "max-content" }}
-                        // dataSource={dataSource}
                         rowSelection={rowSelection}
                     >
                         <Table.Column
                             title="Unit No"
-                            key="unit no"
-                            dataIndex={"unit_no"}
+                            dataIndex="unit_no"
+                            key="unit_no"
                             sorter
                         />
                         <Table.Column
                             title="Description"
+                            dataIndex="description"
                             key="description"
-                            dataIndex={"description"}
-                            sorter={true}
+                            sorter
                         />
-
                         <Table.Column
                             title="Assigned Comlab"
-                            key="email"
-                            dataIndex={"assigned_comlab"}
-                            sorter={true}
+                            dataIndex="assign_comlab"
+                            key="assign_comlab"
+                            sorter
                         />
                         <Table.Column
                             title="Borrow Status"
-                            key="staff_id"
-                            dataIndex={"borrow_status"}
-                            sorter={true}
+                            dataIndex="borrow_status"
+                            key="borrow_status"
+                            sorter
                         />
                         <Table.Column
                             title="Borrow Date"
-                            key="staff_id"
-                            dataIndex={"borrow_date"}
-                            sorter={true}
+                            dataIndex="borrow_date"
+                            key="borrow_date"
+                            sorter
                         />
                         <Table.Column
                             title="Role"
-                            key="staff_id"
-                            dataIndex={"role"}
-                            sorter={true}
+                            dataIndex="role"
+                            key="role"
+                            sorter
                         />
                         <Table.Column
                             title="Quantity of Stock"
-                            key="fullname"
+                            dataIndex="no_of_stock"
+                            key="no_of_stock"
                             sorter
-                            dataIndex={"quantity_of_stock"}
                         />
-                        {/* <Table.Column title="Status" key="" /> */}
                     </Table>
                 </Col>
                 <Col xs={24} sm={24} md={24}>
@@ -211,19 +168,13 @@ export default function TableBorrowStockAdmin(props) {
                         <TablePagination
                             tableFilter={tableFilter}
                             setTableFilter={setTableFilter}
-                            // setPaginationTotal={dataSource?.data.total}
-                            showLessItems={true}
+                            showLessItems
                             showSizeChanger={false}
                             tblIdWrapper="tbl_wrapper"
                         />
                     </div>
                 </Col>
             </Row>
-            {/* <ModalInventory
-                isModalOpen={isModalOpen}
-                handleOk={handleOk}
-                handleCancel={handleCancel}
-            ></ModalInventory> */}
         </>
     );
 }
