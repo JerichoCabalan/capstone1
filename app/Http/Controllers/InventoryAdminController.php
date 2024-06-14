@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Imports\EquipmentImport;
 use App\Models\InventoryAdmin;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -126,9 +127,8 @@ class InventoryAdminController extends Controller
     {
         try {
             $dataAdmin = InventoryAdmin::updateOrCreate(
-                ["user_id" => $request->user_id],
+          
                 [
-                    "user_id" => $request->user_id,
                     "unit_no" => $request->unit_no,
                     "description" => $request->description,
                     "assign_comlab" => $request->assign_comlab,
@@ -141,9 +141,11 @@ class InventoryAdminController extends Controller
                     "amount" => $request->amount,
                     "item_no" => $request->item_no,
                     "property_no" => $request->property_no,
+                    "person_liable" => $request->person_liable,
                     "control_no" => $request->control_no,
                     "serial_no" => $request->serial_no,
                     "no_of_stock" => $request->no_of_stock,
+                    "restocking_point" => $request->restocking_point,
                     "restocking_point" => $request->restocking_point,
 
                 ]
@@ -196,9 +198,8 @@ class InventoryAdminController extends Controller
         ];
 
         $dataAdmin = InventoryAdmin::updateOrCreate(
-            ["user_id" => $request->user_id],
+      
             [
-                "user_id" => $request->user_id,
                 "unit_no" => $request->unit_no,
                 "description" => $request->description,
                 "assign_comlab" => $request->assign_comlab,
@@ -211,6 +212,7 @@ class InventoryAdminController extends Controller
                 "amount" => $request->amount,
                 "item_no" => $request->item_no,
                 "property_no" => $request->property_no,
+                "person_liable" => $request->person_liable,
                 "control_no" => $request->control_no,
                 "serial_no" => $request->serial_no,
                 "no_of_stock" => $request->no_of_stock,
@@ -249,6 +251,16 @@ class InventoryAdminController extends Controller
         }
 
         return response()->json($ret, 200);
+    }
+
+
+
+    public function process_pdf_chart(Request $request){
+
+     $data = InventoryAdmin::all(); 
+
+    $pdf = Pdf::loadView('pdf_chart', compact('data')); 
+    return $pdf->download('chart.pdf'); 
     }
 
     public function model(Request $request) 

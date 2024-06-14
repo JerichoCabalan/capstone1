@@ -88,12 +88,12 @@ export default function TableCategoryAdmin(props) {
             onSuccess: (res) => {
                 if (res.success) {
                     notification.success({
-                        message: "Payroll Entry",
+                        message: "Inventory deleted successfully",
                         description: res.message,
                     });
                 } else {
                     notification.error({
-                        message: "Payroll Entry",
+                        message: "Inventory deleted successfully",
                         description: res.message,
                     });
                 }
@@ -108,7 +108,7 @@ export default function TableCategoryAdmin(props) {
         <>
             <Col xs={24} sm={24} md={24}>
                 <Button
-                    className=" btn-main-primary btn-main-invert-outline b-r-none hides"
+                    className="btn-main-primary btn-main-invert-outline b-r-none hides"
                     icon={<FontAwesomeIcon icon={faPlus} />}
                     size="large"
                     name="btn_add"
@@ -127,9 +127,9 @@ export default function TableCategoryAdmin(props) {
                     className="btn-main-primary btn-main-invert-outline b-r-none hides"
                     style={{
                         marginLeft: "10px",
-                        backgroundColor: "rgb(29 108 53)",
+                        backgroundColor: "#ff6624",
                         color: "white",
-                        borderColor: "rgb(29 108 53)",
+                        borderColor: "#ff6624",
                     }}
                     icon={<FontAwesomeIcon icon={faFileExcel} color="#fff" />}
                     size="large"

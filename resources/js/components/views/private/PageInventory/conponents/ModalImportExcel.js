@@ -14,7 +14,7 @@ export default function ModalImportExcel({
     const props = {
         name: "file",
         multiple: true,
-        action: "https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload",
+        action: "",
         accept: ".xlsx,.xls",
         onChange(info) {
             const { status } = info.file;
@@ -57,9 +57,9 @@ export default function ModalImportExcel({
                     size="large"
                     style={{
                         marginLeft: "10px",
-                        backgroundColor: "rgb(29 108 53)",
+                        backgroundColor: "#ff6624",
                         color: "white",
-                        borderColor: "rgb(29 108 53)",
+                        borderColor: "#ff6624",
                     }}
                     key={2}
                     onClick={handleOk}

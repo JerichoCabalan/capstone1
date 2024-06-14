@@ -1,19 +1,14 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Row, Col, Button, Form, Collapse, Image, notification } from "antd";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp } from "@fortawesome/pro-regular-svg-icons";
-
 import FloatInput from "../../../providers/FloatInput";
 import FloatSelect from "../../../providers/FloatSelect";
 import FloatInputMask from "../../../providers/FloatInputMask";
-
 import { GET, POST } from "../../../providers/useAxiosQuery";
-
 import validateRules from "../../../providers/validateRules";
 import ModalFormEmail from "./ModalFormEmail";
 import ModalFormPassword from "./ModalFormPassword";
-
 import ModalUserUploadPictureForm from "./ModalUserUploadPictureForm";
 import {
     apiUrl,
@@ -28,6 +23,8 @@ export default function PageEditProfile() {
     const [selectedData, setSelectedData] = useState({
         username: "",
         email: "",
+        firstname: "",
+        lastname: "",
     });
 
     const [toggleModalFormEmail, setToggleModalFormEmail] = useState({
@@ -60,6 +57,10 @@ export default function PageEditProfile() {
 
             let username = data.username;
             let email = data.email;
+            let firstname = data.firstname;
+            let lastname = data.lastname;
+            let phone_number = data.phone_number;
+            let fullname = `${firstname} ${lastname}`;
 
             if (
                 data.profile &&
@@ -76,10 +77,18 @@ export default function PageEditProfile() {
             setSelectedData({
                 username,
                 email,
+                firstname,
+                lastname,
+                phone_number,
+                fullname,
             });
             form.setFieldsValue({
                 username,
                 email,
+                firstname,
+                lastname,
+                phone_number,
+                fullname,
             });
         }
     });
@@ -97,6 +106,7 @@ export default function PageEditProfile() {
             contact_number: values.contact_number
                 ? values.contact_number.split(" ").join("")
                 : "",
+            fullname: `${values.firstname} ${values.lastname}`,
         };
 
         mutateUpdateInfo(data, {
@@ -126,7 +136,6 @@ export default function PageEditProfile() {
             if (value !== undefined) {
                 let newval = value.split("_").join("");
                 newval = newval.split(" ").join("");
-                // console.log("newval", newval);
                 let oldval = "";
                 if (selectedData[field]) {
                     oldval = selectedData[field].split("_").join("");
@@ -177,6 +186,20 @@ export default function PageEditProfile() {
                                                 />
                                             </Form.Item>
                                         </Col>
+                                        <Col
+                                            xs={24}
+                                            sm={24}
+                                            md={12}
+                                            lg={12}
+                                            xl={12}
+                                        >
+                                            <Form.Item name="fullname">
+                                                <FloatInput
+                                                    label="First Name"
+                                                    placeholder="First Name"
+                                                />
+                                            </Form.Item>
+                                        </Col>
 
                                         <Col
                                             xs={24}
@@ -190,6 +213,20 @@ export default function PageEditProfile() {
                                                     label="Email"
                                                     placeholder="Email"
                                                     disabled
+                                                />
+                                            </Form.Item>
+                                        </Col>
+                                        <Col
+                                            xs={24}
+                                            sm={24}
+                                            md={12}
+                                            lg={12}
+                                            xl={12}
+                                        >
+                                            <Form.Item name="phone_number">
+                                                <FloatInput
+                                                    label="Phone Number"
+                                                    placeholder="Phone Number"
                                                 />
                                             </Form.Item>
                                         </Col>

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
 import { DatePicker } from "antd";
 import dayjs from "dayjs";
+import React, { useState } from "react";
 
 const FloatDatePicker = (props) => {
     const [focus, setFocus] = useState(false);
@@ -20,6 +20,7 @@ const FloatDatePicker = (props) => {
         className,
         size,
         onBlur,
+        mode,
     } = props;
 
     if (!placeholder) placeholder = label;
@@ -38,30 +39,57 @@ const FloatDatePicker = (props) => {
             onBlur={() => setFocus(false)}
             onFocus={() => setFocus(true)}
         >
-            <DatePicker
-                id={id ?? ""}
-                onChange={(date, dateString) => onChange(date, dateString)}
-                value={value ? dayjs(value) : null}
-                size={size ?? "large"}
-                placeholder={[""]}
-                popupClassName={popupClassName ?? ""}
-                format={format ? format : "DD/MM/YYYY"}
-                allowClear={allowClear ?? false}
-                onBlur={(date, dateString) => {
-                    if (onBlur) {
-                        onBlur(date, dateString);
-                    }
-                }}
-                picker={picker ? picker : "date"}
-                disabled={disabled ? disabled : false}
-                disabledDate={(current) => {
-                    if (disabledDate) {
-                        return disabledDate(current);
-                    } else {
-                        return false;
-                    }
-                }}
-            />
+            {mode === "month" ? (
+                <DatePicker.MonthPicker
+                    id={id ?? ""}
+                    onChange={(date, dateString) => onChange(date, dateString)}
+                    value={value ? value : null}
+                    size={size ?? "large"}
+                    placeholder={[""]}
+                    popupClassName={popupClassName ?? ""}
+                    format={format ? format : "YYYY-MM-DD"}
+                    allowClear={allowClear ?? false}
+                    onBlur={(date, dateString) => {
+                        if (onBlur) {
+                            onBlur(date, dateString);
+                        }
+                    }}
+                    picker={picker ? picker : "date"}
+                    disabled={disabled ? disabled : false}
+                    disabledDate={(current) => {
+                        if (disabledDate) {
+                            return disabledDate(current);
+                        } else {
+                            return false;
+                        }
+                    }}
+                />
+            ) : (
+                <DatePicker
+                    id={id ?? ""}
+                    onChange={(date, dateString) => onChange(date, dateString)}
+                    value={value ? value : null}
+                    size={size ?? "large"}
+                    placeholder={[""]}
+                    popupClassName={popupClassName ?? ""}
+                    format={format ? format : "YYYY-MM-DD"}
+                    allowClear={allowClear ?? false}
+                    onBlur={(date, dateString) => {
+                        if (onBlur) {
+                            onBlur(date, dateString);
+                        }
+                    }}
+                    picker={picker ? picker : "date"}
+                    disabled={disabled ? disabled : false}
+                    disabledDate={(current) => {
+                        if (disabledDate) {
+                            return disabledDate(current);
+                        } else {
+                            return false;
+                        }
+                    }}
+                />
+            )}
 
             <label className={labelClass}>
                 {isOccupied ? label : placeholder} {requiredMark}

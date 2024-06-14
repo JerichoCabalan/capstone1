@@ -450,7 +450,7 @@ export default function PageDashboard() {
                                         }}
                                         type="primary"
                                         onClick={() =>
-                                            navigate("/inventory/creticalstock")
+                                            navigate("/report/chart")
                                         }
                                     >
                                         View Stock

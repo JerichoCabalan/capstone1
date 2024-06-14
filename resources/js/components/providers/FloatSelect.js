@@ -17,6 +17,7 @@ const FloatSelect = (props) => {
         onChange,
         size,
         className,
+        ...restProps
     } = props;
 
     const [focus, setFocus] = useState(false);
@@ -61,13 +62,13 @@ const FloatSelect = (props) => {
                     }
                 }}
                 filterOption={(input, option) => {
-                    // console.log("option", option);
                     return (
                         option.label
                             .toLowerCase()
                             .indexOf(input.toLowerCase()) >= 0
                     );
                 }}
+                {...restProps}
             >
                 {options.map((item, key) => {
                     return (

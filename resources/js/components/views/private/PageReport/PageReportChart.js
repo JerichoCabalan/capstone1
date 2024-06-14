@@ -1,90 +1,120 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Highcharts from "highcharts";
+import { Button, Spin, Alert } from "antd";
 import HighchartsReact from "highcharts-react-official";
 import { GET } from "../../../providers/useAxiosQuery";
-import { Button } from "antd";
 
 export default function PageReportChart() {
-    const { data: dataSource, refetch: refetchSource } = GET(
-        `api/inventory_admin`,
-        "inventory_admin"
-    );
+    const {
+        data: dataSource,
+        error,
+        isLoading,
+    } = GET(`api/inventory_admin`, "inventory_admin");
 
-    const options = {
-        chart: {
-            type: "column",
-        },
-        title: {
-            text: "Equipment Report",
-            align: "left",
-        },
-        xAxis: {
-            categories: [
-                "Keyboard",
-                "Mouse",
-                "AVR",
-                "Monitor",
-                "CPU",
-                "Printer",
-                "Power Supply",
-                "System Unit",
-                "Laptop Charger",
-                "Projector",
-            ],
-            crosshair: true,
-            accessibility: {
-                description: "Months",
-            },
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: "Months",
-            },
-            labels: {
-                formatter: function () {
-                    const months = [
-                        "January",
-                        "February",
-                        "March",
-                        "April",
-                        "May",
-                        "June",
-                        "July",
-                        "August",
-                        "September",
-                        "October",
-                        "November",
-                        "December",
-                    ];
-                    return months[this.value];
+    const [chartOptions, setChartOptions] = useState(null);
+    useEffect(() => {
+        console.log("Fetched dataSource:", dataSource);
+
+        const processData = (data) => {
+            const categories = data.map((item) => item.category);
+            const equipmentStock = data.map((item) => Number(item.no_of_stock));
+            const criticalStock = data.map((item) =>
+                Number(item.restocking_point)
+            );
+
+            const options = {
+                chart: {
+                    type: "column",
                 },
-            },
-        },
-        tooltip: {
-            valueSuffix: " ",
-        },
-        plotOptions: {
-            column: {
-                pointPadding: 0.2,
-                borderWidth: 0,
-            },
-        },
-        series: [
-            {
-                name: "Equipment Stock ",
-                data: [4, 2.6, 1.07, 0.68, 0.27, 0.14],
-            },
-            {
-                name: "Critical Stock",
-                data: [0.51, 1.36, 0.05, 1.41, 1.07, 0.77],
-            },
-        ],
-    };
+                title: {
+                    text: "Equipment Report",
+                    align: "left",
+                },
+                xAxis: {
+                    categories: categories,
+                    crosshair: true,
+                    accessibility: {
+                        description: "Categories",
+                    },
+                },
+                accessibility: {
+                    enabled: false,
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: "Stock Levels",
+                    },
+                },
+                // tooltip: {
+                //     valueSuffix: "units",
+                // },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0,
+                    },
+                },
+                series: [
+                    {
+                        name: "Equipment Stock",
+                        data: equipmentStock,
+                        color: "green",
+                    },
+                    {
+                        name: "Critical Stock",
+                        data: criticalStock,
+                        color: "red",
+                    },
+                ],
+            };
+            setChartOptions(options);
+        };
+
+        if (!dataSource) {
+            console.warn("Data source is null or undefined.");
+        } else if (Array.isArray(dataSource)) {
+            if (dataSource.length > 0) {
+                processData(dataSource);
+            } else {
+                console.warn("Data source array is empty.");
+            }
+        } else if (typeof dataSource === "object") {
+            const dataArray =
+                dataSource.items ||
+                dataSource.data ||
+                Object.values(dataSource)[0];
+            if (Array.isArray(dataArray) && dataArray.length > 0) {
+                processData(dataArray);
+            } else {
+                console.error(
+                    "Unexpected data structure, data source does not contain a non-empty array:",
+                    dataSource
+                );
+            }
+        } else {
+            console.error("Unexpected data structure:", dataSource);
+        }
+    }, [dataSource]);
+
+    if (isLoading) {
+        return <Spin size="large" />;
+    }
+
+    if (error) {
+        return <Alert message="Error fetching data" type="error" />;
+    }
 
     return (
         <div>
-            <HighchartsReact highcharts={Highcharts} options={options} />
+            {chartOptions ? (
+                <HighchartsReact
+                    highcharts={Highcharts}
+                    options={chartOptions}
+                />
+            ) : (
+                <Alert message="No data available" type="info" />
+            )}
             <br />
             <div
                 style={{
@@ -99,9 +129,9 @@ export default function PageReportChart() {
                     className="btn-main-primary btn-main-invert-outline b-r-none hides"
                     style={{
                         marginLeft: "10px",
-                        backgroundColor: "ff6624",
+                        backgroundColor: "#ff6624",
                         color: "white",
-                        borderColor: "ff6624",
+                        borderColor: "#ff6624",
                     }}
                     type="primary"
                 >

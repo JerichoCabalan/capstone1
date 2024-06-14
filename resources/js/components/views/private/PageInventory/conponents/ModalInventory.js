@@ -1,7 +1,20 @@
-import { Modal, Button, Form, notification, Spin, Row, Col } from "antd";
-import { useEffect, useState } from "react";
-import { message, Upload } from "antd";
-import { FileExcelOutlined, InboxOutlined } from "@ant-design/icons";
+import {
+    Modal,
+    Button,
+    Form,
+    notification,
+    Row,
+    Col,
+    Space,
+    Input,
+    Divider,
+} from "antd";
+import { useEffect, useState, useRef } from "react";
+import {
+    FileExcelOutlined,
+    InboxOutlined,
+    PlusOutlined,
+} from "@ant-design/icons";
 import FloatInput from "../../../../providers/FloatInput";
 import FloatSelect from "../../../../providers/FloatSelect";
 import FloatDatePicker from "../../../../providers/FloatDatePicker";
@@ -9,6 +22,7 @@ import notificationErrors from "../../../../providers/notificationErrors";
 import { useForm } from "antd/es/form/Form";
 import { POST } from "../../../../providers/useAxiosQuery";
 import TextArea from "antd/es/input/TextArea";
+import dayjs from "dayjs";
 
 export default function ModalInventory(props) {
     const { toggleModalInventory, setToggleModalInventory } = props;
@@ -16,16 +30,68 @@ export default function ModalInventory(props) {
     const { mutate: mutateInventoryAdmin } = POST(`api/inventory_modal`, [
         "inventory_admin",
     ]);
+    const [assignComlabItems, setAssignComlabItems] = useState(() => {
+        const savedItems = localStorage.getItem("assignComlabItems");
+        return savedItems ? JSON.parse(savedItems) : [];
+    });
+    const [categoryItems, setCategoryItems] = useState(() => {
+        const savedItems = localStorage.getItem("categoryItems");
+        return savedItems ? JSON.parse(savedItems) : [];
+    });
+
+    const inputRef = useRef(null);
+    const [name, setName] = useState("");
+    const [items, setItems] = useState(() => {
+        const savedItems = localStorage.getItem("items");
+        return savedItems ? JSON.parse(savedItems) : [];
+    });
+    const addAssignComlabItem = (e) => {
+        e.preventDefault();
+        const newItem = name || `New item ${assignComlabItems.length + 1}`;
+        const newItems = [...assignComlabItems, newItem];
+        localStorage.setItem("assignComlabItems", JSON.stringify(newItems));
+        setAssignComlabItems(newItems);
+        setName("");
+    };
+
+    const addCategoryItem = (e) => {
+        e.preventDefault();
+        const newItem = name || `New item ${categoryItems.length + 1}`;
+        const newItems = [...categoryItems, newItem];
+        localStorage.setItem("categoryItems", JSON.stringify(newItems));
+        setCategoryItems(newItems);
+        setName("");
+    };
+
+    const addItem = (e) => {
+        e.preventDefault();
+        const newItem = name || `New item ${items.length + 1}`;
+        const newItems = [...items, newItem];
+        localStorage.setItem("items", JSON.stringify(newItems));
+        setItems(newItems);
+        setName("");
+
+        form.setFieldsValue({
+            equipment_status: newItem,
+        });
+
+        setTimeout(() => {
+            inputRef.current?.focus();
+        }, 0);
+    };
+    const onNameChange = (event) => {
+        setName(event.target.value);
+    };
 
     const onFinish = (values) => {
         console.log("onFinish values", values);
+
         let date_acquired = form.getFieldValue("date_acquired")
             ? form.getFieldValue("date_acquired").format("YYYY-MM-DD")
             : "";
 
         let data = {
             ...values,
-
             id:
                 toggleModalInventory.data && toggleModalInventory.data.id
                     ? toggleModalInventory.data.id
@@ -62,69 +128,45 @@ export default function ModalInventory(props) {
             },
         });
     };
+
     const handleCancel = () => {
+        form.resetFields();
         setToggleModalInventory({
             open: false,
             data: null,
         });
     };
     useEffect(() => {
-        if (toggleModalInventory.open) {
+        if (toggleModalInventory.open && toggleModalInventory.data) {
             form.setFieldsValue({
-                unit_no: toggleModalInventory.data
-                    ? toggleModalInventory.data.unit_no
-                    : "",
-                description: toggleModalInventory.data
-                    ? toggleModalInventory.data.description
-                    : "",
-                assign_comlab: toggleModalInventory.data
-                    ? toggleModalInventory.data.assign_comlab
-                    : "",
-                category: toggleModalInventory.data
-                    ? toggleModalInventory.data.category
-                    : "",
-                equipment_status: toggleModalInventory.data
-                    ? toggleModalInventory.data.equipment_status
-                    : "",
-                person_liable: toggleModalInventory.data
-                    ? toggleModalInventory.data.person_liable
-                    : "",
-                supplier: toggleModalInventory.data
-                    ? toggleModalInventory.data.supplier
-                    : "",
-                amount: toggleModalInventory.data
-                    ? toggleModalInventory.data.amount
-                    : "",
-                item_no: toggleModalInventory.data
-                    ? toggleModalInventory.data.item_no
-                    : "",
-                category: toggleModalInventory.data
-                    ? toggleModalInventory.data.category
-                    : "",
-                property_no: toggleModalInventory.data
-                    ? toggleModalInventory.data.property_no
-                    : "",
-                control_no: toggleModalInventory.data
-                    ? toggleModalInventory.data.control_no
-                    : "",
-                serial_no: toggleModalInventory.data
-                    ? toggleModalInventory.data.serial_no
-                    : "",
-                no_of_stock: toggleModalInventory.data
-                    ? toggleModalInventory.data.no_of_stock
-                    : "",
-                restocking_point: toggleModalInventory.data
-                    ? toggleModalInventory.data.restocking_point
-                    : "",
-                remarks: toggleModalInventory.data
-                    ? toggleModalInventory.data.remarks
+                unit_no: toggleModalInventory.data.unit_no || "",
+                description: toggleModalInventory.data.description || "",
+                assign_comlab: toggleModalInventory.data.assign_comlab || "",
+                category: toggleModalInventory.data.category || "",
+                equipment_status:
+                    toggleModalInventory.data.equipment_status || "",
+                person_liable:
+                    toggleModalInventory.data.person_liable ||
+                    "Dr. Vicente A. Pitogo",
+                supplier: toggleModalInventory.data.supplier || "",
+                amount: toggleModalInventory.data.amount || "",
+                item_no: toggleModalInventory.data.item_no || "",
+                category: toggleModalInventory.data.category || "",
+                property_no: toggleModalInventory.data.property_no || "",
+                control_no: toggleModalInventory.data.control_no || "",
+                serial_no: toggleModalInventory.data.serial_no || "",
+                no_of_stock: toggleModalInventory.data.no_of_stock || "",
+                restocking_point:
+                    toggleModalInventory.data.restocking_point || "",
+                remarks: toggleModalInventory.data.remarks || "",
+                date_acquired: toggleModalInventory.data
+                    ? dayjs(toggleModalInventory.data.date_acquired)
                     : "",
             });
+        } else {
+            form.resetFields();
         }
-
-        return () => {};
     }, [toggleModalInventory]);
-
     return (
         <Modal
             className="ant-modal-wrap-2 custom-modal"
@@ -251,10 +293,50 @@ export default function ModalInventory(props) {
                                                 value: "MSIT",
                                                 label: "MSIT",
                                             },
+                                            ...assignComlabItems.map(
+                                                (item) => ({
+                                                    value: item,
+                                                    label: item,
+                                                })
+                                            ),
                                         ]}
+                                        dropdownRender={(menu) => (
+                                            <>
+                                                {menu}
+                                                <Divider
+                                                    style={{ margin: "8px 0" }}
+                                                />
+                                                <Space
+                                                    style={{
+                                                        padding: "0 8px 4px",
+                                                    }}
+                                                >
+                                                    <Input
+                                                        style={{
+                                                            width: "170px",
+                                                        }}
+                                                        placeholder="Add Assigned ComLab"
+                                                        value={name}
+                                                        onChange={onNameChange}
+                                                        onKeyDown={(e) =>
+                                                            e.stopPropagation()
+                                                        }
+                                                        ref={inputRef}
+                                                    />
+                                                    <Button
+                                                        type="text"
+                                                        icon={<PlusOutlined />}
+                                                        onClick={
+                                                            addAssignComlabItem
+                                                        }
+                                                    ></Button>
+                                                </Space>
+                                            </>
+                                        )}
                                     />
                                 </Form.Item>
                             </Col>
+
                             <Col
                                 xs={24}
                                 sm={24}
@@ -309,10 +391,48 @@ export default function ModalInventory(props) {
                                                 value: "TV",
                                                 label: "TV",
                                             },
+                                            ...categoryItems.map((item) => ({
+                                                value: item,
+                                                label: item,
+                                            })),
                                         ]}
+                                        dropdownRender={(menu) => (
+                                            <>
+                                                {menu}
+                                                <Divider
+                                                    style={{ margin: "8px 0" }}
+                                                />
+                                                <Space
+                                                    style={{
+                                                        padding: "0 8px 4px",
+                                                    }}
+                                                >
+                                                    <Input
+                                                        style={{
+                                                            width: "170px",
+                                                        }}
+                                                        placeholder="Add Category"
+                                                        value={name}
+                                                        onChange={onNameChange}
+                                                        onKeyDown={(e) =>
+                                                            e.stopPropagation()
+                                                        }
+                                                        ref={inputRef}
+                                                    />
+                                                    <Button
+                                                        type="text"
+                                                        icon={<PlusOutlined />}
+                                                        onClick={
+                                                            addCategoryItem
+                                                        }
+                                                    ></Button>
+                                                </Space>
+                                            </>
+                                        )}
                                     />
                                 </Form.Item>
                             </Col>
+
                             <Col
                                 xs={24}
                                 sm={24}
@@ -355,7 +475,42 @@ export default function ModalInventory(props) {
                                                 value: "Lost",
                                                 label: "Lost",
                                             },
+                                            ...items.map((item) => ({
+                                                value: item,
+                                                label: item,
+                                            })),
                                         ]}
+                                        dropdownRender={(menu) => (
+                                            <>
+                                                {menu}
+                                                <Divider
+                                                    style={{ margin: "8px 0" }}
+                                                />
+                                                <Space
+                                                    style={{
+                                                        padding: "0 8px 4px",
+                                                    }}
+                                                >
+                                                    <Input
+                                                        style={{
+                                                            width: "170px",
+                                                        }}
+                                                        placeholder="Add Equipment Status"
+                                                        value={name}
+                                                        onChange={onNameChange}
+                                                        onKeyDown={(e) =>
+                                                            e.stopPropagation()
+                                                        }
+                                                        ref={inputRef}
+                                                    />
+                                                    <Button
+                                                        type="text"
+                                                        icon={<PlusOutlined />}
+                                                        onClick={addItem}
+                                                    ></Button>
+                                                </Space>
+                                            </>
+                                        )}
                                     />
                                 </Form.Item>
                             </Col>
@@ -373,6 +528,7 @@ export default function ModalInventory(props) {
                                         required
                                         label="Date Acquired"
                                         placeholder="Date Acquired"
+                                        format="YYYY-MM-DD"
                                     />
                                 </Form.Item>
                             </Col>
@@ -505,6 +661,22 @@ export default function ModalInventory(props) {
                                         required
                                         label="Restocking Point"
                                         placeholder="Restocking Point"
+                                    />
+                                </Form.Item>
+                            </Col>
+                            <Col
+                                xs={24}
+                                sm={24}
+                                md={24}
+                                lg={24}
+                                xl={24}
+                                xxl={24}
+                            >
+                                <Form.Item name="person_liable">
+                                    <FloatInput
+                                        required
+                                        label="Person Liable"
+                                        placeholder="Person Liable"
                                     />
                                 </Form.Item>
                             </Col>
