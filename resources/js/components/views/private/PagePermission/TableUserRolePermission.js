@@ -91,23 +91,9 @@ export default function TableUserRolePermission(props) {
                     scroll={{ x: "max-content" }}
                 >
                     <Table.Column
-                        title="Module Code"
-                        key="module_code"
-                        dataIndex="module_code"
-                        sorter={true}
-                    />
-
-                    <Table.Column
                         title="Module Name"
                         key="module_name"
                         dataIndex="module_name"
-                        sorter={true}
-                    />
-
-                    <Table.Column
-                        title="Description"
-                        key="description"
-                        dataIndex="description"
                         sorter={true}
                     />
 

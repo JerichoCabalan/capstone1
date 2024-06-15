@@ -30,25 +30,12 @@ export default function Sidemenu(props) {
         return () => {};
     }, []);
     // useEffect(() => {
-    //     if ((role === "admin", "lab staff")) {
+    //     console.log("Current role:", role);
+    //     if (role === "Super Admin") {
     //         setMenuItems(adminSideMenu);
-    //     } else if (
-    //         [
-    //             "Faculty",
-    //             "Students Assistant",
-    //             "Procurement Officer",
-    //             "Comlab Adviser",
-    //             "Technician",
-    //         ].includes(role)
-    //     ) {
+    //     } else {
     //         setMenuItems(staffSideMenu);
     //     }
-
-    //     return () => {};
-    // }, [role]);
-    // useEffect(() => {
-    //     setMenuItems(role === "admin" ? adminSideMenu : staffSideMenu);
-    //     return () => {};
     // }, [role]);
 
     useEffect(() => {

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Col, Row, Table, Button, notification } from "antd";
+import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCheck, faUserXmark } from "@fortawesome/pro-light-svg-icons";
 import notificationErrors from "../../../../providers/notificationErrors";
@@ -81,14 +82,14 @@ export default function TableBorrowStockAdmin(props) {
                 >
                     Accept
                 </Button>
-                <Button
+                {/* <Button
                     className="btn-main-primary btn-main-invert-outline b-r-none hides"
                     style={{ marginLeft: "10px" }}
                     icon={<FontAwesomeIcon icon={faUserXmark} />}
                     size="large"
                 >
                     Decline
-                </Button>
+                </Button> */}
             </Col>
             <Row
                 gutter={[12, 12]}
@@ -145,7 +146,9 @@ export default function TableBorrowStockAdmin(props) {
                         <Table.Column
                             title="Borrow Date"
                             dataIndex="borrow_date"
-                            key="borrow_date"
+                            render={(borrow_date) =>
+                                moment(borrow_date).format("YYYY-MM-DD")
+                            }
                             sorter
                         />
                         <Table.Column

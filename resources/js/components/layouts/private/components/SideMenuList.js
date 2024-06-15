@@ -38,6 +38,12 @@ export const adminSideMenu = [
         title: "Home",
         path: "/dashboard",
         icon: <FontAwesomeIcon icon={faHome} />,
+        roles: [
+            "Super Admin",
+            "Lab Staff",
+            "Comlab Adviser",
+            "Procurement Officer",
+        ],
         moduleCode: "M-01",
     },
     {

@@ -40,7 +40,7 @@ class ModuleAndRolePermissionSeeder extends Seeder
                         ]
                     ],
                     [
-                        "module_name" => "Schedule Scheduling",
+                        "module_name" => "Static Page",
                         "description" => "",
                         "module_buttons" => [
                             [
@@ -66,7 +66,7 @@ class ModuleAndRolePermissionSeeder extends Seeder
                         ]
                     ],
                     [
-                        "module_name" => "Schedule Day Time",
+                        "module_name" => "Signup Page",
                         "description" => "",
                         "module_buttons" => [
                             [
@@ -92,7 +92,7 @@ class ModuleAndRolePermissionSeeder extends Seeder
                         ]
                     ],
                     [
-                        "module_name" => "Faculty Schedule",
+                        "module_name" => "Sign In",
                         "description" => "",
                         "module_buttons" => [
                             [
@@ -118,7 +118,7 @@ class ModuleAndRolePermissionSeeder extends Seeder
                         ]
                     ],
                     [
-                        "module_name" => "Student Schedule",
+                        "module_name" => "Home",
                         "description" => "",
                         "module_buttons" => [
                             [
@@ -144,7 +144,7 @@ class ModuleAndRolePermissionSeeder extends Seeder
                         ]
                     ],
                     [
-                        "module_name" => "Employee Full-time",
+                        "module_name" => "Users",
                         "description" => "",
                         "module_buttons" => [
                             [
@@ -170,7 +170,7 @@ class ModuleAndRolePermissionSeeder extends Seeder
                         ]
                     ],
                     [
-                        "module_name" => "Employee Part-time",
+                        "module_name" => "Inventory",
                         "description" => "",
                         "module_buttons" => [
                             [
@@ -196,7 +196,7 @@ class ModuleAndRolePermissionSeeder extends Seeder
                         ]
                     ],
                     [
-                        "module_name" => "Employee Archived",
+                        "module_name" => "Reports",
                         "description" => "",
                         "module_buttons" => [
                             [
@@ -218,7 +218,7 @@ class ModuleAndRolePermissionSeeder extends Seeder
                         ]
                     ],
                     [
-                        "module_name" => "Student Current",
+                        "module_name" => "Import Records",
                         "description" => "",
                         "module_buttons" => [
                             [
@@ -244,7 +244,7 @@ class ModuleAndRolePermissionSeeder extends Seeder
                         ]
                     ],
                     [
-                        "module_name" => "Student Archived",
+                        "module_name" => "Profile",
                         "description" => "",
                         "module_buttons" => [
                             [
@@ -266,7 +266,7 @@ class ModuleAndRolePermissionSeeder extends Seeder
                         ]
                     ],
                     [
-                        "module_name" => "User Current",
+                        "module_name" => "Event History",
                         "description" => "",
                         "module_buttons" => [
                             [
@@ -292,7 +292,7 @@ class ModuleAndRolePermissionSeeder extends Seeder
                         ]
                     ],
                     [
-                        "module_name" => "User Archived",
+                        "module_name" => "Crerical Stock Alert",
                         "description" => "",
                         "module_buttons" => [
                             [

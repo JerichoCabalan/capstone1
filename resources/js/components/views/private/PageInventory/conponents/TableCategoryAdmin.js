@@ -16,6 +16,7 @@ import {
 } from "../../../../providers/CustomTableFilter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+    faChartBar,
     faPencil,
     faTrash,
     faUserGear,
@@ -31,6 +32,7 @@ import ModalImportExcel from "./ModalImportExcel";
 import { useForm } from "antd/es/form/Form";
 import { POST } from "../../../../providers/useAxiosQuery";
 import notificationErrors from "../../../../providers/notificationErrors";
+import { faChartSimple } from "@fortawesome/pro-duotone-svg-icons";
 
 // import dayjs from "dayjs";
 // import { description } from "../../../providers/companyInfo";
@@ -168,7 +170,7 @@ export default function TableCategoryAdmin(props) {
                         onChange={onChangeTable}
                         scroll={{ x: "max-content" }}
                         // dataSource={dataSource}
-                        rowSelection={rowSelection}
+                        // rowSelection={rowSelection}
                     >
                         <Table.Column
                             title={
@@ -189,6 +191,7 @@ export default function TableCategoryAdmin(props) {
                                             // className="btn-main-primary"
                                             type="link"
                                             size="medium"
+                                            title="Edit"
                                             onClick={() => {
                                                 setToggleModalInventory({
                                                     open: true,
@@ -217,6 +220,7 @@ export default function TableCategoryAdmin(props) {
                                             <Button
                                                 type="link"
                                                 className="text-danger"
+                                                title="Delete"
                                                 name="btn_delete"
                                             >
                                                 <FontAwesomeIcon

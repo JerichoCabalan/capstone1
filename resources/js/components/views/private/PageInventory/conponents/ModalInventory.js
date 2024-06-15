@@ -27,9 +27,10 @@ import dayjs from "dayjs";
 export default function ModalInventory(props) {
     const { toggleModalInventory, setToggleModalInventory } = props;
     const [form] = Form.useForm();
-    const { mutate: mutateInventoryAdmin } = POST(`api/inventory_modal`, [
-        "inventory_admin",
-    ]);
+    const { mutate: mutateInventoryAdmin } = POST(
+        `api/inventory_modal`,
+        "inventory_admin"
+    );
     const [assignComlabItems, setAssignComlabItems] = useState(() => {
         const savedItems = localStorage.getItem("assignComlabItems");
         return savedItems ? JSON.parse(savedItems) : [];
