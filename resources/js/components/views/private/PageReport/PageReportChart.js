@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Highcharts from "highcharts";
-import { Button, Spin, Alert } from "antd";
+import { Button, Spin, Alert, Col } from "antd";
 import HighchartsReact from "highcharts-react-official";
 import { GET } from "../../../providers/useAxiosQuery";
+import FloatSelect from "../../../providers/FloatSelect";
+import moment from "moment";
 
 export default function PageReportChart() {
     const {
@@ -13,94 +15,94 @@ export default function PageReportChart() {
 
     const [chartOptions, setChartOptions] = useState(null);
     const [comlabOptions, setComlabOptions] = useState(null);
-    const [highandlowOptions, setHighandlowOptions] = useState(null);
+    const [selectedOption, setSelectedOption] = useState("All");
+
+    const handleSelectChange = (value) => {
+        setSelectedOption(value);
+    };
+
+    const getOptions = () => {
+        return [
+            { value: "All", label: "All" },
+            { value: "this day", label: "this day" },
+            { value: "last 3 days", label: "last 3 days" },
+            { value: "this week", label: "this week" },
+            { value: "last month", label: "last month" },
+            { value: "last year", label: "last year" },
+        ];
+    };
+
+    const filterData = (data, filter) => {
+        const now = moment();
+        switch (filter) {
+            case "this day":
+                return data.filter((item) =>
+                    moment(item.date).isSame(now, "day")
+                );
+            case "last 3 days":
+                return data.filter((item) =>
+                    moment(item.date).isBetween(
+                        now.clone().subtract(3, "days"),
+                        now
+                    )
+                );
+            case "this week":
+                return data.filter((item) =>
+                    moment(item.date).isSame(now, "week")
+                );
+            case "last month":
+                return data.filter((item) =>
+                    moment(item.date).isSame(
+                        now.clone().subtract(1, "month"),
+                        "month"
+                    )
+                );
+            case "last year":
+                return data.filter((item) =>
+                    moment(item.date).isSame(
+                        now.clone().subtract(1, "year"),
+                        "year"
+                    )
+                );
+            default:
+                return data;
+        }
+    };
 
     useEffect(() => {
-        console.log("Fetched dataSource:", dataSource);
+        if (!dataSource) {
+            console.warn("Data source is null or undefined.");
+            return;
+        }
 
         const processData = (data) => {
-            const categories = data.map((item) => item.category);
-            const equipmentStock = data.map((item) => Number(item.no_of_stock));
-            const criticalStock = data.map((item) =>
+            const filteredData = filterData(data, selectedOption);
+            const categories = filteredData.map((item) => item.category);
+            const equipmentStock = filteredData.map((item) =>
+                Number(item.no_of_stock)
+            );
+            const criticalStock = filteredData.map((item) =>
                 Number(item.restocking_point)
             );
-            const highestStock = Math.max(...equipmentStock);
-            const lowestStock = Math.min(...equipmentStock);
 
-            console.log("Highest Stock:", highestStock);
-            console.log("Lowest Stock:", lowestStock);
-
-            const options = {
-                chart: {
-                    type: "column",
-                    events: {
-                        click: function (event) {
-                            if (
-                                event.target.textContent ===
-                                "Inventory Management System"
-                            ) {
-                                window.location.href = "http://127.0.0.1:8001";
-                            }
-                        },
-                    },
-                },
-                title: {
-                    text: "Equipment Report",
-                    align: "left",
-                },
-                xAxis: {
-                    categories: categories,
-                    crosshair: true,
-                    accessibility: {
-                        description: "Categories",
-                    },
-                },
-                accessibility: {
-                    enabled: false,
-                },
-                yAxis: {
-                    min: 0,
-                    title: {
-                        text: "Stock Levels",
-                    },
-                },
-                plotOptions: {
-                    column: {
-                        pointPadding: 0.2,
-                        borderWidth: 0,
-                    },
-                },
+            const chartOptions = {
+                chart: { type: "column" },
+                title: { text: "Equipment Stock", align: "left" },
+                xAxis: { categories: categories, crosshair: true },
+                yAxis: { min: 0, title: { text: "Stock Levels" } },
+                plotOptions: { column: { pointPadding: 0.2, borderWidth: 0 } },
                 series: [
                     {
                         name: "Equipment Stock",
                         data: equipmentStock,
                         color: "green",
                     },
-                    {
-                        name: "Critical Stock",
-                        data: criticalStock,
-                        color: "red",
-                    },
                 ],
-                credits: {
-                    enabled: true,
-                    text: "Inventory Management System",
-                    events: {
-                        click: function (event) {
-                            if (
-                                event.target.textContent ===
-                                "Inventory Management System"
-                            ) {
-                                window.location.href = "http://127.0.0.1:8001";
-                            }
-                        },
-                    },
-                },
+                credits: { enabled: true, text: "Inventory Management System" },
             };
-            setChartOptions(options);
+            setChartOptions(chartOptions);
 
-            // Process comlabOptions data
-            const comlabData = data.filter(
+            const comlabData = filteredData.filter(
                 (item) =>
                     item.equipment_status === "To Repair" && item.assign_comlab
             );
@@ -109,6 +111,9 @@ export default function PageReportChart() {
                 (item) => `${item.assign_comlab} (${item.category})`
             );
             const uniqueComlabs = [...new Set(comlabCategories)].join(", ");
+            const uniqueStatus = [
+                ...new Set(comlabData.map((item) => item.equipment_status)),
+            ].join(", ");
             const comlabStock = comlabData.map((item) =>
                 Number(item.no_of_stock)
             );
@@ -118,7 +123,7 @@ export default function PageReportChart() {
                     type: "column",
                 },
                 title: {
-                    text: `To Repair in ${uniqueComlabs}`,
+                    text: `${uniqueStatus} -> ${uniqueComlabs}`,
                     align: "left",
                 },
                 xAxis: {
@@ -131,7 +136,7 @@ export default function PageReportChart() {
                 yAxis: {
                     min: 0,
                     title: {
-                        text: "Equipment To Repair",
+                        text: "Equipment To Repair Count",
                     },
                 },
                 plotOptions: {
@@ -142,7 +147,7 @@ export default function PageReportChart() {
                 },
                 series: [
                     {
-                        name: "Comlab Equipment Stock",
+                        name: "Comlab Equipment To Repair",
                         data: comlabStock,
                         color: "purple",
                     },
@@ -152,87 +157,24 @@ export default function PageReportChart() {
                 },
             };
             setComlabOptions(comlabChartOptions);
-
-            // Process highandlowOptions data
-            const highestStockItem = data.find(
-                (item) => Number(item.no_of_stock) === highestStock
-            );
-            const lowestStockItem = data.find(
-                (item) => Number(item.no_of_stock) === lowestStock
-            );
-
-            const highandlowCategories = [
-                highestStockItem?.category || "N/A",
-                lowestStockItem?.category || "N/A",
-            ];
-            const highandlowStock = [highestStock, lowestStock];
-
-            const highandlowChartOptions = {
-                chart: {
-                    type: "column",
-                },
-                title: {
-                    text: "Highest and Lowest Stock Levels",
-                    align: "left",
-                },
-                xAxis: {
-                    categories: highandlowCategories,
-                    crosshair: true,
-                    accessibility: {
-                        description: "Categories",
-                    },
-                },
-                yAxis: {
-                    min: 0,
-                    title: {
-                        text: "Highest and Lowest Stock Levels",
-                    },
-                },
-                plotOptions: {
-                    column: {
-                        pointPadding: 0.2,
-                        borderWidth: 0,
-                    },
-                },
-                series: [
-                    {
-                        name: "Stock Levels",
-                        data: highandlowStock,
-                        color: "orange",
-                    },
-                ],
-                credits: {
-                    enabled: false,
-                },
-            };
-            setHighandlowOptions(highandlowChartOptions);
         };
 
-        if (!dataSource) {
-            console.warn("Data source is null or undefined.");
-        } else if (Array.isArray(dataSource)) {
-            if (dataSource.length > 0) {
-                processData(dataSource);
-            } else {
-                console.warn("Data source array is empty.");
-            }
+        if (Array.isArray(dataSource)) {
+            processData(dataSource);
         } else if (typeof dataSource === "object") {
             const dataArray =
                 dataSource.items ||
                 dataSource.data ||
                 Object.values(dataSource)[0];
-            if (dataArray && dataArray.length > 0) {
+            if (dataArray && Array.isArray(dataArray)) {
                 processData(dataArray);
             } else {
-                console.error(
-                    "Unexpected data structure, data source does not contain a non-empty array:",
-                    dataSource
-                );
+                console.error("Unexpected data structure:", dataSource);
             }
         } else {
             console.error("Unexpected data structure:", dataSource);
         }
-    }, [dataSource]);
+    }, [dataSource, selectedOption]);
 
     if (isLoading) {
         return <Spin size="large" />;
@@ -244,7 +186,14 @@ export default function PageReportChart() {
 
     return (
         <div>
-            <div>
+            <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
+                <FloatSelect
+                    label="Report Data"
+                    placeholder="Report Data"
+                    required
+                    options={getOptions()}
+                    onChange={handleSelectChange}
+                />
                 {chartOptions ? (
                     <HighchartsReact
                         highcharts={Highcharts}
@@ -253,17 +202,7 @@ export default function PageReportChart() {
                 ) : (
                     <Alert message="No data available" type="info" />
                 )}
-                <br />
-                <div
-                    style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        marginTop: "20px",
-                        marginLeft: "-25px",
-                        borderRadius: "100px",
-                    }}
-                ></div>
-            </div>
+            </Col>
             <div>
                 {comlabOptions ? (
                     <HighchartsReact
@@ -273,27 +212,6 @@ export default function PageReportChart() {
                 ) : (
                     <Alert message="No data available" type="info" />
                 )}
-                <br />
-                <div
-                    style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        marginTop: "20px",
-                        marginLeft: "-25px",
-                        borderRadius: "100px",
-                    }}
-                ></div>
-            </div>
-            <div>
-                {highandlowOptions ? (
-                    <HighchartsReact
-                        highcharts={Highcharts}
-                        options={highandlowOptions}
-                    />
-                ) : (
-                    <Alert message="No data available" type="info" />
-                )}
-                <br />
                 <div
                     style={{
                         display: "flex",
