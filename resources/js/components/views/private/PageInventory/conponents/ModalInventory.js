@@ -687,9 +687,11 @@ export default function ModalInventory(props) {
                         <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
                             <Form.Item name="remarks" style={{}}>
                                 <TextArea
+                                    style={{ width: "1234px" }}
                                     required
                                     label="Remarks"
                                     placeholder="Remarks"
+                                    defaultValue="No. Sticker"
                                     rows={7}
                                 />
                             </Form.Item>

@@ -12,10 +12,14 @@ export default function PageReportChart() {
         error,
         isLoading,
     } = GET(`api/inventory_admin`, "inventory_admin");
+    const { data: dataBorrow } = GET(`api/borrow_stock`, "borrow_stock");
 
     const [chartOptions, setChartOptions] = useState(null);
     const [comlabOptions, setComlabOptions] = useState(null);
     const [selectedOption, setSelectedOption] = useState("All");
+    const [borrowDataOption, setBorrowDataOption] = useState(null);
+    const [equipmentStatusDataOption, setEquipmentStatusDataOption] =
+        useState(null);
 
     const handleSelectChange = (value) => {
         setSelectedOption(value);
@@ -70,6 +74,11 @@ export default function PageReportChart() {
     };
 
     useEffect(() => {
+        if (error) {
+            console.error("Error fetching data:", error);
+            return;
+        }
+
         if (!dataSource) {
             console.warn("Data source is null or undefined.");
             return;
@@ -77,12 +86,30 @@ export default function PageReportChart() {
 
         const processData = (data) => {
             const filteredData = filterData(data, selectedOption);
-            const categories = filteredData.map((item) => item.category);
-            const equipmentStock = filteredData.map((item) =>
-                Number(item.no_of_stock)
+
+            let combinedData = filteredData.reduce((acc, item) => {
+                const found = acc.find((a) => a.category === item.category);
+                if (found) {
+                    found.no_of_stock += Number(item.no_of_stock);
+                    found.restocking_point += Number(item.restocking_point);
+                } else {
+                    acc.push({
+                        category: item.category,
+                        no_of_stock: Number(item.no_of_stock),
+                        restocking_point: Number(item.restocking_point),
+                    });
+                }
+                return acc;
+            }, []);
+
+            combinedData = combinedData.sort(
+                (a, b) => b.no_of_stock - a.no_of_stock
             );
-            const criticalStock = filteredData.map((item) =>
-                Number(item.restocking_point)
+
+            const categories = combinedData.map((item) => item.category);
+            const equipmentStock = combinedData.map((item) => item.no_of_stock);
+            const criticalStock = combinedData.map(
+                (item) => item.restocking_point
             );
 
             const chartOptions = {
@@ -93,88 +120,246 @@ export default function PageReportChart() {
                 plotOptions: { column: { pointPadding: 0.2, borderWidth: 0 } },
                 series: [
                     {
+                        colorByPoint: true,
                         name: "Equipment Stock",
+                        groupPadding: 0,
                         data: equipmentStock,
-                        color: "green",
+                        dataLabels: {
+                            enabled: true,
+                            rotation: -90,
+                            color: "#FFFFFF",
+                            inside: true,
+                            verticalAlign: "top",
+                            format: "{point.y}",
+                            y: 10,
+                            style: {
+                                fontSize: "13px",
+                                fontFamily: "Verdana, sans-serif",
+                            },
+                        },
                     },
                 ],
                 credits: { enabled: true, text: "Inventory Management System" },
             };
             setChartOptions(chartOptions);
-
             const comlabData = filteredData.filter(
                 (item) =>
                     item.equipment_status === "To Repair" && item.assign_comlab
             );
 
-            const comlabCategories = comlabData.map(
+            const combinedComlabData = comlabData.reduce((acc, item) => {
+                const found = acc.find(
+                    (a) =>
+                        a.assign_comlab === item.assign_comlab &&
+                        a.category === item.category
+                );
+                if (found) {
+                    found.no_of_stock += Number(item.no_of_stock);
+                } else {
+                    acc.push({
+                        assign_comlab: item.assign_comlab,
+                        category: item.category,
+                        no_of_stock: Number(item.no_of_stock),
+                    });
+                }
+                return acc;
+            }, []);
+
+            // Sort combinedComlabData by no_of_stock in descending order
+            combinedComlabData.sort((a, b) => b.no_of_stock - a.no_of_stock);
+
+            const comlabCategories = combinedComlabData.map(
                 (item) => `${item.assign_comlab} (${item.category})`
             );
+
             const uniqueComlabs = [...new Set(comlabCategories)].join(", ");
-            const uniqueStatus = [
-                ...new Set(comlabData.map((item) => item.equipment_status)),
-            ].join(", ");
-            const comlabStock = comlabData.map((item) =>
+            const comlabStock = combinedComlabData.map((item) =>
                 Number(item.no_of_stock)
             );
 
             const comlabChartOptions = {
-                chart: {
-                    type: "column",
+                chart: { type: "column" },
+                title: { text: `To Repair -> ${uniqueComlabs}`, align: "left" },
+                xAxis: { categories: comlabCategories, crosshair: true },
+                yAxis: { title: { text: "Equipment To Repair Count" } },
+                plotOptions: { bar: { pointPadding: 0.2, borderWidth: 0 } },
+
+                series: [
+                    {
+                        colorByPoint: true,
+                        name: "Comlab Equipment To Repair",
+                        groupPadding: 0,
+                        data: combinedComlabData.map((item) => ({
+                            y: Number(item.no_of_stock),
+                            assign_comlab: item.assign_comlab,
+                        })),
+                        dataLabels: {
+                            enabled: true,
+                            rotation: -90,
+                            color: "#FFFFFF",
+                            inside: true,
+                            verticalAlign: "top",
+                            format: "{point.assign_comlab}",
+                            y: 10,
+                            style: {
+                                fontSize: "13px",
+                                fontFamily: "Verdana, sans-serif",
+                            },
+                        },
+                    },
+                ],
+                credits: { enabled: false },
+            };
+            setComlabOptions(comlabChartOptions);
+
+            const equipmentStatusCounts = filteredData.reduce((acc, item) => {
+                if (acc[item.equipment_status]) {
+                    acc[item.equipment_status]++;
+                } else {
+                    acc[item.equipment_status] = 1;
+                }
+                return acc;
+            }, {});
+
+            const equipmentStatusArray = Object.entries(
+                equipmentStatusCounts
+            ).map(([status, count]) => ({ status, count }));
+
+            // Sort the array by count in descending order
+            equipmentStatusArray.sort((a, b) => b.count - a.count);
+
+            // Create sorted categories and data arrays
+            const equipmentStatusCategories = equipmentStatusArray.map(
+                (item) => item.status
+            );
+            const equipmentStatusData = equipmentStatusArray.map(
+                (item) => item.count
+            );
+            const equipmentStatusDataOption = {
+                chart: { type: "column" },
+                title: { text: "Equipment Status Count", align: "left" },
+                xAxis: {
+                    categories: equipmentStatusCategories,
+                    crosshair: true,
                 },
+                yAxis: { title: { text: "Count" } },
+                plotOptions: { column: { pointPadding: 0.2, borderWidth: 0 } },
+                series: [
+                    {
+                        colorByPoint: true,
+                        name: "Equipment Status Count",
+                        groupPadding: 0,
+                        data: equipmentStatusData,
+                        dataLabels: {
+                            enabled: true,
+                            rotation: -90,
+                            color: "#FFFFFF",
+                            inside: true,
+                            verticalAlign: "top",
+                            format: "{point.y}",
+                            y: 10,
+                            style: {
+                                fontSize: "13px",
+                                fontFamily: "Verdana, sans-serif",
+                            },
+                        },
+                    },
+                ],
+                credits: { enabled: false },
+            };
+
+            setEquipmentStatusDataOption(equipmentStatusDataOption);
+        };
+
+        const processBorrowData = (data) => {
+            const groupedData = data.reduce((acc, item) => {
+                if (item.borrow_status !== "pending") {
+                    const key = item.category;
+                    if (!acc[key]) {
+                        acc[key] = 0;
+                    }
+                    acc[key] += 1;
+                }
+                return acc;
+            }, {});
+
+            const totalBorrows = Object.entries(groupedData).map(
+                ([category, count]) => ({
+                    category,
+                    count,
+                })
+            );
+            totalBorrows.sort((a, b) => b.count - a.count);
+            const highestBorrow = totalBorrows.reduce(
+                (max, item) => (item.count > max.count ? item : max),
+                totalBorrows[0]
+            );
+
+            const lowestBorrow = totalBorrows.reduce(
+                (min, item) => (item.count < min.count ? item : min),
+                totalBorrows[0]
+            );
+
+            const borrowDataOption = {
+                chart: { type: "column" },
                 title: {
-                    text: `${uniqueStatus} -> ${uniqueComlabs}`,
+                    text: "Highest And Lowest Usage  Equipment",
                     align: "left",
                 },
                 xAxis: {
-                    categories: comlabCategories,
+                    categories: totalBorrows.map((item) => item.category),
                     crosshair: true,
-                    accessibility: {
-                        description: "Assigned Comlabs",
-                    },
                 },
-                yAxis: {
-                    min: 0,
-                    title: {
-                        text: "Equipment To Repair Count",
-                    },
-                },
-                plotOptions: {
-                    bar: {
-                        pointPadding: 0.2,
-                        borderWidth: 0,
-                    },
-                },
+                yAxis: { title: { text: "Borrow Count" } },
+                plotOptions: { column: { pointPadding: 0.2, borderWidth: 0 } },
                 series: [
                     {
-                        name: "Comlab Equipment To Repair",
-                        data: comlabStock,
-                        color: "purple",
+                        colorByPoint: true,
+                        name: "Borrow Count",
+                        groupPadding: 0,
+                        data: totalBorrows.map((item) => ({
+                            name: item.category,
+                            y: item.count,
+                        })),
+                        dataLabels: {
+                            enabled: true,
+                            rotation: -90,
+                            color: "#FFFFFF",
+                            inside: true,
+                            verticalAlign: "top",
+                            style: {
+                                fontSize: "13px",
+                                fontFamily: "Verdana, sans-serif",
+                            },
+                        },
                     },
                 ],
-                credits: {
-                    enabled: false,
-                },
+                credits: { enabled: false },
             };
-            setComlabOptions(comlabChartOptions);
+
+            setBorrowDataOption(borrowDataOption);
         };
 
         if (Array.isArray(dataSource)) {
             processData(dataSource);
-        } else if (typeof dataSource === "object") {
+        } else if (dataSource && typeof dataSource === "object") {
             const dataArray =
                 dataSource.items ||
                 dataSource.data ||
                 Object.values(dataSource)[0];
-            if (dataArray && Array.isArray(dataArray)) {
+            if (Array.isArray(dataArray)) {
                 processData(dataArray);
             } else {
                 console.error("Unexpected data structure:", dataSource);
             }
-        } else {
-            console.error("Unexpected data structure:", dataSource);
         }
-    }, [dataSource, selectedOption]);
+
+        if (dataBorrow && dataBorrow.data) {
+            processBorrowData(dataBorrow.data);
+        } else {
+            console.warn("Borrow data source is null or undefined.");
+        }
+    }, [dataSource, dataBorrow, selectedOption, error]);
 
     if (isLoading) {
         return <Spin size="large" />;
@@ -208,6 +393,22 @@ export default function PageReportChart() {
                     <HighchartsReact
                         highcharts={Highcharts}
                         options={comlabOptions}
+                    />
+                ) : (
+                    <Alert message="No data available" type="info" />
+                )}
+                {borrowDataOption ? (
+                    <HighchartsReact
+                        highcharts={Highcharts}
+                        options={borrowDataOption}
+                    />
+                ) : (
+                    <Alert message="No data available" type="info" />
+                )}
+                {equipmentStatusDataOption ? (
+                    <HighchartsReact
+                        highcharts={Highcharts}
+                        options={equipmentStatusDataOption}
                     />
                 ) : (
                     <Alert message="No data available" type="info" />

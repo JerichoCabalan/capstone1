@@ -126,9 +126,9 @@ export default function TableBorrowStockAdmin(props) {
                             sorter
                         />
                         <Table.Column
-                            title="Description"
-                            dataIndex="description"
-                            key="description"
+                            title="Cetegory"
+                            dataIndex="category"
+                            key="category"
                             sorter
                         />
                         <Table.Column

@@ -19,14 +19,14 @@ class BorrowStockController extends Controller
 
      
         $unit_no = "SELECT unit_no FROM inventory_admins WHERE inventory_admins.id = borrow_stocks.inventory_admin_id";
-        $description = "SELECT description FROM inventory_admins WHERE inventory_admins.id = borrow_stocks.inventory_admin_id";
+        $category = "SELECT category FROM inventory_admins WHERE inventory_admins.id = borrow_stocks.inventory_admin_id";
         $assign_comlab = "SELECT assign_comlab FROM inventory_admins WHERE inventory_admins.id = borrow_stocks.inventory_admin_id";
         $no_of_stock = "SELECT no_of_stock FROM inventory_admins WHERE inventory_admins.id = borrow_stocks.inventory_admin_id";
         $role = "SELECT  user_role_id  FROM users WHERE users.id = borrow_stocks.user_id";
         $data = BorrowStock::select([
             "*",
             DB::raw("($unit_no) `unit_no`"),
-            DB::raw("($description) `description`"),
+            DB::raw("($category) `category`"),
             DB::raw("($assign_comlab) `assign_comlab`"),
             DB::raw("($no_of_stock) `no_of_stock`"),
             DB::raw("($role) `role`"),
