@@ -78,15 +78,6 @@ export default function TableBinAdmin(props) {
     const showModal = () => {
         setIsModalOpen(true);
     };
-    // const handleRestore = () => {
-    //     const newDataSource = dataSource.map((item) =>
-    //         selectedRowKeys.includes(item.key)
-    //             ? { ...item, status: "Restored" }
-    //             : item
-    //     );
-    //     setDataSource(newDataSource);
-    //     setIsModalOpen(true);
-    // };
 
     return (
         <>
