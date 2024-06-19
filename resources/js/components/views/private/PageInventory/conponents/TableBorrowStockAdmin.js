@@ -43,25 +43,29 @@ export default function TableBorrowStockAdmin(props) {
         "api/borrow_stock_status",
         "borrow_stock"
     );
-
-    const handleAccept = (record) => {
-        mutateAccept(record, {
-            onSuccess: (res) => {
-                if (res.success) {
-                    notification.success({
-                        message: "Borrow",
-                        description: res.message,
-                    });
-                } else {
-                    notification.error({
-                        message: "Borrow",
-                        description: res.message,
-                    });
-                }
-            },
-            onError: (err) => {
-                notificationErrors(err);
-            },
+    const handleAccept = () => {
+        const recordsToAccept = selectedRowKeys.map((key) =>
+            dataSource.data.data.find((item) => item.id === key)
+        );
+        recordsToAccept.forEach((record) => {
+            mutateAccept(record, {
+                onSuccess: (res) => {
+                    if (res.success) {
+                        notification.success({
+                            message: "Borrow",
+                            description: res.message,
+                        });
+                    } else {
+                        notification.error({
+                            message: "Borrow",
+                            description: res.message,
+                        });
+                    }
+                },
+                onError: (err) => {
+                    notificationErrors(err);
+                },
+            });
         });
     };
 
@@ -171,6 +175,7 @@ export default function TableBorrowStockAdmin(props) {
                         <TablePagination
                             tableFilter={tableFilter}
                             setTableFilter={setTableFilter}
+                            setPaginationTotal={dataSource?.data.total}
                             showLessItems
                             showSizeChanger={false}
                             tblIdWrapper="tbl_wrapper"

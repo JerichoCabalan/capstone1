@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Col, Dropdown, Image, Layout, Menu, Row, Typography } from "antd";
+import { Link, useParams } from "react-router-dom";
+import { Dropdown, Image, Layout, Menu, Typography } from "antd";
 import {
     apiUrl,
     defaultProfile,
@@ -8,12 +8,10 @@ import {
     userData,
 } from "../../providers/companyInfo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faPowerOff, faBell } from "@fortawesome/pro-light-svg-icons";
+import { faEdit, faPowerOff } from "@fortawesome/pro-light-svg-icons";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { PageHeader } from "@ant-design/pro-layout";
-import { TableGlobalSearch } from "../../providers/CustomTableFilter";
-import { GET } from "../../providers/useAxiosQuery";
-// Import your custom hook
+import { faBell } from "@fortawesome/pro-regular-svg-icons";
 
 export default function Header(props) {
     const {
@@ -32,12 +30,6 @@ export default function Header(props) {
         username: "",
         role: "",
     });
-
-    const { data: dataBorrowStatus, error } = GET(
-        "api/borrow_stock",
-        "borrow_stock"
-    ); // Fetch notification data
-    const [notifications, setNotifications] = useState([]);
 
     useEffect(() => {
         if (dataUserProfileInfo) {
@@ -62,12 +54,6 @@ export default function Header(props) {
         return () => {};
     }, [dataUserProfileInfo]);
 
-    useEffect(() => {
-        if (dataBorrowStatus) {
-            setNotifications(dataBorrowStatus); // Update notifications state with fetched data
-        }
-    }, [dataBorrowStatus]);
-
     const handleLogout = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("userdata");
@@ -75,19 +61,22 @@ export default function Header(props) {
     };
 
     const menuNotification = () => {
-        const items = notifications.length
-            ? notifications.map((notification, index) => ({
-                  label: notification.message,
-                  key: index,
-              }))
-            : [
-                  {
-                      label: "No notifications",
-                      key: "1",
-                  },
-              ];
+        const items = [
+            {
+                label: "Notifications",
+                key: "0",
+            },
 
-        console.log("Notification Items:", items); // Debug notification items
+            {
+                type: "divider",
+            },
+
+            {
+                label: "No notification",
+                key: "1",
+            },
+        ];
+
         return { items };
     };
 
@@ -116,12 +105,12 @@ export default function Header(props) {
                         </div>
                     </div>
                 ),
-            },
+            }, // remember to pass the key prop
             {
                 key: "/edit-profile",
                 icon: <FontAwesomeIcon icon={faEdit} />,
                 label: <Link to="/edit-profile">Edit Account Profile</Link>,
-            },
+            }, // which is required
         ];
 
         items.push({
@@ -157,24 +146,27 @@ export default function Header(props) {
             "btn_sidemenu_collapse_unfold"
         );
         btnSidemenuCollapseUnfold.addEventListener(
-            "click",
+            "type-of-event",
             handleCollapseUnfold
         );
 
         const btnSidemenuCollapseFold = document.getElementById(
             "btn_sidemenu_collapse_fold"
         );
-        btnSidemenuCollapseFold.addEventListener("click", handleCollapseFold);
+        btnSidemenuCollapseFold.addEventListener(
+            "type-of-event",
+            handleCollapseFold
+        );
 
         window.addEventListener("resize", handleResize);
 
         return () => {
             btnSidemenuCollapseUnfold.removeEventListener(
-                "click",
+                "type-of-event",
                 handleCollapseUnfold
             );
             btnSidemenuCollapseFold.removeEventListener(
-                "click",
+                "type-of-event",
                 handleCollapseFold
             );
             window.removeEventListener("resize", handleResize);
@@ -223,12 +215,7 @@ export default function Header(props) {
                 )}
             </div>
 
-            <div
-                className="header-right-menu"
-                style={{
-                    marginLeft: "410px",
-                }}
-            >
+            <div className="header-right-menu">
                 <Dropdown
                     menu={menuProfile()}
                     placement="bottomRight"

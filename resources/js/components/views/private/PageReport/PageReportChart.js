@@ -5,6 +5,8 @@ import HighchartsReact from "highcharts-react-official";
 import { GET } from "../../../providers/useAxiosQuery";
 import FloatSelect from "../../../providers/FloatSelect";
 import moment from "moment";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilePdf } from "@fortawesome/pro-regular-svg-icons";
 
 export default function PageReportChart() {
     const {
@@ -18,6 +20,7 @@ export default function PageReportChart() {
     const [comlabOptions, setComlabOptions] = useState(null);
     const [selectedOption, setSelectedOption] = useState("All");
     const [borrowDataOption, setBorrowDataOption] = useState(null);
+    const [noOfStickersOption, setNoOfStickersOption] = useState(null);
     const [equipmentStatusDataOption, setEquipmentStatusDataOption] =
         useState(null);
 
@@ -142,6 +145,7 @@ export default function PageReportChart() {
                 credits: { enabled: true, text: "Inventory Management System" },
             };
             setChartOptions(chartOptions);
+
             const comlabData = filteredData.filter(
                 (item) =>
                     item.equipment_status === "To Repair" && item.assign_comlab
@@ -165,7 +169,6 @@ export default function PageReportChart() {
                 return acc;
             }, []);
 
-            // Sort combinedComlabData by no_of_stock in descending order
             combinedComlabData.sort((a, b) => b.no_of_stock - a.no_of_stock);
 
             const comlabCategories = combinedComlabData.map(
@@ -225,10 +228,8 @@ export default function PageReportChart() {
                 equipmentStatusCounts
             ).map(([status, count]) => ({ status, count }));
 
-            // Sort the array by count in descending order
             equipmentStatusArray.sort((a, b) => b.count - a.count);
 
-            // Create sorted categories and data arrays
             const equipmentStatusCategories = equipmentStatusArray.map(
                 (item) => item.status
             );
@@ -242,7 +243,7 @@ export default function PageReportChart() {
                     categories: equipmentStatusCategories,
                     crosshair: true,
                 },
-                yAxis: { title: { text: "Count" } },
+                yAxis: { title: { text: "Equipment Status Count" } },
                 plotOptions: { column: { pointPadding: 0.2, borderWidth: 0 } },
                 series: [
                     {
@@ -269,10 +270,60 @@ export default function PageReportChart() {
             };
 
             setEquipmentStatusDataOption(equipmentStatusDataOption);
+
+            const remarksData = filteredData.reduce((acc, item) => {
+                if (item.remarks === "No. Sticker") {
+                    const key = `${item.assign_comlab} (${item.category})`;
+                    if (acc[key]) {
+                        acc[key] += 1;
+                    } else {
+                        acc[key] = 1;
+                    }
+                }
+                return acc;
+            }, {});
+
+            console.log(remarksData);
+
+            const assignComlabCategories = Object.keys(remarksData);
+            const noOfStickers = Object.values(remarksData);
+
+            const noOfStickersOption = {
+                chart: { type: "column" },
+                title: { text: "No. Sticker per Assign Comlab", align: "left" },
+                xAxis: { categories: assignComlabCategories, crosshair: true },
+                yAxis: { title: { text: "No. Stickers" } },
+                plotOptions: { column: { pointPadding: 0.2, borderWidth: 0 } },
+                series: [
+                    {
+                        colorByPoint: true,
+                        name: "No. Stickers",
+                        groupPadding: 0,
+                        data: noOfStickers,
+                        dataLabels: {
+                            enabled: true,
+                            rotation: -90,
+                            color: "#FFFFFF",
+                            inside: true,
+                            verticalAlign: "top",
+                            format: "{point.y}",
+                            y: 10,
+                            style: {
+                                fontSize: "13px",
+                                fontFamily: "Verdana, sans-serif",
+                            },
+                        },
+                    },
+                ],
+                credits: { enabled: false },
+            };
+
+            setNoOfStickersOption(noOfStickersOption);
         };
 
         const processBorrowData = (data) => {
-            const groupedData = data.reduce((acc, item) => {
+            const filteredData = filterData(data, selectedOption);
+            const groupedData = filteredData.reduce((acc, item) => {
                 if (item.borrow_status !== "pending") {
                     const key = item.category;
                     if (!acc[key]) {
@@ -303,7 +354,7 @@ export default function PageReportChart() {
             const borrowDataOption = {
                 chart: { type: "column" },
                 title: {
-                    text: "Highest And Lowest Usage  Equipment",
+                    text: "Highest And Lowest Usage Equipment",
                     align: "left",
                 },
                 xAxis: {
@@ -354,8 +405,15 @@ export default function PageReportChart() {
             }
         }
 
-        if (dataBorrow && dataBorrow.data) {
-            processBorrowData(dataBorrow.data);
+        if (Array.isArray(dataBorrow)) {
+            processBorrowData(dataBorrow);
+        } else if (dataBorrow && typeof dataBorrow === "object") {
+            const dataArray = dataBorrow.items || dataBorrow.data;
+            if (Array.isArray(dataArray)) {
+                processBorrowData(dataArray);
+            } else {
+                console.error("Unexpected borrow data structure:", dataBorrow);
+            }
         } else {
             console.warn("Borrow data source is null or undefined.");
         }
@@ -371,7 +429,30 @@ export default function PageReportChart() {
 
     return (
         <div>
-            <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    marginTop: "20px",
+                    marginLeft: "-25px",
+                    borderRadius: "100px",
+                }}
+            >
+                <Button
+                    className="btn-main-primary btn-main-invert-outline b-r-none hides"
+                    style={{
+                        marginLeft: "10px",
+                        backgroundColor: "#ff6624",
+                        color: "white",
+                        borderColor: "#ff6624",
+                    }}
+                    type="primary"
+                >
+                    <FontAwesomeIcon icon={faFilePdf} />
+                    Print Pdf...
+                </Button>
+            </div>
+            <Col xs={2} sm={2} md={2} lg={2} xl={2} xxl={2}>
                 <FloatSelect
                     label="Report Data"
                     placeholder="Report Data"
@@ -379,15 +460,16 @@ export default function PageReportChart() {
                     options={getOptions()}
                     onChange={handleSelectChange}
                 />
-                {chartOptions ? (
-                    <HighchartsReact
-                        highcharts={Highcharts}
-                        options={chartOptions}
-                    />
-                ) : (
-                    <Alert message="No data available" type="info" />
-                )}
             </Col>
+            {chartOptions ? (
+                <HighchartsReact
+                    highcharts={Highcharts}
+                    options={chartOptions}
+                />
+            ) : (
+                <Alert message="No data available" type="info" />
+            )}
+
             <div>
                 {comlabOptions ? (
                     <HighchartsReact
@@ -413,28 +495,14 @@ export default function PageReportChart() {
                 ) : (
                     <Alert message="No data available" type="info" />
                 )}
-                <div
-                    style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        marginTop: "20px",
-                        marginLeft: "-25px",
-                        borderRadius: "100px",
-                    }}
-                >
-                    <Button
-                        className="btn-main-primary btn-main-invert-outline b-r-none hides"
-                        style={{
-                            marginLeft: "10px",
-                            backgroundColor: "#ff6624",
-                            color: "white",
-                            borderColor: "#ff6624",
-                        }}
-                        type="primary"
-                    >
-                        Print Pdf...
-                    </Button>
-                </div>
+                {noOfStickersOption ? (
+                    <HighchartsReact
+                        highcharts={Highcharts}
+                        options={noOfStickersOption}
+                    />
+                ) : (
+                    <Alert message="No data available" type="info" />
+                )}
             </div>
         </div>
     );

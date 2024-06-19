@@ -19,6 +19,8 @@ import {
     faChartBar,
     faPencil,
     faTrash,
+    faPlus,
+    faFileExcel,
     faUserGear,
     faUserPlus,
     faWrench,
@@ -26,18 +28,12 @@ import {
 // import notificationErrors from "../../../providers/notificationErrors";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { faFileExcel, faPlus } from "@fortawesome/pro-light-svg-icons";
 import ModalInventory from "./ModalInventory";
-import ModalImportExcel from "./ModalImportExcel";
 import { useForm } from "antd/es/form/Form";
 import { POST } from "../../../../providers/useAxiosQuery";
 import notificationErrors from "../../../../providers/notificationErrors";
-import { faChartSimple } from "@fortawesome/pro-duotone-svg-icons";
 
-// import dayjs from "dayjs";
-// import { description } from "../../../providers/companyInfo";
-
-export default function TableCategoryAdmin(props) {
+export default function TableInventory(props) {
     const { tableFilter, setTableFilter, sortInfo, dataSource } = props;
     const navigate = useNavigate();
     const [form] = useForm();
@@ -61,6 +57,13 @@ export default function TableCategoryAdmin(props) {
     const toggleImportModal = () => {
         setIsImportModalOpen(!isImportModalOpen);
     };
+    const filteredDataSource =
+        dataSource &&
+        dataSource.data &&
+        dataSource.data.data &&
+        dataSource.data.data.filter(
+            (record) => record.equipment_status !== "To Repair"
+        );
 
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const onSelectChange = (selectedRowKeys) => {
@@ -85,11 +88,6 @@ export default function TableCategoryAdmin(props) {
         `api/equipement_delete`,
         "inventory_admin"
     );
-    const filteredDataSource =
-        dataSource &&
-        dataSource.data.data.filter(
-            (record) => record.equipment_status === "To Repair"
-        );
     const handleDeleteEquipment = (record) => {
         mutateDeleteEquipment(record, {
             onSuccess: (res) => {
@@ -113,7 +111,7 @@ export default function TableCategoryAdmin(props) {
 
     return (
         <>
-            {/* <Col xs={24} sm={24} md={24}>
+            <Col xs={24} sm={24} md={24}>
                 <Button
                     className="btn-main-primary btn-main-invert-outline b-r-none hides"
                     icon={<FontAwesomeIcon icon={faPlus} />}
@@ -145,7 +143,7 @@ export default function TableCategoryAdmin(props) {
                 >
                     Import Equipment{" "}
                 </Button>
-            </Col> */}
+            </Col>
             <Row
                 gutter={[12, 12]}
                 id="tbl_wrapper"
@@ -261,27 +259,12 @@ export default function TableCategoryAdmin(props) {
                             key="equipment_status"
                             dataIndex={"equipment_status"}
                             sorter={true}
-                            filters={[
-                                {
-                                    text: "To Repair",
-                                    value: "To Repair",
-                                },
-                            ]}
-                            onFilter={(value, record) =>
-                                record.equipment_status.indexOf(value) === 0
-                            }
                         />
                         <Table.Column
                             title="No of Stock"
                             key="no_of_stock"
                             sorter
                             dataIndex={"no_of_stock"}
-                        />
-                        <Table.Column
-                            title="Restocking Point"
-                            key="restocking_point"
-                            sorter
-                            dataIndex={"restocking_point"}
                         />
 
                         <Table.Column
@@ -318,11 +301,11 @@ export default function TableCategoryAdmin(props) {
                 toggleModalInventory={toggleModalInventory}
                 setToggleModalInventory={setToggleModalInventory}
             />
-            <ModalImportExcel
-                isModalOpen={isImportModalOpen}
-                handleOk={toggleImportModal}
-                handleCancel={toggleImportModal}
-            />
+            {/* <ModalImportExcel
+              isModalOpen={isImportModalOpen}
+              handleOk={toggleImportModal}
+              handleCancel={toggleImportModal}
+          /> */}
         </>
     );
 }
