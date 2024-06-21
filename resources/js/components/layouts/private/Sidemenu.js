@@ -25,7 +25,9 @@ export default function Sidemenu(props) {
     const [menuItems, setMenuItems] = useState([]);
 
     useEffect(() => {
-        setMenuItems(adminSideMenu);
+        let menu = adminSideMenu;
+        if (role !== "Super Admin") menu = staffSideMenu;
+        setMenuItems(menu);
 
         return () => {};
     }, []);

@@ -19,4 +19,5 @@ class BorrowStock extends Model
     {
         return $this->hasMany(InventoryAdmin::class, "inventory_admin_id");
     }
+    
 }

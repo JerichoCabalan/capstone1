@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BorrowStock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class BorrowStockController extends Controller
 {
@@ -22,7 +23,7 @@ class BorrowStockController extends Controller
         $category = "SELECT category FROM inventory_admins WHERE inventory_admins.id = borrow_stocks.inventory_admin_id";
         $assign_comlab = "SELECT assign_comlab FROM inventory_admins WHERE inventory_admins.id = borrow_stocks.inventory_admin_id";
         $no_of_stock = "SELECT no_of_stock FROM inventory_admins WHERE inventory_admins.id = borrow_stocks.inventory_admin_id";
-        $role = "SELECT  user_role_id  FROM users WHERE users.id = borrow_stocks.user_id";
+        $role = "SELECT user_roles.role FROM user_roles WHERE user_roles.id = borrow_stocks.user_id";
         $data = BorrowStock::select([
             "*",
             DB::raw("($unit_no) `unit_no`"),
@@ -139,4 +140,40 @@ class BorrowStockController extends Controller
 
         return response()->json($ret, 200);
     }
+
+   
+  
+    public function borrow_equipment_stock(Request $request)
+    {
+        $quantity = $request->input('quantity');
+        $inventory_admin_id = $request->input('inventory_admin_id');
+        $inventoryAdmin = DB::table('inventory_admins')->where('id', $inventory_admin_id)->first();
+        if ($inventoryAdmin && $inventoryAdmin->no_of_stock >= $quantity) {
+            $newStock = $inventoryAdmin->no_of_stock - $quantity;
+            
+    
+            DB::table('inventory_admins')
+                ->where('id', $inventory_admin_id)
+                ->update(['no_of_stock' => $newStock]);
+    
+            BorrowStock::create([
+                 'user_id' => auth()->id(),
+                'inventory_admin_id' => $inventory_admin_id,
+                'borrow_status' => 'pending', 
+            ]);
+    
+            return response()->json([
+                'success' => true,
+                'message' => 'Equipment borrowed successfully',
+                'newStock' => $newStock,
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Not enough stock available',
+            ], 400);
+        }
+    }
+ 
+   
 }

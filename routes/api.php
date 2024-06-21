@@ -68,6 +68,7 @@ Route::middleware('auth:api')->group(function () {
     Route::post('equipement_delete', [App\Http\Controllers\InventoryAdminController::class, "equipement_delete"]);
     Route::apiResource('borrow_stock', App\Http\Controllers\BorrowStockController::class);
     Route::post('borrow_stock_status', [App\Http\Controllers\BorrowStockController::class, "borrow_stock_status"]);
+    Route::post('borrow_equipment_stock', [App\Http\Controllers\BorrowStockController::class, "borrow_equipment_stock"]);
     Route::post('model', [App\Http\Controllers\BorrowStockController::class, "model"]);
     Route::apiResource('user_role_permission', App\Http\Controllers\UserRolePermissionController::class);
 

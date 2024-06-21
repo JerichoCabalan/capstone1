@@ -26,20 +26,12 @@ import PageUser from "../views/private/PageUser/PageUser";
 import PageUserRolePermission from "../views/private/PagePermission/PageUserRolePermission";
 import PageDashBoardStaff from "../views/private/PageDashboardStaff/PageDashboardStaff";
 import PageReportChat from "../views/private/PageReport/PageReportChart";
+import EquipmentRoute from "./EquipmentRoute";
+import PageInventoryBorrowStaff from "../views/private/PageStaff/PageInventoryBorrowStaff";
 
 export default function RouteList() {
     return (
         <Routes>
-            <Route
-                path="/"
-                element={
-                    <PublicRoute
-                        title="LOGIN"
-                        pageId="PageLogin"
-                        component={PageInventory}
-                    />
-                }
-            />
             <Route
                 path="/login"
                 element={
@@ -50,6 +42,7 @@ export default function RouteList() {
                     />
                 }
             />
+
             <Route
                 path="/signup"
                 element={
@@ -57,6 +50,16 @@ export default function RouteList() {
                         title="LOGIN"
                         pageId="PageLogin"
                         component={PageRegister}
+                    />
+                }
+            />
+            <Route
+                path="/"
+                element={
+                    <EquipmentRoute
+                        title="LOGIN"
+                        pageId="PageLogin"
+                        component={PageInventory}
                     />
                 }
             />
@@ -79,6 +82,28 @@ export default function RouteList() {
                             },
                         ]}
                         component={PageEditProfile}
+                    />
+                }
+            />
+            <Route
+                path="/test/testing"
+                element={
+                    <PrivateRoute
+                        moduleName="Edit Profile"
+                        title="User"
+                        subtitle="VIEW / EDIT"
+                        pageId="PageUserProfile"
+                        pageHeaderIcon={faUsers}
+                        breadcrumb={[
+                            {
+                                name: "Dashboard",
+                                link: "/test/testing",
+                            },
+                            {
+                                name: "Edit Profile",
+                            },
+                        ]}
+                        component={PageInventory}
                     />
                 }
             />
@@ -336,6 +361,34 @@ export default function RouteList() {
                             },
                         ]}
                         component={PageDashBoardStaff}
+                    />
+                }
+            />
+
+            <Route
+                path="/inventorys"
+                element={
+                    <PrivateRoute
+                        // moduleCode="M-02"
+                        moduleName="Equipment Report Chart"
+                        title="Equipment Report Chart"
+                        subtitle="Equipment Report Chart"
+                        pageId="PageUserEdit"
+                        pageHeaderIcon={faUsers}
+                        breadcrumb={[
+                            {
+                                name: "Dashboard",
+                                link: "/staffdashboard",
+                            },
+                            {
+                                name: "Users",
+                                link: "/inventorys",
+                            },
+                            {
+                                name: "Equipment Report Chart",
+                            },
+                        ]}
+                        component={PageInventoryBorrowStaff}
                     />
                 }
             />

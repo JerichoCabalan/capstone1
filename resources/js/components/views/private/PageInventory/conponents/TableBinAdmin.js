@@ -21,7 +21,7 @@ import ModalInventory from "./ModalInventory";
 // import { description } from "../../../providers/companyInfo";
 
 export default function TableBinAdmin(props) {
-    const { tableFilter, setTableFilter, sortInfo } = props;
+    const { tableFilter, setTableFilter, sortInfo, dataSource } = props;
     const navigate = useNavigate();
     const onChangeTable = (sorter) => {
         setTableFilter((ps) => ({
@@ -33,32 +33,6 @@ export default function TableBinAdmin(props) {
         }));
     };
 
-    const dataSource = [
-        {
-            key: "1",
-            unit_no: "1",
-            description: "Monitor",
-            assigned_comlab: "Assigned to Lab 1",
-            status: "Available",
-            quantity_of_stock: "10",
-        },
-        {
-            key: "2",
-            unit_no: "2",
-            description: "Keybord",
-            assigned_comlab: "Assigned to Lab 1",
-            status: "Available",
-            quantity_of_stock: "10",
-        },
-        {
-            key: "3",
-            unit_no: "3",
-            description: "Monitor",
-            assigned_comlab: "Assigned to Lab 1",
-            status: "Available",
-            quantity_of_stock: "10",
-        },
-    ];
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const onSelectChange = (selectedRowKeys) => {
         setSelectedRowKeys(selectedRowKeys);
@@ -67,45 +41,9 @@ export default function TableBinAdmin(props) {
         selectedRowKeys,
         onChange: onSelectChange,
     };
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
-    const handleOk = () => {
-        setIsModalOpen(false);
-    };
-    const handleCancel = () => {
-        setIsModalOpen(false);
-    };
-    const showModal = () => {
-        setIsModalOpen(true);
-    };
 
     return (
         <>
-            <Col xs={24} sm={24} md={24}>
-                <Button
-                    className="btn-main-primary btn-main-invert-outline b-r-none hides"
-                    icon={<FontAwesomeIcon icon={faTrashUndo} />}
-                    size="large"
-                    name="btn_add"
-                    open={isModalOpen}
-                    // onClick={showModal}
-                    // onClick={handleRestore}
-                >
-                    Restore Equipment{" "}
-                </Button>
-
-                <Button
-                    className="btn-main-primary btn-main-invert-outline b-r-none hides"
-                    style={{
-                        marginLeft: "10px",
-                    }}
-                    icon={<FontAwesomeIcon icon={faTrash} />}
-                    size="large"
-                    name="btn_add"
-                >
-                    Delete Equipment
-                </Button>
-            </Col>
             <Row
                 gutter={[12, 12]}
                 id="tbl_wrapper"
@@ -127,61 +65,48 @@ export default function TableBinAdmin(props) {
                 </Col>
                 <Col xs={24} sm={24} md={24}>
                     <Table
-                        // className="ant-table-default ant-table-striped"
-                        // dataSource={dataSource && dataSource.data.data}
-                        // rowKey={(record) => record.id}
+                        className="ant-table-default ant-table-striped"
+                        dataSource={dataSource && dataSource.data.data}
+                        rowKey={(record) => record.id}
                         pagination={false}
                         bordered={false}
                         onChange={onChangeTable}
                         scroll={{ x: "max-content" }}
-                        dataSource={dataSource}
                         rowSelection={rowSelection}
                     >
                         <Table.Column
                             title="Unit No"
-                            key="unit no"
+                            key="unit_no"
                             dataIndex={"unit_no"}
                             sorter
                         />
-                        <Table.Column
-                            title="Description"
-                            key="description"
-                            dataIndex={"description"}
-                            sorter={true}
-                        />
+
                         <Table.Column
                             title="Category"
-                            key="description"
+                            key="category"
                             dataIndex={"category"}
                             sorter={true}
                         />
 
                         <Table.Column
                             title="Equipment Status"
-                            key="email"
-                            dataIndex={"status"}
+                            key="borrow_status"
+                            dataIndex={"borrow_status"}
                             sorter={true}
                         />
                         <Table.Column
                             title="Moved on"
-                            key="email"
-                            dataIndex={"assigned_comlab"}
+                            key="role"
+                            dataIndex={"role"}
                             sorter={true}
                         />
                         <Table.Column
                             title="Moved by"
-                            key="email"
-                            dataIndex={"assigned_comlab"}
+                            key="role"
+                            dataIndex={"role"}
                             sorter={true}
                         />
                         {/* <Table.Column title="Staff" key="" /> */}
-
-                        <Table.Column
-                            title="Quantity of Stock"
-                            key="fullname"
-                            sorter
-                            dataIndex={"quantity_of_stock"}
-                        />
 
                         {/* <Table.Column title="Status" key="" /> */}
                     </Table>

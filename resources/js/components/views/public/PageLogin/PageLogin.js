@@ -50,6 +50,7 @@ export default function PageLogin() {
 
                         setTimeout(() => {
                             window.location.reload();
+                            navigate("/dashboard");
                         }, 500);
                     } else {
                         setErrorMessageLogin({

@@ -1,4 +1,4 @@
-import { Row, Col, Table, Card, Popconfirm } from "antd";
+import { Row, Col, Table, Card, Popconfirm, Button, notification } from "antd";
 import {
     TableGlobalSearch,
     TablePageSize,
@@ -16,9 +16,12 @@ import notificationErrors from "../../../providers/notificationErrors";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import { description } from "../../../providers/companyInfo";
+import { assign } from "lodash";
+import { POST } from "../../../providers/useAxiosQuery";
 
 export default function TableInventory(props) {
     const { tableFilter, setTableFilter, sortInfo, dataSource } = props;
+
     const navigate = useNavigate();
     const onChangeTable = (sorter) => {
         setTableFilter((ps) => ({
@@ -28,6 +31,35 @@ export default function TableInventory(props) {
             page: 1,
             page_size: "50",
         }));
+    };
+    const { mutate: mutateBorrowEquipment } = POST(
+        `api/borrow_equipment_stock`,
+        "borrow_equipment_stock"
+    );
+    const handleBorrowEquipment = (record) => {
+        const requestBody = {
+            inventory_admin_id: record.id,
+            user_id: record.id,
+        };
+        console.log("requestBody", requestBody);
+        mutateBorrowEquipment(requestBody, {
+            onSuccess: (res) => {
+                if (res.success) {
+                    notification.success({
+                        message: "Equipment borrowed successfully",
+                        description: res.message,
+                    });
+                } else {
+                    notification.error({
+                        message: "Failed to borrow equipment",
+                        description: res.message,
+                    });
+                }
+            },
+            onError: (err) => {
+                notificationErrors(err);
+            },
+        });
     };
 
     return (
@@ -54,6 +86,7 @@ export default function TableInventory(props) {
                 <Table
                     className="ant-table-default ant-table-striped"
                     dataSource={dataSource && dataSource.data.data}
+                    // dataSource={dataSource}
                     rowKey={(record) => record.id}
                     pagination={false}
                     bordered={false}
@@ -62,7 +95,7 @@ export default function TableInventory(props) {
                 >
                     <Table.Column
                         title="Unit No"
-                        key="unit no"
+                        key="unit_no"
                         dataIndex={"unit_no"}
                         sorter
                     />
@@ -75,8 +108,8 @@ export default function TableInventory(props) {
 
                     <Table.Column
                         title="Assigned Comlab"
-                        key="assigned_comlab"
-                        dataIndex={"assigned_comlab"}
+                        key="assign_comlab"
+                        dataIndex={"assign_comlab"}
                         sorter={true}
                     />
                     <Table.Column
@@ -93,19 +126,21 @@ export default function TableInventory(props) {
                     />
                     <Table.Column
                         title="Action"
-                        key="user_id"
                         sorter
                         render={(text, record) => (
                             <Popconfirm
-                                // title={`Are you sure you want to borrow this ${record.description}?`}
                                 title="Are you sure you want to Borrow?"
-                                onConfirm={() => {
-                                    console.log("Icon clicked!", record);
-                                    navigate("/login");
-                                }}
+                                onConfirm={() => handleBorrowEquipment(record)}
                                 okText="Yes"
                                 cancelText="No"
                             >
+                                <Button
+                                    type="link"
+                                    size="medium"
+                                    title="Borrow"
+                                >
+                                    Borrow
+                                </Button>
                                 <FontAwesomeIcon icon={faUserPlus} />
                             </Popconfirm>
                         )}

@@ -452,10 +452,7 @@ export default function ModalInventory(props) {
                                                 value: "Working",
                                                 label: "Working",
                                             },
-                                            {
-                                                value: "Damaged",
-                                                label: "Damaged",
-                                            },
+
                                             {
                                                 value: "To Repair",
                                                 label: "To Repair",
@@ -473,8 +470,16 @@ export default function ModalInventory(props) {
                                                 label: "Unreturned",
                                             },
                                             {
-                                                value: "Lost",
-                                                label: "Lost",
+                                                value: "Disposal",
+                                                label: "Disposal",
+                                            },
+                                            {
+                                                value: "For Replacement",
+                                                label: "For Replacement",
+                                            },
+                                            {
+                                                value: "Disposed",
+                                                label: "Disposed",
                                             },
                                             ...items.map((item) => ({
                                                 value: item,

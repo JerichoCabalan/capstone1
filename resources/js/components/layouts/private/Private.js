@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGifts, faHome, faRefresh } from "@fortawesome/pro-regular-svg-icons";
 import { GET } from "../../providers/useAxiosQuery";
 // import checkUserPermission from "../../providers/checkUserPermission";
+import { role } from "../../providers/companyInfo";
 
 export default function Private(props) {
     const {
@@ -124,6 +125,7 @@ export default function Private(props) {
                     sideMenuCollapse={sideMenuCollapse}
                     setSideMenuCollapse={setSideMenuCollapse}
                     width={width}
+                    role={role()}
                     // dataPermissions={
                     //     dataPermissions && dataPermissions.data
                     //         ? dataPermissions.data

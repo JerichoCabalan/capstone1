@@ -54,8 +54,8 @@ export default function PageBinAdmin() {
     }, [location]);
 
     const { data: dataSource, refetch: refetchSource } = GET(
-        `api/users?${new URLSearchParams(tableFilter)}`,
-        "students_active_list"
+        `api/borrow_stock?${new URLSearchParams(tableFilter)}`,
+        "borrow_stock"
     );
 
     useEffect(() => {
@@ -64,16 +64,7 @@ export default function PageBinAdmin() {
         return () => {};
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [tableFilter]);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const showModal = () => {
-        setIsModalOpen(true);
-    };
-    const handleOk = () => {
-        setIsModalOpen(false);
-    };
-    const handleCancel = () => {
-        setIsModalOpen(false);
-    };
+
     return (
         <>
             <Col xs={24} sm={24} md={24}></Col>

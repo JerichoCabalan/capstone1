@@ -38,12 +38,7 @@ export const adminSideMenu = [
         title: "Home",
         path: "/dashboard",
         icon: <FontAwesomeIcon icon={faHome} />,
-        roles: [
-            "Super Admin",
-            "Lab Staff",
-            "Comlab Adviser",
-            "Procurement Officer",
-        ],
+
         moduleCode: "M-01",
     },
     {
@@ -114,6 +109,18 @@ export const adminSideMenu = [
             },
         ],
     },
+    {
+        title: "Test Borrows",
+        path: "/test",
+        icon: <FontAwesomeIcon icon={faShieldKeyhole} />,
+        children: [
+            {
+                title: "Test",
+                path: "/test/testing",
+                moduleCode: "M-05",
+            },
+        ],
+    },
 ];
 
 export const staffSideMenu = [
@@ -125,7 +132,7 @@ export const staffSideMenu = [
     },
     {
         title: "Inventory",
-        path: "/inventory",
+        path: "/inventorys",
         icon: <FontAwesomeIcon icon={faUsers} />,
         moduleCode: "S-02",
     },
@@ -135,5 +142,4 @@ export const staffSideMenu = [
         icon: <FontAwesomeIcon icon={faTasks} />,
         moduleCode: "S-03",
     },
-    // Add more menu items as needed
 ];

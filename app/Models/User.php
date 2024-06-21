@@ -23,6 +23,7 @@ class User extends Authenticatable
         'username',
         'password',
         'user_role_id', 
+        'borrow_stock_id',
         'status',
         'user_status',
 
@@ -71,5 +72,9 @@ class User extends Authenticatable
     public function inventory_admin()
     {
         return $this->belongsTo(InventoryAdmin::class, "inventory_admin_id");
+    }
+    public function borrowStocks()
+    {
+        return $this->hasMany(BorrowStock::class, 'user_id');
     }
 }
