@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { GET } from "../../../providers/useAxiosQuery";
 import { Col, Row } from "antd";
 import TableInventoryBorrowStaff from "./component/TableStaffInventory";
-import { role } from "../../../providers/companyInfo";
 
 export default function PageInventoryBorrowStaff() {
     const navigate = useNavigate();
@@ -13,6 +12,8 @@ export default function PageInventoryBorrowStaff() {
         order: "descend",
         columnKey: "created_at",
     });
+    const user_id = null;
+    console.log("user_id", user_id);
 
     const [tableFilter, setTableFilter] = useState({
         page: 1,
@@ -20,8 +21,6 @@ export default function PageInventoryBorrowStaff() {
         search: "",
         sort_field: "created_at",
         sort_order: "desc",
-
-        // Update this to set your user_id
         status:
             location.pathname === "/students/current"
                 ? "Active"
@@ -55,6 +54,7 @@ export default function PageInventoryBorrowStaff() {
                         tableFilter={tableFilter}
                         setTableFilter={setTableFilter}
                         sortInfo={sortInfo}
+                        user_id={user_id}
                     />
                 </Col>
             </Row>

@@ -42,6 +42,12 @@ export default function TableBinAdmin(props) {
         onChange: onSelectChange,
     };
 
+    const filteredDataSource =
+        dataSource &&
+        dataSource.data.data.filter(
+            (record) => record.equipment_status === "Disposed"
+        );
+
     return (
         <>
             <Row
@@ -66,7 +72,7 @@ export default function TableBinAdmin(props) {
                 <Col xs={24} sm={24} md={24}>
                     <Table
                         className="ant-table-default ant-table-striped"
-                        dataSource={dataSource && dataSource.data.data}
+                        dataSource={filteredDataSource}
                         rowKey={(record) => record.id}
                         pagination={false}
                         bordered={false}
@@ -76,11 +82,16 @@ export default function TableBinAdmin(props) {
                     >
                         <Table.Column
                             title="Unit No"
-                            key="unit_no"
+                            key="unit no"
                             dataIndex={"unit_no"}
                             sorter
                         />
-
+                        <Table.Column
+                            title="Description"
+                            key="description"
+                            dataIndex={"description"}
+                            sorter={true}
+                        />
                         <Table.Column
                             title="Category"
                             key="category"
@@ -90,25 +101,30 @@ export default function TableBinAdmin(props) {
 
                         <Table.Column
                             title="Equipment Status"
-                            key="borrow_status"
-                            dataIndex={"borrow_status"}
+                            key="equipment_status"
+                            dataIndex={"equipment_status"}
                             sorter={true}
                         />
                         <Table.Column
-                            title="Moved on"
-                            key="role"
-                            dataIndex={"role"}
-                            sorter={true}
+                            title="No of Stock"
+                            key="no_of_stock"
+                            sorter
+                            dataIndex={"no_of_stock"}
                         />
-                        <Table.Column
-                            title="Moved by"
-                            key="role"
-                            dataIndex={"role"}
-                            sorter={true}
-                        />
-                        {/* <Table.Column title="Staff" key="" /> */}
 
-                        {/* <Table.Column title="Status" key="" /> */}
+                        <Table.Column
+                            title="Assigned Comlab"
+                            key="assign_comlab"
+                            dataIndex={"assign_comlab"}
+                            sorter={true}
+                        />
+
+                        <Table.Column
+                            title="Custodian"
+                            key="person_liable"
+                            dataIndex={"person_liable"}
+                            sorter={true}
+                        />
                     </Table>
                 </Col>
                 <Col xs={24} sm={24} md={24}>

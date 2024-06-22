@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             RefStatusSeeder::class,
             RefCivilStatusSeeder::class,
             RefNationalitySeeder::class,
-            RefRegionSeeder::class,
+            // RefRegionSeeder::class,
             RefReligionSeeder::class,
             RefReligionSeeder::class,
             SchoolLevelSeeder::class,

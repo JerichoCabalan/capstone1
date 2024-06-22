@@ -16,11 +16,11 @@ class IventoryAdminSeeder extends Seeder
     {
         $DATA = [
             [
-                "unit_no"=>    "1",
+                "unit_no" =>    "1",
                 "description" =>   "CIVO (Black and Red",
-                "assign_comlab" =>   "Working in Lab",
+                "assign_comlab" =>   "CL 3",
                 "category" =>   "CL 10",
-               "date_acquired" => date('Y-m-d'),
+                "date_acquired" => date('Y-m-d'),
                 "amount" =>   "1000",
                 "equipment_status" =>   "Working in Lab",
                 "person_liable" =>   "Dr. Vicente A. Pitogo",
@@ -34,11 +34,11 @@ class IventoryAdminSeeder extends Seeder
                 "remarks" =>   "",
             ],
             [
-                "unit_no"=>    "1",
+                "unit_no" =>    "1",
                 "description" =>   "Acer",
-                "assign_comlab" =>   "CL1",
+                "assign_comlab" =>   "CL 1",
                 "category" =>   "Monitor",
-               "date_acquired" => date('Y-m-d'),
+                "date_acquired" => date('Y-m-d'),
                 "amount" =>   "1000",
                 "equipment_status" =>   "Working and Available",
                 "person_liable" =>   "Dr. Vicente A. Pitogo",
@@ -52,11 +52,11 @@ class IventoryAdminSeeder extends Seeder
                 "remarks" =>   "",
             ],
             [
-                "unit_no"=>    "1",
+                "unit_no" =>    "1",
                 "description" =>   "Acer",
-                "assign_comlab" =>   "CL1",
+                "assign_comlab" =>   "CL 10",
                 "category" =>   "Monitor",
-               "date_acquired" => date('Y-m-d'),
+                "date_acquired" => date('Y-m-d'),
                 "amount" =>   "1000",
                 "equipment_status" =>   "Working and Available",
                 "person_liable" =>   "Dr. Vicente A. Pitogo",
@@ -71,8 +71,8 @@ class IventoryAdminSeeder extends Seeder
             ],
             [
                 "unit_no" => '123',
-                "description" => 'Lorem ipsum dolor sit amet',
-                "assign_comlab" => 'John Doe',
+                "description" => 'Test',
+                "assign_comlab" => 'CL 2',
                 "category" => 'Category A',
                 "date_acquired" => '2024-06-06',
                 "amount" => 1000.50,
@@ -89,8 +89,8 @@ class IventoryAdminSeeder extends Seeder
             ],
             [
                 "unit_no" => '456',
-                "description" => 'Consectetur adipiscing elit',
-                "assign_comlab" => 'Alice Smith',
+                "description" => 'test',
+                "assign_comlab" => 'CL 5',
                 "category" => 'Category B',
                 "date_acquired" => '2023-05-15',
                 "amount" => 750.25,
@@ -103,12 +103,12 @@ class IventoryAdminSeeder extends Seeder
                 "serial_no" => 'serial-002',
                 "no_of_stock" => 5,
                 "restocking_point" => 2,
-                "remarks" => 'Consectetur adipiscing elit',
+                "remarks" => 'test',
             ],
             [
                 "unit_no" => '101112',
-                "description" => 'Ut labore et dolore magna aliqua',
-                "assign_comlab" => 'Grace Wilson',
+                "description" => 'testing',
+                "assign_comlab" => 'CL 4',
                 "category" => 'Category D',
                 "date_acquired" => '2021-12-12',
                 "amount" => 1500.00,
@@ -121,12 +121,12 @@ class IventoryAdminSeeder extends Seeder
                 "serial_no" => 'serial-004',
                 "no_of_stock" => 12,
                 "restocking_point" => 4,
-                "remarks" => 'Ut labore et dolore magna aliqua',
+                "remarks" => 'testing',
             ],
 
-            ];
+        ];
 
-            InventoryAdmin::truncate(); 
-            InventoryAdmin::insert($DATA);
+        InventoryAdmin::truncate();
+        InventoryAdmin::insert($DATA);
     }
 }

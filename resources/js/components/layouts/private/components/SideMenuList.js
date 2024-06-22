@@ -79,7 +79,7 @@ export const adminSideMenu = [
                 moduleCode: "M-05",
             },
             {
-                title: "Bin",
+                title: "Disposal Stock",
                 path: "/inventory/bin",
                 moduleCode: "M-05",
             },
@@ -126,7 +126,7 @@ export const adminSideMenu = [
 export const staffSideMenu = [
     {
         title: "Home",
-        path: "/staffdashboard",
+        path: "/dashboardss",
         icon: <FontAwesomeIcon icon={faHome} />,
         moduleCode: "S-01",
     },
@@ -138,7 +138,7 @@ export const staffSideMenu = [
     },
     {
         title: "Reports",
-        path: "/report",
+        path: "/reports",
         icon: <FontAwesomeIcon icon={faTasks} />,
         moduleCode: "S-03",
     },

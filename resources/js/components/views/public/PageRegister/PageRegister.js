@@ -34,25 +34,8 @@ export default function PageRegister() {
         type: "",
         message: "",
     });
-    const { mutate: mutateRegister, isLoading: isLoadingRegister } = POST(
+    const { mutate: mutateLogin, isLoading: isLoadingRegister } = POST(
         "api/register",
-        "login"
-    );
-
-    const onFinish = (values) => {
-        mutateRegister(values, {
-            onSuccess: (res) => {
-                console.log("res", res);
-                message.success("Registration successful! Please login.");
-                navigate("/staffdashboard");
-            },
-            onError: (err) => {
-                message.error("Registration failed. Please try again.");
-            },
-        });
-    };
-    const { mutate: mutateLogin, isLoading: isLoadingButtonLogin } = POST(
-        "api/login",
         "login"
     );
 
@@ -67,7 +50,7 @@ export default function PageRegister() {
                     localStorage.token = res.token;
 
                     setTimeout(() => {
-                        window.location.reload();
+                        navigate("/staffdashboard"); // navigate to dashboard
                     }, 500);
                 } else {
                     setErrorMessageLogin({
@@ -138,7 +121,7 @@ export default function PageRegister() {
                         <Form
                             layout="vertical"
                             className="login-form"
-                            onFinish={onFinish}
+                            onFinish={onFinishLogin}
                             autoComplete="off"
                             form={form}
                         >
@@ -279,7 +262,6 @@ export default function PageRegister() {
                             <Button
                                 type="primary"
                                 htmlType="submit"
-                                loading={isLoadingButtonLogin}
                                 className="mt-10 btn-log-in page-login"
                                 block
                                 size="middle"

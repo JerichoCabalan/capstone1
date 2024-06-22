@@ -31,7 +31,7 @@ class CreateInventoryAdminsTable extends Migration
             $table->string('serial_no')->nullable();
             $table->string('no_of_stock')->nullable();
             $table->string('restocking_point')->nullable();
-          
+
 
             $table->timestamps();
             $table->softDeletes();

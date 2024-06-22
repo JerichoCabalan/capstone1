@@ -54,10 +54,9 @@ export default function PageBinAdmin() {
     }, [location]);
 
     const { data: dataSource, refetch: refetchSource } = GET(
-        `api/borrow_stock?${new URLSearchParams(tableFilter)}`,
-        "borrow_stock"
+        `api/inventory_admin?${new URLSearchParams(tableFilter)}`,
+        "inventory_admin"
     );
-
     useEffect(() => {
         refetchSource();
 

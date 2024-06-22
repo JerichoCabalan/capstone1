@@ -28,6 +28,8 @@ import PageDashBoardStaff from "../views/private/PageDashboardStaff/PageDashboar
 import PageReportChat from "../views/private/PageReport/PageReportChart";
 import EquipmentRoute from "./EquipmentRoute";
 import PageInventoryBorrowStaff from "../views/private/PageStaff/PageInventoryBorrowStaff";
+import TableInventoryBorrowStaff from "../views/private/PageStaff/component/TableStaffInventory";
+import TableBorrowStaff from "../views/private/PageStaff/component/TableBorrowStaff";
 
 export default function RouteList() {
     return (
@@ -341,18 +343,32 @@ export default function RouteList() {
                     />
                 }
             />
+            <Route
+                path="/reports"
+                element={
+                    <PrivateRoute
+                        // moduleCode="M-02"
+                        moduleName="Equipment Report Chart"
+                        title="Equipment Report Chart"
+                        subtitle="Equipment Report Chart"
+                        pageId="PageUserEdit"
+                        pageHeaderIcon={faUsers}
+                        component={PageReportChat}
+                    />
+                }
+            />
 
             {/* end permission */}
 
             {/* STAFF DASHBOARD */}
             <Route
-                path="/staffdashboard"
+                path="/dashboardss"
                 element={
                     <PrivateRoute
                         // moduleCode="M-01"
                         moduleName="Home"
                         title="Home"
-                        subtitle="ADMIN"
+                        subtitle="Employee"
                         pageId="PageHome"
                         pageHeaderIcon={faHome}
                         breadcrumb={[
@@ -370,9 +386,9 @@ export default function RouteList() {
                 element={
                     <PrivateRoute
                         // moduleCode="M-02"
-                        moduleName="Equipment Report Chart"
-                        title="Equipment Report Chart"
-                        subtitle="Equipment Report Chart"
+                        moduleName="Inventory"
+                        title="Inventory"
+                        subtitle="Inventory"
                         pageId="PageUserEdit"
                         pageHeaderIcon={faUsers}
                         breadcrumb={[
@@ -385,10 +401,10 @@ export default function RouteList() {
                                 link: "/inventorys",
                             },
                             {
-                                name: "Equipment Report Chart",
+                                name: "Inventory",
                             },
                         ]}
-                        component={PageInventoryBorrowStaff}
+                        component={TableBorrowStaff}
                     />
                 }
             />

@@ -57,12 +57,15 @@ export default function TableInventory(props) {
     const toggleImportModal = () => {
         setIsImportModalOpen(!isImportModalOpen);
     };
+
     const filteredDataSource =
         dataSource &&
         dataSource.data &&
         dataSource.data.data &&
         dataSource.data.data.filter(
-            (record) => record.equipment_status !== "To Repair"
+            (record) =>
+                record.equipment_status !== "To Repair" &&
+                record.equipment_status !== "Disposed"
         );
 
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);

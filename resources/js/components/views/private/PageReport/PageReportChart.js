@@ -23,6 +23,7 @@ export default function PageReportChart() {
     const [noOfStickersOption, setNoOfStickersOption] = useState(null);
     const [equipmentStatusDataOption, setEquipmentStatusDataOption] =
         useState(null);
+    const [desposalOptions, setDesposalOptions] = useState(null);
 
     const handleSelectChange = (value) => {
         setSelectedOption(value);
@@ -108,7 +109,6 @@ export default function PageReportChart() {
             combinedData = combinedData.sort(
                 (a, b) => b.no_of_stock - a.no_of_stock
             );
-
             const categories = combinedData.map((item) => item.category);
             const equipmentStock = combinedData.map((item) => item.no_of_stock);
             const criticalStock = combinedData.map(
@@ -319,6 +319,58 @@ export default function PageReportChart() {
             };
 
             setNoOfStickersOption(noOfStickersOption);
+
+            const remarksDatas = filteredData.reduce((acc, item) => {
+                if (item.equipment_status === "Disposed") {
+                    const key = `${item.assign_comlab} (${item.category})`;
+                    if (acc[key]) {
+                        acc[key] += 1;
+                    } else {
+                        acc[key] = 1;
+                    }
+                }
+                return acc;
+            }, {});
+
+            console.log(remarksData);
+
+            const assignComlabCategoriess = Object.keys(remarksDatas);
+            const noOfStickerss = Object.values(remarksDatas);
+
+            const desposalOptions = {
+                chart: { type: "column" },
+                title: {
+                    text: "Equipment Disposed Status Count",
+                    align: "left",
+                },
+                xAxis: { categories: assignComlabCategoriess, crosshair: true },
+                yAxis: { title: { text: "Equipment Disposed Status Count" } },
+                plotOptions: { column: { pointPadding: 0.2, borderWidth: 0 } },
+                series: [
+                    {
+                        colorByPoint: true,
+                        name: "Equipment  Disposed Status Count",
+                        groupPadding: 0,
+                        data: noOfStickerss,
+                        dataLabels: {
+                            enabled: true,
+                            rotation: -90,
+                            color: "#FFFFFF",
+                            inside: true,
+                            verticalAlign: "top",
+                            format: "{point.y}",
+                            y: 10,
+                            style: {
+                                fontSize: "13px",
+                                fontFamily: "Verdana, sans-serif",
+                            },
+                        },
+                    },
+                ],
+                credits: { enabled: false },
+            };
+
+            setDesposalOptions(desposalOptions);
         };
 
         const processBorrowData = (data) => {
@@ -452,7 +504,7 @@ export default function PageReportChart() {
                     Print Pdf...
                 </Button>
             </div>
-            <Col xs={2} sm={2} md={2} lg={2} xl={2} xxl={2}>
+            <Col xs={10} sm={2} md={2} lg={2} xl={2} xxl={2}>
                 <FloatSelect
                     label="Report Data"
                     placeholder="Report Data"
@@ -499,6 +551,14 @@ export default function PageReportChart() {
                     <HighchartsReact
                         highcharts={Highcharts}
                         options={noOfStickersOption}
+                    />
+                ) : (
+                    <Alert message="No data available" type="info" />
+                )}
+                {desposalOptions ? (
+                    <HighchartsReact
+                        highcharts={Highcharts}
+                        options={desposalOptions}
                     />
                 ) : (
                     <Alert message="No data available" type="info" />

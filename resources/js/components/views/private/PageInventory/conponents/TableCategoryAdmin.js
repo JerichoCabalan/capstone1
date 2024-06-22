@@ -283,7 +283,6 @@ export default function TableCategoryAdmin(props) {
                             sorter
                             dataIndex={"restocking_point"}
                         />
-
                         <Table.Column
                             title="Assigned Comlab"
                             key="assign_comlab"

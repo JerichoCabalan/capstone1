@@ -51,7 +51,12 @@ export default function TableInventoryBorrowStaff(props) {
                 </Col>
                 <Col xs={24} sm={24} md={24}>
                     <Table
-                        dataSource={dataSource && dataSource.data.data}
+                        dataSource={
+                            dataSource &&
+                            dataSource.data.data.filter(
+                                (record) => record.user_id === 4
+                            )
+                        }
                         rowKey={(record) => record.id}
                         pagination={{
                             current: tableFilter.page,
@@ -102,12 +107,6 @@ export default function TableInventoryBorrowStaff(props) {
                             title="Quantity of Stock"
                             dataIndex="no_of_stock"
                             key="no_of_stock"
-                            sorter
-                        />
-                        <Table.Column
-                            title="User ID"
-                            dataIndex="user_id"
-                            key="user_id"
                             sorter
                         />
                     </Table>
