@@ -47,6 +47,8 @@ export default function TableBorrowStockAdmin(props) {
         const recordsToAccept = selectedRowKeys.map((key) =>
             dataSource.data.data.find((item) => item.id === key)
         );
+        let successCount = 0;
+
         recordsToAccept.forEach((record) => {
             mutateAccept(record, {
                 onSuccess: (res) => {
@@ -55,6 +57,10 @@ export default function TableBorrowStockAdmin(props) {
                             message: "Borrow",
                             description: res.message,
                         });
+                        successCount++;
+                        if (successCount === recordsToAccept.length) {
+                            setSelectedRowKeys([]);
+                        }
                     } else {
                         notification.error({
                             message: "Borrow",
@@ -124,13 +130,7 @@ export default function TableBorrowStockAdmin(props) {
                         rowSelection={rowSelection}
                     >
                         <Table.Column
-                            title="Unit No"
-                            dataIndex="unit_no"
-                            key="unit_no"
-                            sorter
-                        />
-                        <Table.Column
-                            title="Cetegory"
+                            title="Description"
                             dataIndex="category"
                             key="category"
                             sorter
@@ -141,12 +141,20 @@ export default function TableBorrowStockAdmin(props) {
                             key="assign_comlab"
                             sorter
                         />
+
                         <Table.Column
-                            title="Borrow Status"
-                            dataIndex="borrow_status"
-                            key="borrow_status"
+                            title="Borrowed By"
+                            dataIndex="role"
+                            key="role"
                             sorter
                         />
+                        <Table.Column
+                            title="Approved By"
+                            dataIndex=""
+                            key=""
+                            sorter
+                        />
+
                         <Table.Column
                             title="Borrow Date"
                             dataIndex="borrow_date"
@@ -155,16 +163,23 @@ export default function TableBorrowStockAdmin(props) {
                             }
                             sorter
                         />
+
                         <Table.Column
-                            title="Role"
-                            dataIndex="role"
-                            key="role"
+                            title="Returned Date"
+                            dataIndex=""
+                            key=""
                             sorter
                         />
                         <Table.Column
-                            title="Quantity of Stock"
-                            dataIndex="no_of_stock"
-                            key="no_of_stock"
+                            title="Borrow Status"
+                            dataIndex="borrow_status"
+                            key="borrow_status"
+                            sorter
+                        />
+                        <Table.Column
+                            title="Status(returned/unreturned)"
+                            dataIndex=""
+                            key=""
                             sorter
                         />
                     </Table>

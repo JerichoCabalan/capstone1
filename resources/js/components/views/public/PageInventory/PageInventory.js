@@ -55,6 +55,11 @@ export default function PageInventory() {
         `api/inventory_admin?${new URLSearchParams(tableFilter)}`,
         "inventory_admin"
     );
+    useEffect(() => {
+        if (dataSource) {
+            console.log("Fetched Data Source: ", dataSource);
+        }
+    }, [dataSource]);
 
     useEffect(() => {
         refetchSource();

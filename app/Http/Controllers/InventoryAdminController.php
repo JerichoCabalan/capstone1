@@ -200,6 +200,8 @@ class InventoryAdminController extends Controller
         $dataAdmin = InventoryAdmin::updateOrCreate(
             ["id" => $request->id],
             [
+                "user_id" => $request->user_id,
+              
                 "unit_no" => $request->unit_no,
                 "description" => $request->description,
                 "assign_comlab" => $request->assign_comlab,

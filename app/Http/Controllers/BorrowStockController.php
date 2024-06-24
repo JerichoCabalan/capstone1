@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BorrowStock;
+use App\Models\InventoryAdmin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -147,25 +148,26 @@ class BorrowStockController extends Controller
     {
         $quantity = $request->input('quantity');
         $inventory_admin_id = $request->input('inventory_admin_id');
-        $inventoryAdmin = DB::table('inventory_admins')->where('id', $inventory_admin_id)->first();
+        $inventoryAdmin = InventoryAdmin::find($inventory_admin_id);
+    
         if ($inventoryAdmin && $inventoryAdmin->no_of_stock >= $quantity) {
             $newStock = $inventoryAdmin->no_of_stock - $quantity;
-            
+            $inventoryAdmin->no_of_stock = $newStock;
+            $inventoryAdmin->save();
     
-            DB::table('inventory_admins')
-                ->where('id', $inventory_admin_id)
-                ->update(['no_of_stock' => $newStock]);
-    
-            BorrowStock::create([
-                 'user_id' => auth()->id(),
+            $borrowStock = BorrowStock::create([
+                'user_id' => auth()->id(),
                 'inventory_admin_id' => $inventory_admin_id,
-                'borrow_status' => 'pending', 
+                'borrow_date' => date('Y-m-d'),
+                'purpose' => $request->input('purpose'),
+                'borrow_status' => 'pending',
             ]);
     
             return response()->json([
                 'success' => true,
                 'message' => 'Equipment borrowed successfully',
                 'newStock' => $newStock,
+                'borrowStock' => $borrowStock,
             ], 200);
         } else {
             return response()->json([
@@ -174,6 +176,13 @@ class BorrowStockController extends Controller
             ], 400);
         }
     }
+    
+    
+    
+    
+    
+    
+    
  
    
 }
