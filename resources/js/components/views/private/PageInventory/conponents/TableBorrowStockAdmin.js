@@ -44,8 +44,8 @@ export default function TableBorrowStockAdmin(props) {
         "borrow_stock"
     );
     const handleAccept = () => {
-        const recordsToAccept = selectedRowKeys.map((key) =>
-            dataSource.data.data.find((item) => item.id === key)
+        const recordsToAccept = selectedRowKeys.map(
+            (key) => dataSources.find((item) => item.id === key) // change into DataSource if have a database "dataSources.data.data"
         );
         let successCount = 0;
 
@@ -74,6 +74,44 @@ export default function TableBorrowStockAdmin(props) {
             });
         });
     };
+    const dataSources = [
+        {
+            key: "1",
+            category: "Mouse",
+            assign_comlab: "CL 6",
+            role: "Faculty",
+            roles: "Administrator",
+            borrow_date: "2024-05-12",
+            return_date: "2024-06-12",
+            borrow_status: "Pending",
+            no_of_stock: 0,
+            return_status: "Returned",
+        },
+        {
+            key: "1",
+            category: "Keyboard",
+            assign_comlab: "CL 1",
+            role: "Technician",
+            roles: "Administrator",
+            borrow_date: "2024-05-12",
+            return_date: "2024-06-12",
+            borrow_status: "Pending",
+            no_of_stock: 0,
+            return_status: "Returned",
+        },
+        {
+            key: "1",
+            category: "Mouse",
+            assign_comlab: "CL 6",
+            role: "Student Assistant",
+            roles: "Administrator",
+            borrow_date: "2024-06-5",
+            return_date: "2024-07-5",
+            borrow_status: "Accept",
+            no_of_stock: 0,
+            return_status: "Returned",
+        },
+    ];
 
     return (
         <>
@@ -84,8 +122,8 @@ export default function TableBorrowStockAdmin(props) {
                     size="large"
                     onClick={() =>
                         handleAccept(
-                            dataSource.data.data.find(
-                                (item) => item.id === selectedRowKeys[0]
+                            dataSources.find(
+                                (item) => item.id === selectedRowKeys[0] // change into DataSource if have a database "dataSources.data.data"
                             )
                         )
                     }
@@ -120,7 +158,8 @@ export default function TableBorrowStockAdmin(props) {
                 </Col>
                 <Col xs={24} sm={24} md={24}>
                     <Table
-                        dataSource={dataSource && dataSource.data.data}
+                        // dataSource={dataSource && dataSource.data.data}
+                        dataSource={dataSources}
                         rowKey={(record) => record.id}
                         pagination={{
                             current: tableFilter.page,
@@ -150,8 +189,8 @@ export default function TableBorrowStockAdmin(props) {
                         />
                         <Table.Column
                             title="Approved By"
-                            dataIndex=""
-                            key=""
+                            dataIndex="roles"
+                            key="roles"
                             sorter
                         />
 
@@ -166,8 +205,8 @@ export default function TableBorrowStockAdmin(props) {
 
                         <Table.Column
                             title="Returned Date"
-                            dataIndex=""
-                            key=""
+                            dataIndex="return_date"
+                            key="return_date"
                             sorter
                         />
                         <Table.Column
@@ -178,8 +217,8 @@ export default function TableBorrowStockAdmin(props) {
                         />
                         <Table.Column
                             title="Status(returned/unreturned)"
-                            dataIndex=""
-                            key=""
+                            dataIndex="return_status"
+                            key="return_status"
                             sorter
                         />
                     </Table>
@@ -190,7 +229,7 @@ export default function TableBorrowStockAdmin(props) {
                         <TablePagination
                             tableFilter={tableFilter}
                             setTableFilter={setTableFilter}
-                            setPaginationTotal={dataSource?.data.total}
+                            // setPaginationTotal={dataSource?.data.total} // Editable
                             showLessItems
                             showSizeChanger={false}
                             tblIdWrapper="tbl_wrapper"

@@ -133,7 +133,7 @@ export default function TableBinAdmin(props) {
                         <TablePagination
                             tableFilter={tableFilter}
                             setTableFilter={setTableFilter}
-                            // setPaginationTotal={dataSource?.data.total}
+                            setPaginationTotal={dataSource?.data.total}
                             showLessItems={true}
                             showSizeChanger={false}
                             tblIdWrapper="tbl_wrapper"
