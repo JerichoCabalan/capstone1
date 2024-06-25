@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Table, Button, notification, Modal, Spin } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPen } from "@fortawesome/pro-regular-svg-icons";
 import dayjs from "dayjs";
 import { POST } from "../../../providers/useAxiosQuery";
 import notificationErrors from "../../../providers/notificationErrors";
+import { useNavigate } from "react-router-dom";
 
 export default function TableInventory(props) {
     const { tableFilter, setTableFilter, dataSource } = props;
@@ -12,6 +13,18 @@ export default function TableInventory(props) {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [selectedRecord, setSelectedRecord] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const checkLoginStatus = () => {
+            const loggedIn =
+                localStorage.getItem && localStorage.getItem("token");
+            setIsLoggedIn(loggedIn);
+        };
+        checkLoginStatus();
+    }, []);
 
     const onChangeTable = (sorter) => {
         setTableFilter((ps) => ({
@@ -22,12 +35,41 @@ export default function TableInventory(props) {
             page_size: "50",
         }));
     };
-    const modifiedDataSource =
-        dataSource &&
-        dataSource.data.data.map((item) => ({
-            ...item,
-            equipment_status: "Working", // Set every item's equipment_status to "Working"
-        }));
+
+    const exampleDataSource = [
+        {
+            id: 1,
+            unit_no: "U123",
+            description: "Laptop",
+            assign_comlab: "Lab A",
+            equipment_status: "Working",
+            no_of_stock: 5,
+            category: "Electronics",
+        },
+        {
+            id: 2,
+            unit_no: "U124",
+            description: "Monitor",
+            assign_comlab: "Lab B",
+            equipment_status: "Working",
+            no_of_stock: 2,
+            category: "Electronics",
+        },
+        {
+            id: 3,
+            unit_no: "U125",
+            description: "Projector",
+            assign_comlab: "Lab C",
+            equipment_status: "Working",
+            no_of_stock: 0,
+            category: "Electronics",
+        },
+    ];
+
+    const modifiedDataSource = exampleDataSource.map((item) => ({
+        ...item,
+        equipment_status: "Working",
+    }));
 
     const { mutate: mutateBorrowEquipment } = POST(
         `api/borrow_equipment_stock`,
@@ -36,14 +78,6 @@ export default function TableInventory(props) {
 
     const handleBorrowEquipment = (record) => {
         setLoading(true);
-        if (record.no_of_stock === 0) {
-            notification.error({
-                message: "Failed to borrow equipment",
-                description: "No stock available for this equipment.",
-            });
-            setLoading(false);
-            return;
-        }
 
         const requestBody = {
             inventory_admin_id: record.id,
@@ -60,17 +94,15 @@ export default function TableInventory(props) {
                         description: res.message,
                     });
 
-                    const updatedDataSource = dataSource.data.data.map(
-                        (item) => {
-                            if (item.id === record.id) {
-                                return {
-                                    ...item,
-                                    no_of_stock: item.no_of_stock - 1,
-                                };
-                            }
-                            return item;
+                    const updatedDataSource = exampleDataSource.map((item) => {
+                        if (item.id === record.id) {
+                            return {
+                                ...item,
+                                no_of_stock: item.no_of_stock - 1,
+                            };
                         }
-                    );
+                        return item;
+                    });
 
                     setTableFilter((prevFilter) => ({
                         ...prevFilter,
@@ -91,6 +123,23 @@ export default function TableInventory(props) {
     };
 
     const showBorrowModal = (record) => {
+        if (!isLoggedIn) {
+            notification.error({
+                message: "Login required",
+                description: "You need to be logged in to borrow equipment.",
+            });
+            navigate("/login"); // Redirect to login page
+            return;
+        }
+
+        if (record.no_of_stock === 0) {
+            notification.error({
+                message: "Failed to borrow equipment",
+                description: "No stock available for this equipment.",
+            });
+            return;
+        }
+
         setSelectedRecord(record);
         setIsModalVisible(true);
     };
@@ -110,7 +159,6 @@ export default function TableInventory(props) {
             <Col xs={24} sm={24} md={24}>
                 <Table
                     className="ant-table-default ant-table-striped"
-                    // dataSource={dataSource && dataSource.data.data}
                     dataSource={modifiedDataSource}
                     rowKey={(record) => record.id}
                     pagination={false}
@@ -150,7 +198,6 @@ export default function TableInventory(props) {
                     />
                     <Table.Column
                         title="Action"
-                        sorter
                         render={(text, record) => (
                             <Button
                                 type="primary"
@@ -170,7 +217,7 @@ export default function TableInventory(props) {
             </Col>
             <Modal
                 title="Confirm Borrow"
-                visible={isModalVisible}
+                open={isModalVisible}
                 onOk={handleOk}
                 onCancel={handleCancel}
                 okText="Yes"
@@ -183,15 +230,16 @@ export default function TableInventory(props) {
                             {dayjs().format("YYYY-MM-DD")}
                         </p>
                         <p>
-                            <strong>Borrow By:</strong>{" "}
+                            <strong>Borrow By:</strong> Test User{" "}
                             {/* Add Borrower Info Here */}
                         </p>
                         <p>
                             <strong>Equipment to Borrow:</strong>{" "}
-                            {selectedRecord.category} {/* Confirm Category */}
+                            {selectedRecord.description}
                         </p>
                         <p>
-                            <strong>Purpose:</strong> {/* Add Purpose Info */}
+                            <strong>Purpose:</strong> For a project{" "}
+                            {/* Add Purpose Info */}
                         </p>
                     </div>
                 )}

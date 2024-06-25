@@ -1,26 +1,12 @@
 import React, { useState } from "react";
-import {
-    Layout,
-    Typography,
-    Card,
-    Alert,
-    Form,
-    Button,
-    Tabs,
-    DatePicker,
-    Col,
-    Row,
-} from "antd";
-import { logo } from "../../../providers/companyInfo";
-import { encrypt } from "../../../providers/companyInfo";
+import { Layout, Typography, Card, Alert, Form, Button, Col, Row } from "antd";
+import { logo, encrypt } from "../../../providers/companyInfo";
 import { Link, useNavigate } from "react-router-dom";
-import { date, description } from "../../../providers/companyInfo";
 import { message } from "antd";
 
 import FloatInput from "../../../providers/FloatInput";
 import FloatInputPassword from "../../../providers/FloatInputPassword";
 import validateRules from "../../../providers/validateRules";
-
 import { POST } from "../../../providers/useAxiosQuery";
 import FloatSelect from "../../../providers/FloatSelect";
 import FloatInputMask from "../../../providers/FloatInputMask";
@@ -28,68 +14,38 @@ import FloatInputMask from "../../../providers/FloatInputMask";
 export default function PageRegister() {
     const navigate = useNavigate();
     const [form] = Form.useForm();
-    const [activeTab, setActiveTab] = useState("login");
-
     const [errorMessageLogin, setErrorMessageLogin] = useState({
         type: "",
         message: "",
     });
-    const { mutate: mutateLogin, isLoading: isLoadingRegister } = POST(
+
+    const { mutate: mutateRegister, isLoading: isLoadingRegister } = POST(
         "api/register",
         "login"
     );
 
-    const onFinishLogin = (values) => {
-        console.log("onFinishLogin", values);
-
-        mutateLogin(values, {
+    const onFinish = (values) => {
+        mutateRegister(values, {
             onSuccess: (res) => {
-                // console.log("res", res);
-                if (res.data) {
-                    localStorage.userdata = encrypt(JSON.stringify(res.data));
-                    localStorage.token = res.token;
-
-                    setTimeout(() => {
-                        navigate("/staffdashboard"); // navigate to dashboard
-                    }, 500);
-                } else {
-                    setErrorMessageLogin({
-                        type: "error",
-                        message: res.message,
-                    });
-                }
+                console.log("res", res);
+                message.success("Registration successful! Please login.");
+                setTimeout(() => {
+                    navigate("/dashboard");
+                }, 500);
             },
             onError: (err) => {
-                setErrorMessageLogin({
-                    type: "error",
-                    message: (
-                        <>
-                            Unrecognized username or password.{" "}
-                            <b>Forgot your password?</b>
-                        </>
-                    ),
-                });
+                message.error("Registration failed. Please try again.");
             },
         });
     };
 
-    const onChange = (key) => {
-        console.log(key);
-    };
-
     return (
         <Layout.Content>
-            <div
-                className="container"
-                // style={{
-                //     height: "700px",
-                // }}
-            >
+            <div className="container">
                 <div className="left">
                     <div className="logo-wrapper zoom-in-out-box-1">
                         {/* <img src={logo} /> */}
                     </div>
-
                     {/* <Typography.Title className="title">
                         FSUU
                         <p className="sub-title">
@@ -103,25 +59,19 @@ export default function PageRegister() {
                             <img
                                 src="../../../images/register.png"
                                 alt=""
-                                style={{
-                                    marginTop: "-80px",
-                                }}
+                                style={{ marginTop: "-80px" }}
                             />
                         </div>
-
                         <Typography.Title
                             className="text-center text-log-in mt-0"
-                            style={{
-                                marginTop: "-80px !important",
-                            }}
+                            style={{ marginTop: "-80px !important" }}
                         >
-                            Sign Up{" "}
+                            Sign Up
                         </Typography.Title>
-
                         <Form
                             layout="vertical"
                             className="login-form"
-                            onFinish={onFinishLogin}
+                            onFinish={onFinish}
                             autoComplete="off"
                             form={form}
                         >
@@ -146,7 +96,6 @@ export default function PageRegister() {
                                     </Form.Item>
                                 </Col>
                             </Row>
-
                             <Form.Item
                                 name="email"
                                 rules={[validateRules.required]}
@@ -213,7 +162,6 @@ export default function PageRegister() {
                                     ]}
                                 />
                             </Form.Item>
-
                             <Form.Item
                                 name="password"
                                 rules={[validateRules.required]}
@@ -224,7 +172,6 @@ export default function PageRegister() {
                                     placeholder="Password"
                                 />
                             </Form.Item>
-
                             <Form.Item
                                 name="password_confirmation"
                                 dependencies={["password"]}
@@ -258,17 +205,16 @@ export default function PageRegister() {
                                     placeholder="Confirm Password"
                                 />
                             </Form.Item>
-
                             <Button
                                 type="primary"
                                 htmlType="submit"
+                                loading={isLoadingRegister}
                                 className="mt-10 btn-log-in page-login"
                                 block
                                 size="middle"
                             >
                                 Sign Up
                             </Button>
-
                             {errorMessageLogin.message && (
                                 <Alert
                                     className="mt-10"
@@ -276,19 +222,9 @@ export default function PageRegister() {
                                     message={errorMessageLogin.message}
                                 />
                             )}
-
-                            <p
-                                style={{
-                                    marginLeft: "85px",
-                                }}
-                            >
+                            <p style={{ marginLeft: "85px" }}>
                                 Already have an account?
-                                <Link
-                                    to="/login"
-                                    style={{
-                                        marginTop: "15px",
-                                    }}
-                                >
+                                <Link to="/login" style={{ marginTop: "15px" }}>
                                     {" "}
                                     Login here
                                 </Link>

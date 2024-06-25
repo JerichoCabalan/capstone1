@@ -1,8 +1,8 @@
-import { Row, Button, Col, Watermark } from "antd";
+import { Row, Button, Col } from "antd";
 import { useEffect, useState } from "react";
 import { GET } from "../../../providers/useAxiosQuery";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/pro-regular-svg-icons";
+import { faFilePdf, faPlus } from "@fortawesome/pro-regular-svg-icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import TableInventory from "./TableInventory";
 
@@ -29,7 +29,15 @@ export default function PageInventory() {
         from: location.pathname,
     });
 
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
     useEffect(() => {
+        const checkLoginStatus = () => {
+            // Replace with actual login check logic
+            const loggedIn = setIsLoggedIn(loggedIn); // Logic to determine if user is logged in
+        };
+        checkLoginStatus();
+
         setTableFilter({
             page: 1,
             page_size: 50,
@@ -71,6 +79,49 @@ export default function PageInventory() {
     return (
         <>
             <Row gutter={[12, 12]}>
+                {/* <Col
+                    xs={24}
+                    sm={24}
+                    md={6}
+                    style={{
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        alignItems: "center",
+                        marginLeft: "1384px",
+                    }}
+                >
+                    <Button
+                        className="btn-main-primary btn-main-invert-outline b-r-none hides"
+                        style={{
+                            marginLeft: "10px",
+                            backgroundColor: "#ff6624",
+                            color: "white",
+                            borderColor: "#ff6624",
+                            width: "100px",
+                            height: "60px",
+                        }}
+                        type="primary"
+                        onClick={handleAddButtonClick}
+                    >
+                        <FontAwesomeIcon />
+                        SignUp
+                    </Button>
+                    <Button
+                        className="btn-main-primary btn-main-invert-outline b-r-none hides"
+                        style={{
+                            marginLeft: "10px",
+                            backgroundColor: "#ff6624",
+                            color: "white",
+                            borderColor: "#ff6624",
+                            width: "100px",
+                            height: "60px",
+                        }}
+                        type="primary"
+                    >
+                        <FontAwesomeIcon />
+                        SignIn
+                    </Button>
+                </Col> */}
                 <Col xs={24} sm={24} md={24}>
                     <div className="text-center mt-0">
                         <img src="../../../images/register.png" alt="" />

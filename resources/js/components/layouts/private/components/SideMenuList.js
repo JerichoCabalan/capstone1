@@ -51,11 +51,11 @@ export const adminSideMenu = [
                 path: "/users/user",
                 moduleCode: "M-02",
             },
-            {
-                title: "Roles",
-                path: "/users/roles",
-                moduleCode: "M-03",
-            },
+            // {
+            //     title: "Roles",
+            //     path: "/users/roles",
+            //     moduleCode: "M-03",
+            // },
         ],
     },
     {
@@ -109,18 +109,18 @@ export const adminSideMenu = [
             },
         ],
     },
-    {
-        title: "Test Borrows",
-        path: "/test",
-        icon: <FontAwesomeIcon icon={faShieldKeyhole} />,
-        children: [
-            {
-                title: "Test",
-                path: "/test/testing",
-                moduleCode: "M-05",
-            },
-        ],
-    },
+    // {
+    //     title: "Test Borrows",
+    //     path: "/test",
+    //     icon: <FontAwesomeIcon icon={faShieldKeyhole} />,
+    //     children: [
+    //         {
+    //             title: "Test",
+    //             path: "/test/testing",
+    //             moduleCode: "M-05",
+    //         },
+    //     ],
+    // },
 ];
 
 export const staffSideMenu = [

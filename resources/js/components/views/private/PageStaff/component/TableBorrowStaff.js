@@ -1,24 +1,48 @@
+import React, { useState, useEffect } from "react";
 import { Table, Row, Col } from "antd";
-import React from "react";
-import { GET } from "../../../../providers/useAxiosQuery";
 import moment from "moment";
 
-export default function TableBorrowStaff() {
-    const { data: dataSource, userId } = GET(
-        `api/borrow_stock`,
-        "borrow_stock"
-    );
-    console.log("dataSource:", dataSource);
-    console.log("user_id:", userId);
+// Mock data
+const dataSource = [
+    {
+        user_id: 103,
+        unit_no: "123",
+        category: "AVR",
+        assign_comlab: "ComLab 1",
+        borrow_status: "pending",
+        borrow_date: "2024-05-12",
+        role: "Staff",
+        no_of_stock: 5,
+        borrow_stocks: 101,
+    },
+    {
+        user_id: 103,
+        unit_no: "124",
+        category: "Monitor",
+        assign_comlab: "ComLab 2",
+        borrow_status: "pending",
+        borrow_date: "2024-05-15",
+        role: "Staff",
+        no_of_stock: 10,
+        borrow_stocks: 2,
+    },
+    {
+        user_id: 103,
+        unit_no: "124",
+        category: "Monitor",
+        assign_comlab: "ComLab 2",
+        borrow_status: "accept",
+        borrow_date: "2024-05-15",
+        role: "Staff",
+        no_of_stock: 10,
+        borrow_stocks: 2,
+    },
+];
 
-    const filteredData =
-        dataSource && userId
-            ? dataSource.data.filter(
-                  (record) => record.borrow_stocks === userId
-              )
-            : dataSource
-            ? dataSource.data
-            : [];
+export default function TableBorrowStaff() {
+    // const { data: dataSource } = GET("api/borrow_stock", "borrow_status");
+
+    const filteredData = dataSource ? dataSource : [];
 
     return (
         <Row gutter={[12, 12]} id="tbl_wrapper" style={{ marginTop: "90px" }}>
@@ -69,12 +93,12 @@ export default function TableBorrowStaff() {
                         key="role"
                         sorter={(a, b) => a.role.localeCompare(b.role)}
                     />
-                    <Table.Column
+                    {/* <Table.Column
                         title="Quantity of Stock"
                         dataIndex="no_of_stock"
                         key="no_of_stock"
                         sorter={(a, b) => a.no_of_stock - b.no_of_stock}
-                    />
+                    /> */}
                 </Table>
             </Col>
         </Row>

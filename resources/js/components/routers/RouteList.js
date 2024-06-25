@@ -49,7 +49,7 @@ export default function RouteList() {
                 path="/signup"
                 element={
                     <PublicRoute
-                        title="LOGIN"
+                        title=""
                         pageId="PageLogin"
                         component={PageRegister}
                     />
@@ -59,7 +59,7 @@ export default function RouteList() {
                 path="/"
                 element={
                     <EquipmentRoute
-                        title="LOGIN"
+                        title="Welcome"
                         pageId="PageLogin"
                         component={PageInventory}
                     />
@@ -112,6 +112,25 @@ export default function RouteList() {
 
             <Route
                 path="/dashboard"
+                element={
+                    <PrivateRoute
+                        // moduleCode="M-01"
+                        moduleName="Home"
+                        title="Home"
+                        subtitle="ADMIN"
+                        pageId="PageHome"
+                        pageHeaderIcon={faHome}
+                        breadcrumb={[
+                            {
+                                name: "Home",
+                            },
+                        ]}
+                        component={PageDashboard}
+                    />
+                }
+            />
+            <Route
+                path="/dashboardss"
                 element={
                     <PrivateRoute
                         // moduleCode="M-01"
