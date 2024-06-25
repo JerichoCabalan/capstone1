@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilePdf } from "@fortawesome/pro-regular-svg-icons";
 
 export default function PageReportChart() {
+    // Chart
     const {
         data: dataSource,
         error,
