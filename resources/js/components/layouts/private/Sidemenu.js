@@ -220,10 +220,35 @@ export default function Sidemenu(props) {
                                 alt="INVENTORY "
                                 style={{
                                     width: "80px",
-                                    marginLeft: "-138px",
+                                    marginLeft: "-14px",
                                 }}
                                 // width="50px"
                             />
+                            <p
+                                style={{
+                                    marginTop: "27px",
+                                    marginLeft: "-5px",
+                                    color: "rgb(101, 3, 8)",
+                                    fontSize: "20px",
+                                    fontWeight: "bold",
+                                    fontFamily: "Poppins",
+                                    letterSpacing: "1px",
+                                    textTransform: "uppercase",
+                                    lineHeight: "20px",
+                                }}
+                            >
+                                Inventory
+                                <br />
+                                <p
+                                    style={{
+                                        fontFamily: "Poppins",
+                                        color: "black",
+                                        marginLeft: "20px",
+                                    }}
+                                >
+                                    CCIS
+                                </p>
+                            </p>
                         </>
                     )}
                 </div>

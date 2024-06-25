@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Dropdown, Image, Layout, Menu, Typography } from "antd";
+import { Badge, Dropdown, Image, Layout, Menu, Typography } from "antd";
 import {
     apiUrl,
     defaultProfile,
@@ -11,7 +11,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faPowerOff } from "@fortawesome/pro-light-svg-icons";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { PageHeader } from "@ant-design/pro-layout";
-import { faBell } from "@fortawesome/pro-regular-svg-icons";
+import {
+    faBell,
+    faClock,
+    faComment,
+    faComments,
+} from "@fortawesome/pro-regular-svg-icons";
 
 export default function Header(props) {
     const {
@@ -30,6 +35,12 @@ export default function Header(props) {
         username: "",
         role: "",
     });
+    const [showNotifications, setShowNotifications] = useState(true);
+    const [creticalshowNotifications, setCreticalShowNotifications] =
+        useState(true);
+    const [notificationsCleared, setNotificationsCleared] = useState(false);
+    const [creticalnotificationsCleared, setCreticalNotificationsCleared] =
+        useState(false);
 
     useEffect(() => {
         if (dataUserProfileInfo) {
@@ -60,24 +71,61 @@ export default function Header(props) {
         window.location.reload();
     };
 
-    const menuNotification = () => {
-        const items = [
-            {
-                label: "Notifications",
-                key: "0",
-            },
+    const menuNotification = (show) => {
+        if (!show || notificationsCleared) {
+            return {
+                items: [
+                    {
+                        label: "No notification",
+                        key: "1",
+                    },
+                ],
+                notifications: 0,
+            };
+        }
+        console.log("Current Role:", profileInfo.role); // Debugging
 
+        let notifications = 0;
+        let items = [];
+
+        if (profileInfo.role === "Super Admin") {
+            notifications = 3;
+            items = [
+                ...items,
+                {
+                    label: (
+                        <span>
+                            <p> Test1@gmail.com Borrow Laptop </p>
+                            <p> Test2@gmail.com Borrow Projector </p>
+                            <p> Test2@gmail.com Borrow Camera </p>
+                        </span>
+                    ),
+                    key: "1",
+                },
+            ];
+        } else if (profileInfo.role === "Lab Staff") {
+            notifications = 3;
+            items.push({
+                label: <span>Accept Your Borrow Item</span>,
+                key: "2",
+            });
+        }
+
+        items.push(
             {
                 type: "divider",
             },
-
             {
-                label: "No notification",
-                key: "1",
-            },
-        ];
+                label: "Clear All",
+                key: "clear-all",
+                onClick: () => {
+                    setShowNotifications(false);
+                    setNotificationsCleared(true);
+                },
+            }
+        );
 
-        return { items };
+        return { items, notifications };
     };
 
     const menuProfile = () => {
@@ -105,12 +153,12 @@ export default function Header(props) {
                         </div>
                     </div>
                 ),
-            }, // remember to pass the key prop
+            },
             {
                 key: "/edit-profile",
                 icon: <FontAwesomeIcon icon={faEdit} />,
                 label: <Link to="/edit-profile">Edit Account Profile</Link>,
-            }, // which is required
+            },
         ];
 
         items.push({
@@ -172,6 +220,49 @@ export default function Header(props) {
             window.removeEventListener("resize", handleResize);
         };
     }, []);
+    const menuCreticalStock = (show) => {
+        if (!show || creticalnotificationsCleared) {
+            return {
+                items: [
+                    {
+                        label: "No notification",
+                        key: "1",
+                    },
+                ],
+                notifications: 0,
+            };
+        }
+
+        const notifications = 5;
+        const items = [
+            {
+                label: (
+                    <span>
+                        <Badge>Notifications</Badge>
+                        <p> have a Cretical Stock Mouse is 0 out of stock </p>
+                        <p> have a Cretical Stock Monitor is 0 out of stock </p>
+                        <p> To Repair Keyboard In CL 10 </p>
+                        <p> Despose Mouse In CL 10 </p>
+                        <p> have a Cretical Stock Avr is 0 out of stock </p>
+                    </span>
+                ),
+                key: "0",
+            },
+            {
+                type: "divider",
+            },
+            {
+                label: "Clear All",
+                key: "clear-all",
+                onClick: () => {
+                    setCreticalShowNotifications(false);
+                    setCreticalNotificationsCleared(true); // Update state to indicate notifications have been cleared
+                },
+            },
+        ];
+
+        return { items, notifications };
+    };
 
     return (
         <Layout.Header>
@@ -229,17 +320,53 @@ export default function Header(props) {
                         alt={profileInfo.username}
                     />
                 </Dropdown>
-
                 <Dropdown
-                    menu={menuNotification()}
+                    overlay={
+                        <Menu
+                            items={menuNotification(showNotifications).items}
+                        />
+                    }
                     placement="bottomRight"
                     overlayClassName="menu-submenu-notification-popup"
                     trigger={["click"]}
                 >
-                    <FontAwesomeIcon
-                        className="menu-submenu-notification"
-                        icon={faBell}
-                    />
+                    <Badge
+                        count={
+                            menuNotification(showNotifications).notifications
+                        }
+                        overflowCount={99}
+                    >
+                        <FontAwesomeIcon
+                            className="menu-submenu-notification"
+                            icon={faComments}
+                        />
+                    </Badge>
+                </Dropdown>
+                <Dropdown
+                    overlay={
+                        <Menu
+                            items={
+                                menuCreticalStock(creticalshowNotifications)
+                                    .items
+                            }
+                        />
+                    }
+                    placement="bottomRight"
+                    overlayClassName="menu-submenu-notification-popup"
+                    trigger={["click"]}
+                >
+                    <Badge
+                        count={
+                            menuCreticalStock(creticalshowNotifications)
+                                .notifications
+                        }
+                        overflowCount={99}
+                    >
+                        <FontAwesomeIcon
+                            className="menu-submenu-notification"
+                            icon={faClock}
+                        />
+                    </Badge>
                 </Dropdown>
             </div>
         </Layout.Header>

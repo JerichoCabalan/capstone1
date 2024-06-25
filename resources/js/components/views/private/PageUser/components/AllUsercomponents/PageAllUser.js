@@ -123,9 +123,7 @@ export default function PageAllUser() {
                         >
                             <List.Item.Meta
                                 avatar={
-                                    <Avatar
-                                        src={`https://api.adorable.io/avatars/285/${item.email}.png`}
-                                    />
+                                    <Avatar src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" />
                                 }
                                 title={
                                     <a>{`${item.firstname} ${item.lastname}`}</a>

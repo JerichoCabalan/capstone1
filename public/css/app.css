@@ -15628,7 +15628,7 @@ textarea.form-control-lg {
 }
 
 .private-layout > .ant-layout > .ant-layout-header {
-  background-image: url(/images/login_bg.png?fe85e872f8c678695f86d7acee1c4d83);
+  background-color: #ff6624;
   background-repeat: no-repeat;
   background-size: 100%;
   width: 100%;
@@ -16278,6 +16278,7 @@ textarea.form-control-lg {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  height: 1000px;
 }
 #PageLogin .ant-layout-content .container,
 #LoginRightContent .ant-layout-content .container {
