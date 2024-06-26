@@ -349,46 +349,8 @@ class ModuleAndRolePermissionSeeder extends Seeder
                             ],
                         ]
                     ],
-                    [
-                        "module_name" => "Faculty Load List",
-                        "description" => "",
-                        "module_buttons" => [
-                            [
-                                "mod_button_code" => "view_page",
-                                "mod_button_name" => "View Page",
-                            ],
-                        ]
-                    ],
-                    [
-                        "module_name" => "Faculty Load Report",
-                        "description" => "",
-                        "module_buttons" => [
-                            [
-                                "mod_button_code" => "view_page",
-                                "mod_button_name" => "View Page",
-                            ],
-                        ]
-                    ],
-                    [
-                        "module_name" => "Faculty Load Justification",
-                        "description" => "",
-                        "module_buttons" => [
-                            [
-                                "mod_button_code" => "view_page",
-                                "mod_button_name" => "View Page",
-                            ],
-                        ]
-                    ],
-                    [
-                        "module_name" => "Faculty Load Deduction",
-                        "description" => "",
-                        "module_buttons" => [
-                            [
-                                "mod_button_code" => "view_page",
-                                "mod_button_name" => "View Page",
-                            ],
-                        ]
-                    ],
+                
+
                     [
                         "module_name" => "Admin Settings",
                         "description" => "",

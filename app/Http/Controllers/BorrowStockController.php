@@ -36,10 +36,13 @@ class BorrowStockController extends Controller
           
         ]);
 
-        $data = $data->where(function ($query) use ($request, $unit_no) {
+        $data = $data->where(function ($query) use ($request) {
             if ($request->search) {
-                $query->orWhere(DB::raw("($unit_no)"), 'LIKE', "%$request->search%");
-              
+                $query->orWhere("unit_no", 'LIKE', "%$request->search%");
+                $query->orWhere("description", 'LIKE', "%$request->search%");
+                $query->orWhere("category", 'LIKE', "%$request->search%");
+                $query->orWhere("role", 'LIKE', "%$request->search%");
+
             }
         });
 

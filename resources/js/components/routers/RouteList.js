@@ -163,14 +163,14 @@ export default function RouteList() {
                         pageHeaderIcon={faUsers}
                         breadcrumb={[
                             {
-                                name: "Inventory",
+                                name: "Home",
                                 link: "/dashboard",
                             },
                             {
                                 name: "Users",
                             },
                             {
-                                name: "Users",
+                                name: "All Users",
                             },
                         ]}
                         component={PageAllUser}
@@ -215,7 +215,7 @@ export default function RouteList() {
                         pageHeaderIcon={faShieldKeyhole}
                         breadcrumb={[
                             {
-                                name: "Inventory",
+                                name: "Home",
                                 link: "/dashboard",
                             },
                             {
@@ -234,10 +234,10 @@ export default function RouteList() {
                 element={
                     <PrivateRoute
                         // moduleCode="M-02"
-                        moduleName="Equipment"
-                        title="Equipment"
-                        subtitle="VIEW / EDIT"
-                        pageId="Equipment"
+                        moduleName="Borrow Stock"
+                        title="Borrow Stock"
+                        subtitle="VIEW / ACCEPT"
+                        pageId="Borrow Stock"
                         pageHeaderIcon={faUsers}
                         breadcrumb={[
                             {
@@ -261,9 +261,9 @@ export default function RouteList() {
                     <PrivateRoute
                         // moduleCode="M-02"
                         moduleName="Inventory Category"
-                        title="Creticalstock"
+                        title="Criticalstock"
                         subtitle="VIEW / EDIT"
-                        pageId="Creticalstock"
+                        pageId="Criticalstock"
                         pageHeaderIcon={faUsers}
                         breadcrumb={[
                             {
@@ -274,7 +274,7 @@ export default function RouteList() {
                                 name: "Inventory",
                             },
                             {
-                                name: "Cretical Stock",
+                                name: "Critical Stock",
                             },
                         ]}
                         component={PageCategoryAdmin}
@@ -286,14 +286,14 @@ export default function RouteList() {
                 element={
                     <PrivateRoute
                         // moduleCode="M-02"
-                        moduleName="Equipment"
-                        title="Equipment"
-                        subtitle="VIEW / EDIT"
-                        pageId="Equipment"
+                        moduleName="Disposal Stock"
+                        title="Disposal Stock"
+                        subtitle="VIEW"
+                        pageId="Disposal Stock"
                         pageHeaderIcon={faUsers}
                         breadcrumb={[
                             {
-                                name: "Inventory",
+                                name: "Home",
                                 link: "/dashboard",
                             },
                             {
@@ -320,7 +320,7 @@ export default function RouteList() {
                         pageHeaderIcon={faUsers}
                         breadcrumb={[
                             {
-                                name: "Dashboard",
+                                name: "Home",
                                 link: "/dashboard",
                             },
                             {
@@ -347,11 +347,11 @@ export default function RouteList() {
                         pageHeaderIcon={faUsers}
                         breadcrumb={[
                             {
-                                name: "Dashboard",
+                                name: "Home",
                                 link: "/dashboard",
                             },
                             {
-                                name: "Users",
+                                name: "Reports",
                                 link: "/report/chart",
                             },
                             {

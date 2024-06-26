@@ -22,8 +22,26 @@ class InventoryAdminController extends Controller
         ]);
         $data = $data->where(function ($query) use ($request) {
             if ($request->search) {
-                $query->orWhere("payroll_code", 'LIKE', "%$request->search%");
-                $query->orWhere("employee_type", 'LIKE', "%$request->search%");
+                $query->orWhere("unit_no", 'LIKE', "%$request->search%");
+                $query->orWhere("description", 'LIKE', "%$request->search%");
+                $query->orWhere("assign_comlab", 'LIKE', "%$request->search%");
+                $query->orWhere("category", 'LIKE', "%$request->search%");
+                $query->orWhere("date_acquired", 'LIKE', "%$request->search%");
+                $query->orWhere("supplier", 'LIKE', "%$request->search%");
+                $query->orWhere("remarks", 'LIKE', "%$request->search%");
+                $query->orWhere("equipment_status", 'LIKE', "%$request->search%");
+                $query->orWhere("amount", 'LIKE', "%$request->search%");
+                $query->orWhere("item_no", 'LIKE', "%$request->search%");
+                $query->orWhere("property_no", 'LIKE', "%$request->search%");
+                $query->orWhere("person_liable", 'LIKE', "%$request->search%");
+                $query->orWhere("control_no", 'LIKE', "%$request->search%");
+                $query->orWhere("serial_no", 'LIKE', "%$request->search%");
+                $query->orWhere("no_of_stock", 'LIKE', "%$request->search%");
+                $query->orWhere("restocking_point", 'LIKE', "%$request->search%");
+
+             
+                
+
             }
         });
 

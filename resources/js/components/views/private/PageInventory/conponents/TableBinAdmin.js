@@ -78,7 +78,7 @@ export default function TableBinAdmin(props) {
                         bordered={false}
                         onChange={onChangeTable}
                         scroll={{ x: "max-content" }}
-                        rowSelection={rowSelection}
+                        // rowSelection={rowSelection}
                     >
                         <Table.Column
                             title="Unit No"

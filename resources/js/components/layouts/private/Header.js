@@ -8,7 +8,7 @@ import {
     userData,
 } from "../../providers/companyInfo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faPowerOff } from "@fortawesome/pro-light-svg-icons";
+import { faEdit, faPowerOff, faXmark } from "@fortawesome/pro-light-svg-icons";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { PageHeader } from "@ant-design/pro-layout";
 import {
@@ -36,11 +36,10 @@ export default function Header(props) {
         role: "",
     });
     const [showNotifications, setShowNotifications] = useState(true);
-
-    const [creticalshowNotifications, setCreticalShowNotifications] =
-        useState(true);
     const [notificationsCleared, setNotificationsCleared] = useState(false);
-    const [creticalnotificationsCleared, setCreticalNotificationsCleared] =
+    const [showCreticalNotifications, setCreticalShowNotifications] =
+        useState(true);
+    const [creticalNotificationsCleared, setCreticalNotificationsCleared] =
         useState(false);
 
     useEffect(() => {
@@ -84,7 +83,7 @@ export default function Header(props) {
                 notifications: 0,
             };
         }
-        console.log("Current Role:", profileInfo.role); // Debugging
+        console.log("Current Role:", profileInfo.role);
 
         let notifications = 0;
         let items = [];
@@ -104,7 +103,7 @@ export default function Header(props) {
                     key: "1",
                 },
             ];
-        } else if (profileInfo.role !== "Technician") {
+        } else if (profileInfo.role === "Technician") {
             notifications = 45;
             items.push({
                 label: (
@@ -263,8 +262,17 @@ export default function Header(props) {
             window.removeEventListener("resize", handleResize);
         };
     }, []);
+
     const menuCreticalStock = (show) => {
-        if (!show || creticalnotificationsCleared) {
+        const [notifications, setNotifications] = useState([
+            "have a Cretical Stock Mouse is 0 out of stock",
+            "have a Cretical Stock Monitor is 0 out of stock",
+            "To Repair Keyboard In CL 10",
+            "Despose Mouse In CL 10",
+            "have a Cretical Stock Avr is 0 out of stock",
+        ]);
+
+        if (!show || creticalNotificationsCleared) {
             return {
                 items: [
                     {
@@ -276,21 +284,37 @@ export default function Header(props) {
             };
         }
 
-        const notifications = 5;
+        const removeNotification = (index) => {
+            setNotifications((currentNotifications) =>
+                currentNotifications.filter((_, i) => i !== index)
+            );
+        };
+
         const items = [
-            {
+            ...notifications.map((notification, index) => ({
                 label: (
-                    <span>
-                        <Badge>Notifications</Badge>
-                        <p> have a Cretical Stock Mouse is 0 out of stock </p>
-                        <p> have a Cretical Stock Monitor is 0 out of stock </p>
-                        <p> To Repair Keyboard In CL 10 </p>
-                        <p> Despose Mouse In CL 10 </p>
-                        <p> have a Cretical Stock Avr is 0 out of stock </p>
-                    </span>
+                    <div
+                        style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                        }}
+                    >
+                        <span>{notification}</span>
+                        <FontAwesomeIcon
+                            className="menu-submenu-notification"
+                            icon={faXmark}
+                            onClick={() => removeNotification(index)}
+                            style={{
+                                cursor: "pointer",
+                                marginRight: "-8px",
+                                marginTop: "-23px",
+                            }}
+                        />
+                    </div>
                 ),
-                key: "0",
-            },
+                key: `notification-${index}`,
+            })),
             {
                 type: "divider",
             },
@@ -299,12 +323,12 @@ export default function Header(props) {
                 key: "clear-all",
                 onClick: () => {
                     setCreticalShowNotifications(false);
-                    setCreticalNotificationsCleared(true); // Update state to indicate notifications have been cleared
+                    setCreticalNotificationsCleared(true);
                 },
             },
         ];
 
-        return { items, notifications };
+        return { items, notifications: notifications.length };
     };
 
     return (
@@ -389,7 +413,7 @@ export default function Header(props) {
                     overlay={
                         <Menu
                             items={
-                                menuCreticalStock(creticalshowNotifications)
+                                menuCreticalStock(showCreticalNotifications)
                                     .items
                             }
                         />
@@ -400,7 +424,7 @@ export default function Header(props) {
                 >
                     <Badge
                         count={
-                            menuCreticalStock(creticalshowNotifications)
+                            menuCreticalStock(showCreticalNotifications)
                                 .notifications
                         }
                         overflowCount={99}
