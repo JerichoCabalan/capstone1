@@ -36,6 +36,7 @@ export default function Header(props) {
         role: "",
     });
     const [showNotifications, setShowNotifications] = useState(true);
+
     const [creticalshowNotifications, setCreticalShowNotifications] =
         useState(true);
     const [notificationsCleared, setNotificationsCleared] = useState(false);
@@ -103,11 +104,53 @@ export default function Header(props) {
                     key: "1",
                 },
             ];
-        } else if (profileInfo.role === "Lab Staff") {
-            notifications = 3;
+        } else if (profileInfo.role !== "Technician") {
+            notifications = 45;
             items.push({
-                label: <span>Accept Your Borrow Item</span>,
+                label: (
+                    <span>
+                        <p>Please Repair this Keyboard in Cl 8</p>
+                        <p>Please Repair this Mouse in Cl 10</p>
+                        <p>Please Repair this Monitor in Cl 1</p>
+                    </span>
+                ),
+                key: "technician",
+            });
+        } else if (profileInfo.role !== "Lab Staff") {
+            notifications = 1;
+            items.push({
+                label: <span>Accept Your Borrow Items</span>,
                 key: "2",
+            });
+        } else if (profileInfo.role === "Faculty") {
+            notifications = 2;
+            items.push({
+                label: <span>Faculty Notifications</span>,
+                key: "faculty",
+            });
+        } else if (profileInfo.role === "Procurement Officer") {
+            notifications = 2;
+            items.push({
+                label: <span>Procurement Tasks</span>,
+                key: "procurement",
+            });
+        } else if (profileInfo.role === "Comlab Adviser") {
+            notifications = 2;
+            items.push({
+                label: <span>Advisory Notices</span>,
+                key: "comlab",
+            });
+        } else if (profileInfo.role === "Student Assistant") {
+            notifications = 1;
+            items.push({
+                label: <span>Assistant Duties</span>,
+                key: "assistant",
+            });
+        } else if (profileInfo.role !== "Technician") {
+            notifications = 1;
+            items.push({
+                label: <span>Please Repair this</span>,
+                key: "3",
             });
         }
 
