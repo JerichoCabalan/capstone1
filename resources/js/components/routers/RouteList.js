@@ -181,7 +181,7 @@ export default function RouteList() {
                 path="/users/roles"
                 element={
                     <PrivateRoute
-                        // moduleCode="M-02"
+                        moduleCode="M-02"
                         moduleName="User"
                         title="User"
                         subtitle="VIEW / EDIT"
