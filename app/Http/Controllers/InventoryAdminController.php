@@ -38,10 +38,6 @@ class InventoryAdminController extends Controller
                 $query->orWhere("serial_no", 'LIKE', "%$request->search%");
                 $query->orWhere("no_of_stock", 'LIKE', "%$request->search%");
                 $query->orWhere("restocking_point", 'LIKE', "%$request->search%");
-
-             
-                
-
             }
         });
 
@@ -219,7 +215,6 @@ class InventoryAdminController extends Controller
             ["id" => $request->id],
             [
                 "user_id" => $request->user_id,
-              
                 "unit_no" => $request->unit_no,
                 "description" => $request->description,
                 "assign_comlab" => $request->assign_comlab,
@@ -283,11 +278,20 @@ class InventoryAdminController extends Controller
     return $pdf->download('chart.pdf'); 
     }
 
-    public function model(Request $request) 
-    {
-        Excel::import(new EquipmentImport, $request->file('file'));
-        
-        return back()->with('success', 'Inventory data imported successfully.');
-    }
+    //
 
+    public function process_excel_chart(Request $request)
+    {
+       
+        $request->validate([
+            'equipment_file' => 'required|file|mimes:xlsx,csv',
+        ]);
+
+      
+        Excel::import(new EquipmentImport, request()->file('equipment_file'));
+
+      
+        return back()->with('success', 'Equipment imported successfully.');
+    }
+    
 }

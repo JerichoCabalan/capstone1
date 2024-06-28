@@ -57,9 +57,7 @@ Route::middleware('auth:api')->group(function () {
     // END EmailTemplateController
 
     // ProfileController
-    Route::post('profile_update', [App\Http\Controllers\ProfileController::class, "profile_update"]);
-    Route::post('profile_deactivate', [App\Http\Controllers\ProfileController::class, "profile_deactivate"]);
-    Route::apiResource('profile', App\Http\Controllers\ProfileController::class);
+   
     // END ProfileController
     Route::apiResource('inventory_admin', App\Http\Controllers\InventoryAdminController::class);
     // Route::post('inventory_modal', App\Http\Controllers\InventoryAdminController::class);
@@ -75,11 +73,13 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('user_role', App\Http\Controllers\UserRoleController::class);
 
 
+
   
 });
 
 // Route::get('inventory_admin', [App\Http\Controllers\InventoryAdminController::class, 'inventory_admin']);
-Route::get('faculty_load_report_print', [App\Http\Controllers\FacultyLoadMonitoringController::class, 'faculty_load_report_print']);
+Route::post('process_excel_chart', [App\Http\Controllers\InventoryAdminController::class, "process_excel_chart"]);
+
 // Route::get('inventory_admin', [App\Http\Controllers\InventoryAdminController::class]);
 
 // });

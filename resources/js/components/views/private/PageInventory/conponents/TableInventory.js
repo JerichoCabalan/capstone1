@@ -32,6 +32,7 @@ import ModalInventory from "./ModalInventory";
 import { useForm } from "antd/es/form/Form";
 import { POST } from "../../../../providers/useAxiosQuery";
 import notificationErrors from "../../../../providers/notificationErrors";
+import ModalImportExcel from "./ModalImportExcel";
 
 export default function TableInventory(props) {
     const { tableFilter, setTableFilter, sortInfo, dataSource } = props;
@@ -99,6 +100,8 @@ export default function TableInventory(props) {
                         message: "Inventory deleted successfully",
                         description: res.message,
                     });
+                    refreshData();
+                    window.location.reload();
                 } else {
                     notification.error({
                         message: "Inventory deleted successfully",
@@ -112,6 +115,11 @@ export default function TableInventory(props) {
         });
     };
 
+    const refreshData = () => {
+        // Add logic to fetch data again
+        // Example: Call your API endpoint to fetch the latest data
+        props.refetchData();
+    };
     return (
         <>
             <Col xs={24} sm={24} md={24}>
@@ -304,11 +312,12 @@ export default function TableInventory(props) {
                 toggleModalInventory={toggleModalInventory}
                 setToggleModalInventory={setToggleModalInventory}
             />
-            {/* <ModalImportExcel
-              isModalOpen={isImportModalOpen}
-              handleOk={toggleImportModal}
-              handleCancel={toggleImportModal}
-          /> */}
+            <ModalImportExcel
+                isModalOpen={isImportModalOpen}
+                handleOk={toggleImportModal}
+                handleCancel={toggleImportModal}
+                refreshData={refreshData}
+            />
         </>
     );
 }

@@ -54,7 +54,7 @@ export default function PageCategoryAdmin() {
 
     const { data: dataSource, refetch: refetchSource } = GET(
         `api/inventory_admin?${new URLSearchParams(tableFilter)}`,
-        "inventory_admin"
+        "process_excel_chart"
     );
 
     useEffect(() => {

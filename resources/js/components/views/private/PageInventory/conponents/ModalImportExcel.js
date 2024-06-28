@@ -1,38 +1,32 @@
-import { Modal, Button, Form, notification, Spin } from "antd";
-import { useEffect, useState } from "react";
-import { message, Upload } from "antd";
-import { FileExcelOutlined, InboxOutlined } from "@ant-design/icons";
+import { Modal, Button, Spin, message, Upload } from "antd";
+import { useState } from "react";
+import { FileExcelOutlined } from "@ant-design/icons";
 
 export default function ModalImportExcel({
     isModalOpen,
     handleOk,
     handleCancel,
+    refreshData,
 }) {
     const { Dragger } = Upload;
     const [loading, setLoading] = useState(false);
 
-    const props = {
-        name: "file",
-        multiple: true,
-        action: "",
-        accept: ".xlsx,.xls",
-        onChange(info) {
-            const { status } = info.file;
-            if (status === "uploading") {
-                setLoading(true);
-            } else if (status === "done") {
-                setLoading(false);
+    const handleUploadChange = (info) => {
+        const { status } = info.file;
+        if (status === "uploading") {
+            setLoading(true);
+        } else {
+            setLoading(false);
+            if (status === "done") {
                 message.success(
                     `${info.file.name} file uploaded successfully.`
                 );
+                refreshData();
+                window.location.reload(); // Refresh the site
             } else if (status === "error") {
-                setLoading(false);
                 message.error(`${info.file.name} file upload failed.`);
             }
-        },
-        onDrop(e) {
-            console.log("Dropped files", e.dataTransfer.files);
-        },
+        }
     };
 
     return (
@@ -41,12 +35,17 @@ export default function ModalImportExcel({
             visible={isModalOpen}
             onOk={handleOk}
             onCancel={handleCancel}
-            forceRender
             footer={[
                 <Button
                     className="btn-main-primary outlined"
                     size="large"
                     key={1}
+                    style={{
+                        marginLeft: "10px",
+                        backgroundColor: "#ff6624",
+                        color: "white",
+                        borderColor: "#ff6624",
+                    }}
                     onClick={handleCancel}
                 >
                     CANCEL
@@ -69,8 +68,12 @@ export default function ModalImportExcel({
             ]}
         >
             <Spin spinning={loading}>
-                {" "}
-                <Dragger {...props}>
+                <Dragger
+                    name="equipment_file"
+                    action="/api/process_excel_chart"
+                    multiple={false}
+                    onChange={handleUploadChange}
+                >
                     <p className="ant-upload-drag-icon">
                         <FileExcelOutlined />
                     </p>
@@ -83,7 +86,7 @@ export default function ModalImportExcel({
                         files.
                     </p>
                 </Dragger>
-            </Spin>{" "}
+            </Spin>
         </Modal>
     );
 }
